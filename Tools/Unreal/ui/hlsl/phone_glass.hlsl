@@ -1,0 +1,14 @@
+float2 p = UV * Size;
+float2 hs = Size * 0.5;
+float2 q = abs(p - hs) - (hs - Radius);
+float sd = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - Radius;
+float mask = saturate(0.5 - sd);
+float3 ui = Ui * Nits;
+float edge = saturate(1.0 - sd / -18.0);
+ui *= 1.0 - 0.18 * edge;
+float smudge = Texture2DSample(Noise, NoiseSampler, UV * float2(1.7, 3.6) + 0.37).b;
+smudge = smoothstep(0.52, 0.78, smudge) * 0.85 + smoothstep(0.6, 0.9, Texture2DSample(Noise, NoiseSampler, UV * float2(6.0, 12.0)).b) * 0.35;
+float sky = saturate(Refl.z * 0.5 + 0.5);
+float sheen = Fres * (0.25 + 0.75 * sky);
+float3 glass = Glass.rgb * sheen * (0.35 + smudge * Glass.a);
+return float4(ui + glass, mask);

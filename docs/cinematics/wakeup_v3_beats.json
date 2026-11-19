@@ -1,0 +1,77 @@
+{
+ "_doc": "LS_WakeUp v3 holds for foa_qa.py checks (e) motion settles. Each hold is a span from docs/cinematics/wakeup_shotlist.md where camera and actor are both still; t is its middle, window its half-width (s), clear of cuts, fades and focus pulls. Frames: MRQ render LS_WakeUp.NNNN.png at 30 fps from frame 0. pre_cut_* holds sit in the 0.25 s before each hard cut: a cut must land on still frames.",
+ "fps": 30,
+ "glob": "LS_WakeUp.*.png",
+ "holds": [
+  {
+   "name": "pov_eyes_open",
+   "t": 5.9,
+   "window": 0.35
+  },
+  {
+   "name": "pov_on_clock",
+   "t": 8.7,
+   "window": 0.35
+  },
+  {
+   "name": "pre_cut_pov_to_wide",
+   "t": 9.05,
+   "window": 0.12
+  },
+  {
+   "name": "wide_locked",
+   "t": 11.2,
+   "window": 1.4
+  },
+  {
+   "name": "pre_cut_wide_to_push",
+   "t": 13.05,
+   "window": 0.12
+  },
+  {
+   "name": "push_in_start",
+   "t": 13.7,
+   "window": 0.3
+  },
+  {
+   "name": "push_in_end",
+   "t": 19.05,
+   "window": 0.15
+  },
+  {
+   "name": "two_shot_seated",
+   "t": 22.4,
+   "window": 1.4
+  },
+  {
+   "name": "pre_cut_two_shot_to_insert",
+   "t": 24.05,
+   "window": 0.12
+  },
+  {
+   "name": "insert_sand_settled",
+   "t": 27.7,
+   "window": 0.5
+  },
+  {
+   "name": "pre_cut_insert_to_stand",
+   "t": 28.25,
+   "window": 0.12
+  },
+  {
+   "name": "stand_settled",
+   "t": 32.4,
+   "window": 0.6
+  },
+  {
+   "name": "pre_cut_stand_to_hand_back",
+   "t": 33.25,
+   "window": 0.12
+  },
+  {
+   "name": "hand_back_hold",
+   "t": 34.15,
+   "window": 0.5
+  }
+ ]
+}

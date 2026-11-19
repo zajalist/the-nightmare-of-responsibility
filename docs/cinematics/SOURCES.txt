@@ -1,0 +1,20 @@
+LS_WakeUp v3: sources of every animation and sound it uses (cine lane). Nothing was purchased or newly downloaded.
+
+Animation (all CC0 1.0, Quaternius Universal Animation Library 1 and 2; full record: P:\FoA-Assets\animation\SOURCES.txt)
+  /Game/FoA/Cinematics/WakeUp/AS_FoA_Wake_Lying             the lying hold, baked by Tools/Unreal/wakeup/build_lying.py from
+                                                            UAL_LayToIdle frame 0 (CC0) plus a procedural 4.5 s breath
+  /Game/Characters/Mannequins/Anims/Unarmed/MM_Idle           standing idle after the stand (Epic UE5 mannequin content, ships with the engine templates)
+  /Game/FoA/Cinematics/WakeUp/AS_FoA_Wake_EdgeReach         composite baked in-editor by Tools/Unreal/wakeup/build_anims.py
+                                                            from UAL_Sitting_Idle_Loop, UAL_PickUp_Table and UAL_Sitting_Exit
+                                                            (CC0), with IK hands, IK feet and a seat lift
+  The lying-to-sitting move is covered by the time-shift dip (no clip needed). Sitting to standing is UAL_Sitting_Exit.
+  Mixamo was not used.
+
+Sound (existing project SFX from the audio lane; licenses in P:\FoA-Assets\audio\MANIFEST.md and _libraries\SOURCES.txt)
+  Clock/SFX_Clock_Tick_Loop_01, Clock/SFX_Clock_AlarmMechanism_01, Clock/SFX_Clock_AlarmRing_Loop_01,
+  UI_FrontEnd/SFX_FE_Eyelids_01 and _02, Bed/SFX_Bed_Sheets_02, Bed/SFX_Bed_Sit_01, Bed/SFX_Bed_GetUp_01,
+  Dream/SFX_Dream_Whoosh_03, Dream/SFX_Dream_TapeScrub_01, Dream/SFX_Dream_Breath_Loop_01,
+  Sand/SFX_Sand_Pour_01, Sand/SFX_Sand_Shift_02, Creaks/SFX_Creaks_Floor_02
+
+Character: the MetaHuman protagonist (/Game/FoA/Characters/Protagonist), built in-project by the character lane.
+Clock: sandvfx's SandClock_WakeUp (Lux3D alarm clock splat).

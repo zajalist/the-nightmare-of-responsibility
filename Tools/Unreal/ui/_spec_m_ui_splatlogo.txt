@@ -1,0 +1,30 @@
+M_UI_SplatLogo: the Hayba mark forming from sharp sand grains and blowing back into them (Hayba boot card only).
+Built ONLY with Hayba C++ material tools. UI domain, Translucent. Revised 2026-11-05 for the user's "sharp, crisp 1-2 px
+points, not soft blurry speckle": grains are 2x2 px cells on the screen-pixel grid, not gaussian dots.
+
+Parameters
+  Logo        TextureObjectParameter (T_UI_Logo_Hayba, unaltered mark, monochrome)
+  Transition  Scalar 0 scattered .. 1 assembled. WBP_BootSplash.UpdateSplash sets it from the card's own fade envelope
+              (0.8 s black, 1.3 s up, hold, 1.0 s down), so the mark lands while fading up and leaves while fading out.
+
+Graph (one comment per group)
+  Inputs   Logo, TexCoord0, ScreenPosition (PixelPosition), Transition, VertexColor
+  Grains   Custom "Splat assemble" (float4). Every 2 px cell has its own hash: a direction, and a delay of up to 0.35.
+           Its own progress k = saturate((T - delay) / 0.65), and its scatter (1 - k)^2 eases out as the grain lands.
+           The logo is sampled at UV + (random spread 48 px + lift 18 px) x scatter, and the cell only shows once its
+           progress passes its delay. At T = 1 every offset is 0, so the final frame is exactly the user's mark.
+      float2 t = float2(ddx(UV).x, ddy(UV).y);
+      uint2 q = uint2(int2(floor(Pos / 2.0)) + 65536);
+      uint h1 = (q.x * 1597334677u) ^ (q.y * 3812015801u); h1 = (h1 ^ (h1 >> 16)) * 2246822519u;
+      uint h2 = h1 * 3266489917u + 374761393u; h2 = (h2 ^ (h2 >> 13)) * 668265263u;
+      float3 r = float3(h1 & 1023u, (h1 >> 10) & 1023u, h2 & 1023u) / 1023.0;
+      float k = saturate((T - r.z * 0.35) / 0.65);
+      float sc = (1.0 - k) * (1.0 - k);
+      float2 off = (r.xy * 2.0 - 1.0) * 48.0 * sc + float2(0.0, -18.0) * sc;
+      float4 c = Texture2DSample(Logo, LogoSampler, UV + off * t);
+      return float4(c.rgb, c.a * step(r.z * 0.6, k));
+  Output   Emissive = RGB; Opacity = A x VertexColor.a (the card's own fade still applies)
+Budget: 8 nodes, 1 texture tap, ~45 PS instructions. MF_UI_PixelGrains is not reused here: it returns a 0/1 grain,
+while this needs a direction and a delay per cell (stated in the comment).
+Instance: MI_UI_SplatLogo_Hayba (Logo = T_UI_Logo_Hayba) on WBP_BootSplash.Img_HaybaLogo; wire_menus.py drives it
+once the MI exists (SPLAT gate).

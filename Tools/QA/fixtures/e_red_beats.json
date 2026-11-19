@@ -1,0 +1,13 @@
+{
+ "fps": 5,
+ "holds": [
+  {
+   "name": "sit_hold",
+   "t": 3.0
+  },
+  {
+   "name": "rise_marked_as_hold",
+   "t": 1.0
+  }
+ ]
+}

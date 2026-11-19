@@ -1,0 +1,83 @@
+M_UI_SandText: sand letters, ported from the approved direction page v3 (claude.ai/artifact/EF1N7yRJVrc2VFhHxzor9i,
+P.text shader "the sand-letter material (M_UI_SandText in Unreal)"). Built ONLY with Hayba C++ material tools.
+UI domain, Translucent. It is the Effect Material of a RetainerBox, which renders the words once into its target
+(texture parameter "Texture"); this material redraws them every frame from it. No Tick anywhere.
+
+Port notes (page -> Unreal)
+  uA (glyphs)          -> Texture (retainer target); uB (blurred glyphs) -> 4 diagonal taps at 0.9 x Scale px
+  fbm(p) (4 octaves)   -> T_UI_SandNoise.B (tileable fBm) at p x 0.156, contrast halved: 0.5 + 0.5 (B - 0.5)
+  px / uDpr            -> UV / (ddx UV, ddy UV): local pixels, 1:1 with screen pixels in a retainer
+  uT x (1 - uRM)       -> Time x (1 - MPC_UI.ReduceMotion)
+  paper (.93,.89,.82)  -> MPC_UI.Ink (the project is fully monochrome)
+  slots SEL / UNSEL / TITLE -> one material, Energy and Echo picked by State.R (selected):
+      menu MI   Calm = (0.28, 1.0, 0.0, 1.0): energy 0.28 rest, 1 selected; echo 0 rest, 1 selected
+      title MI  Calm = (0.0, 0.0, 0.55, 0.55): energy 0, echo 0.55 (clean, readable type with the time-shift echo)
+
+Parameters
+  Texture  TextureObjectParameter (default /Engine/EngineResources/WhiteSquareTexture; the retainer sets it)
+  State    Vector: R selected, G pressed, B disabled, A out (blow-away, Wake up)   (WBP_SandButton.PushState)
+  Calm     Vector: R energy rest, G energy selected, B echo rest, A echo selected
+  Scale    Scalar px: the page's uScale = font px x 0.09 (menu 24 px -> 2.2; title 132 px -> 9)
+  Reveal   Scalar 0..1 (1 = shown; reveal animations)
+  Dimming of unselected words is the retainer's render opacity, which reaches here as VertexColor.a.
+
+MF_UI_SandShape  in Glyphs (T2D), Noise (T2D), UV (V2), T (S), M (S, 1 - ReduceMotion), Scale (S), E (S), Rev (S), Out (S)
+                 out Alpha, Edge.  Custom "Sand shape" (float4):
+    float2 tx = float2(ddx(UV).x, ddy(UV).y);
+    float2 q = UV / tx / Scale;
+    float2 r = 0.9 * Scale * tx, s = float2(r.x, -r.y);
+    float b = 0.25 * (Texture2DSample(Glyphs, GlyphsSampler, UV + r).a + Texture2DSample(Glyphs, GlyphsSampler, UV - r).a
+            + Texture2DSample(Glyphs, GlyphsSampler, UV + s).a + Texture2DSample(Glyphs, GlyphsSampler, UV - s).a);
+    float edge = 1.0 - abs(b * 2.0 - 1.0);
+    float n1 = 0.5 + 0.5 * (Texture2DSample(Noise, NoiseSampler, (q * 0.8 + float2(T * 0.35, 0.0)) * 0.156).b - 0.5);
+    float n2 = 0.5 + 0.5 * (Texture2DSample(Noise, NoiseSampler, (q * 0.8 + float2(7.3, -T * 0.28)) * 0.156).b - 0.5);
+    float n3 = 0.5 + 0.5 * (Texture2DSample(Noise, NoiseSampler, (q * 2.2 + T * 0.7) * 0.156).b - 0.5);
+    float2 d = ((float2(n1, n2) - 0.5) * (0.15 + 1.25 * edge) + float2(1.0, -0.25) * edge * edge * (n3 - 0.25) * 1.2) * Scale * E;
+    float a = Texture2DSample(Glyphs, GlyphsSampler, UV + d * tx * M).a;
+    float n = 0.5 + 0.5 * (Texture2DSample(Noise, NoiseSampler, (q * 2.4 + float2(T * 0.6, -T * 0.25)) * 0.156).b - 0.5);
+    a *= lerp(1.0, smoothstep(0.0, 0.28, b - (n - 0.45) * 0.7 * M - 0.05), smoothstep(0.1, 0.8, edge) * E);
+    float rn = 0.5 + 0.5 * (Texture2DSample(Noise, NoiseSampler, (q * 0.5 + 3.7) * 0.156).b - 0.5);
+    a *= smoothstep(rn - 0.16, rn + 0.04, Rev * 1.25 - 0.12);
+    a *= 1.0 - smoothstep(rn - 0.2, rn + 0.02, Out * 1.3 - 0.1);
+    return float4(saturate(a), edge, b, 0.0);
+  -> ComponentMask R = Alpha, G = Edge
+
+MF_UI_SandGrain  in Noise (T2D), UV (V2), T (S), M (S), Scale (S), E (S), Edge (S)   out Tone, Glint.
+                 Sharp ~1 px grains pouring down (faster when selected), pour streaks, rare glints on the rim (hash = page h1).
+                 Custom "Grain and glint" (float2):
+    float2 px = UV / float2(ddx(UV).x, ddy(UV).y);
+    float2 gc = floor(px / 1.1 + float2(0.0, -T * (3.0 + 9.0 * E)));
+    float2 p = frac(gc * float2(0.1031, 0.1030)); p += dot(p, p.yx + 33.33); float grain = frac((p.x + p.y) * p.x);
+    p = frac((gc + floor(T * 6.0)) * float2(0.1031, 0.1030)); p += dot(p, p.yx + 33.33); float gl = frac((p.x + p.y) * p.x);
+    float2 q = px / Scale;
+    float pour = 0.5 + 0.5 * (Texture2DSample(Noise, NoiseSampler, float2(q.x * 0.35, q.y * 0.08 - T * 0.45) * 0.156).b - 0.5);
+    float tone = lerp(1.0, 0.56 + 0.34 * grain * grain + 0.26 * pour, 0.25 + 0.65 * E);
+    return float2(tone, step(0.994, gl) * (0.3 + Edge) * M * E);
+  -> ComponentMask R = Tone, G = Glint
+
+MF_UI_TimeEcho   in Glyphs (T2D), UV (V2), T (S), Scale (S), Echo (S)   out Echo.
+                 Custom "Echo taps" (float1): four ghosts trailing DOWN, spacing breathing with time.
+    float off = Scale * (1.0 + 0.3 * sin(T * 1.3)) * ddy(UV).y;
+    float ea = 0.0;
+    [unroll] for (int k = 1; k <= 4; k++) ea += Texture2DSample(Glyphs, GlyphsSampler, UV - float2(0.0, k * off)).a * (0.22 / k);
+    return ea * Echo;
+
+Main graph (one comment per group, left to right)
+  Inputs     Texture, T_UI_SandNoise (TextureObject), TexCoord0, Time x (1 - ReduceMotion) = T, M, State, Calm, Scale, Reveal
+  Selection  E = lerp(Calm.R, Calm.G, State.R); Echo = lerp(Calm.B, Calm.A, State.R)
+  Shape      MF_UI_SandShape -> Alpha, Edge
+  Grain      MF_UI_SandGrain -> Tone, Glint
+  Echo       MF_UI_TimeEcho  -> Echo
+  Compose    al = Alpha x VertexColor.a; ae = Echo x (1 - al) x VertexColor.a
+             Opacity = al + ae;  Emissive = Ink x (Tone x al + ae) / max(al + ae, 0.001) + Glint x 0.7 x al
+Budget: 15 texture taps (glyph 9, noise 6), target < 160 PS instructions. Instances MI_UI_SandText_Menu (Scale 2.2,
+menu Calm) and MI_UI_SandText_Title (Scale 9, title Calm).
+
+The page's 2D effects (selection vortex left of the selected word, grains falling off it) are the next pass:
+MF_UI_SelectVortex in the same retainer, left padding 40 px and bottom padding 30 px.
+
+Widget side (WBP_SandButton, Hayba ui_* tools)
+  Btn_Hit (no background brushes) > Ret_Sand (RetainerBox, Effect Material MI_UI_SandText_Menu, Texture Parameter
+  "Texture", render on invalidation) > Ovl_Glyphs > Txt_Label with slot padding (12, 6, 12, 30) for the echo.
+  Img_Sand and M_UI_SandButton retire. PushState sets State on Ret_Sand.GetEffectMaterial() and the rest/hover/disabled
+  opacity on Ret_Sand.

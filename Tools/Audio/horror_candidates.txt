@@ -1,0 +1,12 @@
+01_hit-hsfh14|Marek Klemczak - Horror Stingers From Hell/DSGNStngr_HSFH Stinger 14_MarkTheChef_Horror.wav
+02_hit-hsfh22|Marek Klemczak - Horror Stingers From Hell/DSGNStngr_HSFH Stinger 22_MarkTheChef_Horror.wav
+03_hit-slasher05|344 Audio - Jump Scares/Slasher Hit  05.wav
+04_hit-sick6beast15|Soundiron - Sick 6/sick6_stinger_beast_15.wav
+05_scream-jse04|Justsoundeffects - Horror Jumpscares/DSGNStngr_Horrifying Scream 04_JSE_HJS.wav
+06_scream-mangled12|344 Audio - Jump Scares/Mangled Scream 12.wav
+07_scream-rdgscreech12|RDGSFX002 - Creatures/Creature Screeches 12.M.wav
+08_scream-girardot2-1|Olivier Girardot - Monster Sounds & Atmospheres/Screeching Monster 2-1.wav
+09_riser-jsestring13|Justsoundeffects - Horror Jumpscares/DSGNRise_String Riser 13_JSE_HJS.wav
+10_bed-abstract9|Glitchedtones - Scare Tactics/Abstract Texture (9).wav
+11_bed-bowedmetals02|344 Audio - Cymbals From Hell/Bowed Alien Metals 02.wav
+12_bed-ccts022bass|Federico Soler Fernandez - Complex Cinematic Tension Sounds/CCTS - 022 - E Bass.wav

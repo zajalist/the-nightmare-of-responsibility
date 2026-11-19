@@ -1,0 +1,173 @@
+[
+ {
+  "check": "a",
+  "img": "ab_red_menu_55.png",
+  "region": [
+   0.02,
+   0.47,
+   0.5,
+   0.88
+  ],
+  "expect": "FAIL"
+ },
+ {
+  "check": "a",
+  "img": "a_green_menu_55_words_drawn.png",
+  "region": [
+   0.02,
+   0.47,
+   0.5,
+   0.88
+  ],
+  "expect": "PASS"
+ },
+ {
+  "check": "a",
+  "img": "ab_green_mainmenu_v6.png",
+  "region": [
+   0.075,
+   0.5,
+   0.48,
+   0.76
+  ],
+  "expect": "PASS"
+ },
+ {
+  "check": "b",
+  "img": "ab_red_menu_55.png",
+  "region": [
+   0.02,
+   0.29,
+   0.38,
+   0.46
+  ],
+  "expect": "FAIL"
+ },
+ {
+  "check": "b",
+  "img": "ab_green_mainmenu_v6.png",
+  "region": [
+   0.075,
+   0.27,
+   0.48,
+   0.46
+  ],
+  "expect": "PASS"
+ },
+ {
+  "check": "c",
+  "img": "c_red_wake_title_25s.png",
+  "regions": {
+   "title": [
+    0.07,
+    0.28,
+    0.56,
+    0.5
+   ],
+   "menu": [
+    0.07,
+    0.5,
+    0.56,
+    0.85
+   ]
+  },
+  "expect": "FAIL"
+ },
+ {
+  "check": "c",
+  "img": "c_green_wake_25s_title_removed.png",
+  "regions": {
+   "title": [
+    0.07,
+    0.28,
+    0.56,
+    0.5
+   ],
+   "menu": [
+    0.07,
+    0.5,
+    0.56,
+    0.85
+   ]
+  },
+  "expect": "PASS"
+ },
+ {
+  "check": "c",
+  "img": "c_red_wake_title_33s.png",
+  "regions": {
+   "title": [
+    0.07,
+    0.28,
+    0.56,
+    0.5
+   ],
+   "menu": [
+    0.07,
+    0.5,
+    0.56,
+    0.85
+   ]
+  },
+  "expect": "FAIL"
+ },
+ {
+  "check": "c",
+  "img": "c_green_wake_33s_title_removed.png",
+  "regions": {
+   "title": [
+    0.07,
+    0.28,
+    0.56,
+    0.5
+   ],
+   "menu": [
+    0.07,
+    0.5,
+    0.56,
+    0.85
+   ]
+  },
+  "expect": "PASS"
+ },
+ {
+  "check": "d",
+  "img": "d_red_sand_coloured_left.png",
+  "mask": "d_sand_mask.png",
+  "expect": "FAIL"
+ },
+ {
+  "check": "d",
+  "img": "d_red_sand_grey_mono_right.png",
+  "mask": "d_sand_mask.png",
+  "expect": "FAIL"
+ },
+ {
+  "check": "d",
+  "img": "d_green_sand_black_rim.png",
+  "mask": "d_sand_mask.png",
+  "expect": "PASS"
+ },
+ {
+  "check": "e",
+  "seq": "e_seq",
+  "beats": "e_red_beats.json",
+  "expect": "FAIL"
+ },
+ {
+  "check": "e",
+  "seq": "e_seq",
+  "beats": "e_green_beats.json",
+  "expect": "PASS"
+ },
+ {
+  "check": "f",
+  "csv": "f_green_frametimes.csv",
+  "expect": "PASS"
+ },
+ {
+  "check": "f",
+  "csv": "f_red_frametimes.csv",
+  "expect": "FAIL"
+ }
+]

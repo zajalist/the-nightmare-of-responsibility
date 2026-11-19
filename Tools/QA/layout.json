@@ -1,0 +1,24 @@
+{
+  "_regions": "fractions of the game viewport (x0, y0, x1, y1); fit to the title/menu layout in the user's 55.png menu shot. Edit when the UI moves.",
+  "regions": {
+    "title": [0.02, 0.29, 0.53, 0.46],
+    "menu":  [0.02, 0.47, 0.50, 0.88]
+  },
+  "sand": null,
+  "thresholds": {
+    "glyph_contrast": 0.10,
+    "glyph_h": [0.010, 0.12],
+    "menu_min_glyphs": 8,
+    "strip_w": 0.05,
+    "title_min_contrast": 4.5,
+    "no_ui_max_glyphs": 4,
+    "sand_chroma": 0.10,
+    "sand_max_luma": 0.10,
+    "sand_max_chroma_frac": 0.005,
+    "motion_min_floor": 0.002,
+    "hitch_ms": 50,
+    "p95_max_ms": 33.3,
+    "max_hitches": 0,
+    "warn_threshold": 10
+  }
+}

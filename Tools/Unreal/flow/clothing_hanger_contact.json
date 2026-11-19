@@ -1,0 +1,58 @@
+{
+  "mesh_relative_location": [
+    -0.24649424705618017,
+    -0.052024076778625084,
+    2.4612947546378576
+  ],
+  "mesh_relative_rotation": {
+    "Pitch": 81.11468126257786,
+    "Yaw": 179.4854013749393,
+    "Roll": -0.0
+  },
+  "grip_world_rotation": {
+    "Pitch": -20.263724108069045,
+    "Yaw": -99.4763735463491,
+    "Roll": 93.22819182982163
+  },
+  "grip_world_at_snag": [
+    272.76752291285993,
+    -132.84512162456863,
+    11.434328335395378
+  ],
+  "hook_to_grip_world": [
+    3.0085229128599167,
+    18.023878375431366,
+    6.746328335395378
+  ],
+  "hook_distance": 19.47881792662235,
+  "skin_min_z": 9.377824649768527,
+  "pinch": {
+    "location": [
+      -3.704542216225055,
+      -11.419066597180025,
+      3.2196947060941015
+    ],
+    "rotation": [
+      0.7853714162979157,
+      -0.3894596037999769,
+      0.4311454363858403,
+      -0.21360376437187253
+    ],
+    "rotation_degrees": {
+      "Pitch": 30.71969990057891,
+      "Yaw": -67.79649104749039,
+      "Roll": 128.6545442840471
+    },
+    "scale": [
+      1.0588238172466105,
+      1.0588236234418615,
+      1.0588237951013657
+    ],
+    "key_grip_distance_cm": 5.659090909090909,
+    "measured_pad_gap_cm": 0.33703623007504735,
+    "key_bow_thickness_cm": 0.3310518566456653,
+    "method": "Captured Teen skin pad midpoint/normal, measured hand world scale, actual GLB bow triangle intersection",
+    "calibration_capture": "Saved/Integration/key_pinch_capture.json",
+    "live_verified": false
+  }
+}

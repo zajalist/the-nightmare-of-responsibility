@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Nightmare of Responsibility Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Plan: a darkened bedroom at night. Soot ground, bone type, tungsten lamp-light as the board's only accent.
+   The game itself is monochrome; the four burst colors are sampled from the two payoff frames and appear only there.
+   Layout: one long board, numbered sections, storyboard as a grid of real frames. */
+:root {
+  --soot: #0e0d0c;
+  --panel: #171513;
+  --panel-2: #1e1b18;
+  --bone: #e9e3d6;
+  --muted: #a39c8f;
+  --line: #2e2a26;
+  --tung: #e0a052;
+  --burst-1: #dc2a22;
+  --burst-2: #025ed4;
+  --burst-3: #f2c067;
+  --burst-4: #f4efe7;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--soot); color: var(--bone); font: 400 16px/1.6 var(--font-body); }
+h1, h2, h3 { margin: 0; font-weight: 400; text-wrap: balance; }
+h1, h2 { font-family: var(--font-display); }
+h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.1; }
+h3 { font: 600 1.02rem/1.3 var(--font-body); }
+p { margin: 0; }
+img { max-width: 100%; }
+a { color: var(--tung); text-underline-offset: 3px; }
+a:focus-visible { outline: 2px solid var(--tung); outline-offset: 2px; }
+b { font-weight: 600; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+.mono { font-family: var(--font-mono); }
+.lede { color: var(--muted); max-width: 65ch; font-size: 1.05rem; }
+.src { font: 500 0.75rem/1.3 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--tung); }
+
+/* Header */
+.hero { border-bottom: 1px solid var(--line); }
+.hero-inner { padding: 72px 20px 40px; max-width: 1240px; margin: 0 auto; display: grid; gap: 18px; }
+h1 { font-size: clamp(2.8rem, 8vw, 5.6rem); line-height: 0.98; max-width: 14ch; }
+.hero .lede { color: #cfc8ba; }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.meta span { font: 500 0.78rem/1 var(--font-mono); padding: 8px 10px; border: 1px solid #3a352f; border-radius: 6px; background: rgba(14,13,12,0.75); }
+.meta .due { border-color: var(--tung); color: var(--tung); }
+
+/* Sections */
+.sec { padding: 64px 0; border-bottom: 1px solid var(--line); }
+.sec > .wrap { display: grid; gap: 26px; }
+.sec-head { display: grid; gap: 10px; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 250px), 1fr)); gap: 16px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 8px; align-content: start; }
+.card p { color: var(--muted); }
+.cards-3 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+
+.rule { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 32px; align-items: center; }
+.rule blockquote { margin: 0; font: italic 400 clamp(2rem, 4.6vw, 3.4rem)/1.08 var(--font-display); }
+.rule blockquote span { color: var(--tung); }
+.rule p { color: var(--muted); max-width: 52ch; }
+@media (max-width: 800px) { .rule { grid-template-columns: 1fr; } }
+
+/* Visual language */
+.look { margin: 0; display: grid; gap: 12px; }
+.look img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 10px; background: #0b0a09; }
+.look figcaption { color: var(--muted); max-width: 80ch; }
+.look figcaption b { color: var(--bone); }
+.palette { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); gap: 16px; }
+.pal { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 12px; align-content: start; }
+.pal-note { color: var(--muted); font-size: 0.85rem; }
+.sw-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.sw { display: grid; gap: 6px; align-content: start; }
+.sw i { display: block; height: 54px; border-radius: 6px; border: 1px solid rgba(233,227,214,0.12); }
+.sw b { font: 600 0.82rem/1.2 var(--font-body); }
+.sw small { font: 400 0.75rem/1.3 var(--font-mono); color: var(--muted); }
+.materials { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; }
+.mat { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+.mat img { width: 100%; height: auto; display: block; background: #0b0a09; }
+.mat figcaption { padding: 14px 18px 18px; display: grid; gap: 4px; align-content: start; }
+.mat figcaption p { color: var(--muted); font-size: 0.94rem; }
+.camera { color: var(--muted); max-width: 80ch; border-left: 2px solid var(--tung); padding-left: 16px; }
+.camera b { color: var(--bone); }
+
+/* Chips */
+.chip { display: inline-flex; align-items: center; font: 500 0.75rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; padding: 5px 7px; border-radius: 4px; white-space: nowrap; }
+.tier-p { border: 1px solid #5d574e; color: #cfc8ba; }
+.tier-s { border: 1px solid var(--tung); color: var(--tung); }
+.tier-o { background: var(--tung); color: #1a1208; border: 1px solid var(--tung); }
+.tier-pay { background: var(--burst-2); color: var(--burst-4); border: 1px solid var(--burst-3); font-weight: 600; }
+.tier-f { border: 1px dashed #5d574e; color: var(--muted); }
+.src-doc { color: var(--muted); border: 1px solid var(--line); }
+.src-idea { color: var(--bone); border: 1px dashed var(--bone); }
+.cam { color: var(--bone); background: #2a2622; border: 1px solid #3b3631; }
+.legend { display: flex; flex-wrap: wrap; gap: 14px 22px; color: var(--muted); font-size: 0.9rem; align-items: center; }
+.legend > span { display: inline-flex; gap: 8px; align-items: center; }
+
+/* Escalation strip */
+.esc-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+.esc { display: grid; grid-template-columns: 132px repeat(17, minmax(40px, 1fr)); grid-template-rows: auto repeat(4, 46px); min-width: 860px; position: relative; padding: 12px 16px 16px; }
+.esc .lab { grid-column: 1; font: 500 0.7rem/1.2 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); align-self: center; }
+.esc .band { grid-column: 2 / -1; border-top: 1px solid var(--line); }
+.esc .grp { grid-row: 1; font: 500 0.8rem/1.2 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--bone); padding-bottom: 10px; }
+.esc .split { grid-column: 12; grid-row: 1 / 6; border-left: 1px dashed #4a443c; margin-left: -1px; }
+.esc .beat { align-self: center; justify-self: center; z-index: 1; }
+
+/* Storyboard */
+.panels { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 480px), 1fr)); gap: 18px; }
+.panel { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+.panel img { width: 100%; height: auto; display: block; background: #0b0a09; }
+.noframe { aspect-ratio: 1600 / 899; display: grid; place-content: center; justify-items: center; gap: 8px; padding: 24px; text-align: center; background: #12100e; border-bottom: 1px solid var(--line); }
+.noframe b { font: 500 0.78rem/1.2 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--bone); }
+.noframe span { color: var(--muted); font-size: 0.93rem; max-width: 42ch; }
+.panel figcaption { padding: 14px 18px 18px; display: grid; gap: 10px; align-content: start; }
+.p-top { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.p-code { font: 500 0.78rem/1 var(--font-mono); color: var(--tung); margin-right: 4px; }
+.fid { margin-left: auto; font: 500 0.75rem/1 var(--font-mono); color: var(--muted); }
+.beats { margin: 0; display: grid; grid-template-columns: 52px 1fr; gap: 4px 10px; font-size: 0.93rem; }
+.beats dt { font: 500 0.7rem/1.9 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.beats dd { margin: 0; }
+.fnote { color: var(--muted); font-size: 0.88rem; border-left: 2px solid var(--tung); padding-left: 10px; }
+.assets { font: 400 0.76rem/1.5 var(--font-mono); color: var(--muted); border-top: 1px solid var(--line); padding-top: 10px; }
+.board-note { color: var(--muted); font-size: 0.92rem; max-width: 80ch; }
+.failband { margin: 0; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); align-items: center; background: var(--panel-2); border: 1px dashed #4a443c; border-radius: 10px; overflow: hidden; }
+.failband img { width: 100%; height: auto; display: block; background: #0b0a09; }
+.failband figcaption { padding: 18px 22px; display: grid; gap: 10px; }
+.failband p { color: var(--muted); max-width: 60ch; }
+.failband p b { color: var(--bone); }
+@media (max-width: 800px) { .failband { grid-template-columns: 1fr; } }
+
+/* Mechanics */
+.mech { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; }
+@media (max-width: 900px) { .mech { grid-template-columns: 1fr; } }
+figure.loop { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 10px; color: var(--bone); }
+figure.loop svg { width: 100%; height: auto; display: block; }
+figure.loop figcaption { color: var(--muted); font-size: 0.92rem; }
+.encounter { background: var(--panel-2); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 12px; }
+.encounter .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.encounter ul { margin: 0; padding-left: 1.1em; display: grid; gap: 4px; color: var(--muted); font-size: 0.93rem; }
+.encounter ul b { color: var(--bone); }
+.encounter .k { font: 500 0.7rem/1.2 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--tung); }
+
+/* Pipelines */
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 10px; }
+.fact { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 4px; background: var(--panel); }
+.fact b { font: 500 0.82rem/1.3 var(--font-mono); color: var(--tung); }
+.fact span { color: var(--muted); font-size: 0.9rem; }
+.pipes { display: grid; gap: 14px; }
+.pipe { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; grid-template-columns: 230px 1fr; gap: 12px 24px; align-items: start; }
+@media (max-width: 860px) { .pipe { grid-template-columns: 1fr; } }
+.pipe-head { display: grid; gap: 6px; }
+.pipe-head p { color: var(--muted); font-size: 0.92rem; }
+.pipe-head .chips { display: flex; gap: 6px; flex-wrap: wrap; }
+.flow { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; }
+.flow li { position: relative; border: 1px solid #3b3631; border-radius: 8px; padding: 9px 12px; display: grid; gap: 2px; min-width: 128px; background: #13110f; }
+.flow li + li::before { content: "→"; position: absolute; left: -21px; top: 50%; transform: translateY(-50%); color: var(--muted); font-family: var(--font-mono); }
+.flow li.aholo { border-color: var(--tung); background: #1d160d; }
+.flow .tool { font: 500 0.8rem/1.3 var(--font-mono); }
+.flow li.aholo .tool { color: var(--tung); }
+.flow .out { font-size: 0.82rem; color: var(--muted); }
+.pipe .note { grid-column: 2; color: var(--muted); font-size: 0.9rem; }
+@media (max-width: 860px) { .pipe .note { grid-column: 1; } }
+.risk { border: 1px solid var(--tung); background: #1d160d; border-radius: 10px; padding: 16px 20px; display: grid; gap: 8px; }
+.risk p { color: #d8cfbf; max-width: 85ch; }
+.spikes { margin: 0; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px; }
+.spikes li { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.spikes li b { font-family: var(--font-mono); color: var(--tung); font-weight: 500; }
+.spikes li span { color: var(--muted); font-size: 0.92rem; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.95rem; }
+th, td { text-align: left; vertical-align: top; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+th { font: 500 0.72rem/1.2 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+tr:last-child td { border-bottom: 0; }
+td.w { font: 400 1.6rem/1 var(--font-display); color: var(--tung); width: 84px; font-variant-numeric: tabular-nums; }
+td.c { font-weight: 600; width: 210px; }
+td.d { font: 500 0.82rem/1.5 var(--font-mono); color: var(--tung); width: 150px; white-space: nowrap; }
+td .muted { color: var(--muted); }
+
+.decide { margin: 0; padding-left: 1.4em; display: grid; gap: 12px; max-width: 85ch; }
+.decide li::marker { font-family: var(--font-mono); color: var(--tung); }
+.decide li span { color: var(--muted); }
+footer { padding: 36px 0 56px; color: var(--muted); font: 400 0.8rem/1.6 var(--font-mono); }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="hero-inner">
+    <h1>The Nightmare of Responsibility</h1>
+    <p class="lede">Level 1 board: the tutorial morning and Find a Job. Tone, the locked look, a storyboard frame for every beat (four still to board), the mechanics underneath, and the pipeline for each hero asset.</p>
+    <div class="meta">
+      <span>Manycore Aholo 3D AI Hackathon</span>
+      <span class="due">Submit by Nov 19 · 06:00 ET</span>
+      <span>13 build days</span>
+      <span>Team of 2</span>
+      <span>Unreal 5.8 · Aholo Lux3D</span>
+      <span>Board v2 · Nov 5</span>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<section class="sec" aria-labelledby="s1">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s1">The rule of the dream</h2></div>
+    <div class="rule">
+      <blockquote>Funny things, <span>filmed sincerely.</span></blockquote>
+      <p>In a dream, absurd things feel deadly serious. That's the effect we want. The camera never winks, the music never plays a joke sting, and the protagonist reacts with quiet disbelief, then keeps going. The comedy lands because nothing in the world admits it's funny.</p>
+    </div>
+    <div class="cards">
+      <div class="card"><h3>Serious camera</h3><p>Third person, close over the shoulder and never in a hurry, lit only by lamps and the bay window. Top-down only for T7, L4 and L6, where seeing the layout is the joke.</p></div>
+      <div class="card"><h3>Plausible first</h3><p>Every obstacle starts as ordinary bad luck. Dream logic creeps in only after the player has accepted the world as real.</p></div>
+      <div class="card"><h3>Heroic mundane</h3><p>Small wins get staged like action-movie climaxes: a low angle, full color, black sand bursting. Three seconds later, the world is grey again.</p></div>
+    </div>
+    <div class="cards">
+      <div class="card"><span class="src">Reference · Twelve Minutes (2021)</span><p>One small home and a loop where the only upgrade is what you know. This is our puzzle rhythm, and its overhead camera becomes our occasional top-down shot.</p></div>
+      <div class="card"><span class="src">Reference · Coraline (Laika, 2009)</span><p>The Other World is a comfortable trap that wants you to stay, full of faces that are almost right. So is the Sleeper's dream.</p></div>
+      <div class="card"><span class="src">Reference · Fuseli, The Nightmare (1781)</span><p>A sleeper, a weight on her chest, and a horse's head pushing through the curtain. That's our night mare: your black-sand horse belongs here, and frame F15 boards it.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="s2">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s2">Visual language</h2><p class="lede">Photoreal black and white with an inked edge. Color is a reward, so it appears only in the two payoff shots, T9 and L7.</p></div>
+    <figure class="look">
+      <img src="img/ACD_wake.jpg" width="1600" height="899" decoding="async" alt="The Nightmare sits up in an iron bed, its hooded body coming apart into black sand and smoke tendrils. Moonlight falls through a bay window; everything is black and white with hard inked shadows.">
+      <figcaption><b>The locked look.</b> C's photoreal black and white is the base. A adds inked contrast: crushed blacks, hatched shadows, ink edges. D adds the smoke-and-sand tendrils. Fully monochrome: the sand is black, mounds included.</figcaption>
+    </figure>
+    <div class="materials">
+      <figure class="mat"><img src="img/C_photoreal.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="Mood C: the hooded figure stands on an iron bed with its back to camera, in a photoreal black-and-white bedroom lit by a leaded window."><figcaption><span class="src">Base · Mood C</span><h3>Photoreal black and white</h3><p>Real materials and real light, shot in black and white. Everything else layers on top.</p></figcaption></figure>
+      <figure class="mat"><img src="img/A_ink.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="Mood A: an inked drawing of a faceless figure sitting on a bed in moonlight, its legs pouring away as black grains, with hard hatched shadows."><figcaption><span class="src">Plus · Mood A</span><h3>Inked contrast</h3><p>Crushed blacks, hatched shadows, ink edges.</p></figcaption></figure>
+      <figure class="mat"><img src="img/D_smoke.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="Mood D: a figure of black smoke rises from a bed, tendrils curling up the wall beside a moonlit window."><figcaption><span class="src">Plus · Mood D</span><h3>Smoke-and-sand tendrils</h3><p>The Nightmare's edges come apart in curling black tendrils.</p></figcaption></figure>
+    </div>
+    <div class="palette">
+      <div class="pal">
+        <h3>The dream: monochrome, split-toned (always on)</h3>
+        <div class="sw-row">
+          <div class="sw"><i style="background:#0e0d0c"></i><b>Soot</b><small>Black sand, crushed blacks</small></div>
+          <div class="sw"><i style="background:#272d36"></i><b>Night tint</b><small>Shadow tone, tutorial</small></div>
+          <div class="sw"><i style="background:#45403a"></i><b>Ash</b><small>Mid-tones: wood, cloth</small></div>
+          <div class="sw"><i style="background:#e9e3d6"></i><b>Bone</b><small>Highlights: paper, moonlight</small></div>
+        </div>
+      </div>
+      <div class="pal">
+        <h3>Payoff shots only (T9, L7)</h3>
+        <div class="sw-row">
+          <div class="sw"><i style="background:var(--burst-2)"></i><b>Cobalt</b><small>The sky</small></div>
+          <div class="sw"><i style="background:var(--burst-3)"></i><b>Saffron</b><small>Clouds, the sun</small></div>
+          <div class="sw"><i style="background:var(--burst-1)"></i><b>Stamp red</b><small>RECEIVED</small></div>
+          <div class="sw"><i style="background:var(--burst-4)"></i><b>Suit white</b><small>The suit</small></div>
+        </div>
+        <p class="pal-note">Sampled from the two payoff frames, Mood E and F14.</p>
+      </div>
+    </div>
+    <div class="cards cards-3">
+      <div class="card"><h3>Black sand</h3><p>Black everywhere, mounds included. It moves like smoke and settles like sand. Lux3D Gaussian splats drawn as splat meshes, with no Niagara.</p></div>
+      <div class="card"><h3>Time-shift blur</h3><p>Used a lot. When time slips, the Nightmare leaves multiple-exposure echoes of itself, faded copies of the poses it just left.</p></div>
+      <div class="card"><h3>Tear glitch</h3><p>A few times only, a horizontal tear runs through the Nightmare and shifts it in bands, then it snaps back.</p></div>
+      <div class="card"><h3>Light shafts</h3><p>Additive cards through the bay window. The material is <span class="mono">T_Lines</span> band texture × gradient × depth fade × camera depth fade × fresnel.</p></div>
+      <div class="card"><h3>The Nightmare</h3><p>Unreal's mannequin wearing Lux3D garments: a heavy hood, a strap harness and a faceless mask. Its edges shed black sand.</p></div>
+      <div class="card"><h3>The bedroom</h3><p>A 7.5 × 6 m antique bedroom with a three-sided bay window, a chimney breast with mantel and firebox, and full trims. Free CC0 furniture, Lux3D dream objects.</p></div>
+    </div>
+    <p class="camera"><b>Hue drift.</b> The monochrome is split-toned: shadows and highlights carry faint, different tints. The hue drifts slightly as the story progresses, starting as a cold blue-grey night in the tutorial. One shared parameter set drives it, so every level stays in step.</p>
+    <p class="camera"><b>Camera.</b> Gameplay is third person over the shoulder, on Unreal's Third Person template. Top-down only for three beats where the layout is the joke: the moved door (T7), the repeating corner (L4), the endless queue (L6). On a payoff we cut to a low hero angle in full color for two to three seconds, then back to grey.</p>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="s3">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s3">The level at a glance</h2><p class="lede">Dream resistance climbs across the tutorial and Level 1, with two payoffs as release valves. Each chip is a storyboard panel below.</p></div>
+    <div class="legend">
+      <span><i class="chip tier-p">Plausible</i> bad luck</span>
+      <span><i class="chip tier-s">Suspicious</i> too specific to be luck</span>
+      <span><i class="chip tier-o">Open</i> the dream fights back</span>
+      <span><i class="chip tier-pay">Payoff</i> full-color hero shot</span>
+      <span><i class="chip src-doc">Doc</i> from our design doc</span>
+      <span><i class="chip src-idea">Idea</i> new, to discuss</span>
+      <span><i class="chip cam">3rd person</i> how the beat is shot</span>
+    </div>
+    <div class="esc-wrap">
+      <div class="esc" role="img" aria-label="Escalation chart. Tutorial beats T1 to T6 are plausible, T7 suspicious, T8 open, T9 payoff, T10 plausible. Level 1: L1 plausible, L2 to L4 suspicious, L5 and L6 open, L7 payoff.">
+        <span class="grp" style="grid-column:2 / span 10">Tutorial · An ordinary morning</span>
+        <span class="grp" style="grid-column:12 / span 7; padding-left:10px">Level 1 · Find a job</span>
+        <span class="lab" style="grid-row:2">Payoff</span>
+        <span class="lab" style="grid-row:3">Open</span>
+        <span class="lab" style="grid-row:4">Suspicious</span>
+        <span class="lab" style="grid-row:5">Plausible</span>
+        <span class="band" style="grid-row:2"></span><span class="band" style="grid-row:3"></span><span class="band" style="grid-row:4"></span><span class="band" style="grid-row:5"></span>
+        <span class="split"></span>
+        <span class="chip beat tier-p" style="grid-column:2;grid-row:5">T1</span>
+        <span class="chip beat tier-p" style="grid-column:3;grid-row:5">T2</span>
+        <span class="chip beat tier-p" style="grid-column:4;grid-row:5">T3</span>
+        <span class="chip beat tier-p" style="grid-column:5;grid-row:5">T4</span>
+        <span class="chip beat tier-p" style="grid-column:6;grid-row:5">T5</span>
+        <span class="chip beat tier-p" style="grid-column:7;grid-row:5">T6</span>
+        <span class="chip beat tier-s" style="grid-column:8;grid-row:4">T7</span>
+        <span class="chip beat tier-o" style="grid-column:9;grid-row:3">T8</span>
+        <span class="chip beat tier-pay" style="grid-column:10;grid-row:2">T9</span>
+        <span class="chip beat tier-p" style="grid-column:11;grid-row:5">T10</span>
+        <span class="chip beat tier-p" style="grid-column:12;grid-row:5">L1</span>
+        <span class="chip beat tier-s" style="grid-column:13;grid-row:4">L2</span>
+        <span class="chip beat tier-s" style="grid-column:14;grid-row:4">L3</span>
+        <span class="chip beat tier-s" style="grid-column:15;grid-row:4">L4</span>
+        <span class="chip beat tier-o" style="grid-column:16;grid-row:3">L5</span>
+        <span class="chip beat tier-o" style="grid-column:17;grid-row:3">L6</span>
+        <span class="chip beat tier-pay" style="grid-column:18;grid-row:2">L7</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="s4">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s4">Tutorial · An ordinary morning</h2><p class="lede">Goal: get dressed and leave the house. Everything goes wrong in ways that are just plausible enough to accept.</p></div>
+    <p class="board-note">Frames set the look and the staging. The room in them is not yet the final 7.5 × 6 m bedroom with its bay window and chimney breast.</p>
+    <div class="panels">
+      <figure class="panel"><img src="img/F01.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="Over the hooded figure's shoulder: its gloved hand holds a phone showing a calendar of crossed-out days and four tasks, Wake up, Find a job, Get the job, Do the job. A finger taps Wake up.">
+        <figcaption><div class="p-top"><span class="p-code">T0</span><span class="chip cam">UI</span><span class="chip tier-f">Framing</span><span class="chip src-doc">Doc</span><span class="fid">F01</span></div><h3>Phone menu</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To start the day.</dd><dt>Gets</dt><dd>Seventeen crossed-out days and four unticked tasks.</dd><dt>Does</dt><dd>A black-sand hand taps "Wake up."</dd></dl>
+          <p class="assets">Phone UI (UMG) · sand hand (Lux3D splat → splat mesh)</p></figcaption></figure>
+
+      <figure class="panel"><img src="img/C_photoreal.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="The hooded figure stands on the iron bed with its back to camera, a strap harness across its back, light falling through a leaded window.">
+        <figcaption><div class="p-top"><span class="p-code">T1</span><span class="chip cam">3rd person</span><span class="chip tier-p">Plausible</span><span class="chip src-doc">Doc</span><span class="fid">Mood C</span></div><h3>Wake</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To get out of bed.</dd><dt>Gets</dt><dd>Nothing wrong. Yet.</dd><dt>Does</dt><dd>Rises. Black sand trails where it steps.</dd></dl>
+          <p class="assets">The Nightmare (UE mannequin + Lux3D hood, harness, mask) · sand trail (splat mesh)</p></figcaption></figure>
+
+      <figure class="panel"><img src="img/F03.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="The figure bends over the dresser and pulls a drawer open. Black sand is scattered across the bedspread.">
+        <figcaption><div class="p-top"><span class="p-code">T2</span><span class="chip cam">3rd person</span><span class="chip tier-p">Plausible</span><span class="chip src-doc">Doc</span><span class="fid">F03</span></div><h3>The locked door</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To leave the bedroom.</dd><dt>Gets</dt><dd>The door is locked.</dd><dt>Does</dt><dd>Searches the dresser, the bed, the wardrobe.</dd></dl>
+          <p class="assets">Bedroom shell (UE modeling) · dresser (CC0, opening drawers)</p></figcaption></figure>
+
+      <figure class="panel"><div class="noframe"><b>Not boarded yet</b><span>Planned: a shoe sticks out from under the bed with the key beside it, and the figure kneels to reach it.</span></div>
+        <figcaption><div class="p-top"><span class="p-code">T3</span><span class="chip cam">3rd person</span><span class="chip tier-p">Plausible</span><span class="chip src-doc">Doc</span><span class="fid">No frame</span></div><h3>The key</h3>
+          <dl class="beats"><dt>Wants</dt><dd>A way out.</dd><dt>Gets</dt><dd>A key, in the last place it looks: a shoe under the bed.</dd><dt>Does</dt><dd>Takes it.</dd></dl>
+          <p class="assets">Shoe, key (Lux3D meshes)</p></figcaption></figure>
+
+      <figure class="panel"><img src="img/F04.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="Close on the faceless mask under the hood. The figure tilts its head at the stub of the key in its raised hand.">
+        <figcaption><div class="p-top"><span class="p-code">T4</span><span class="chip cam">3rd person</span><span class="chip tier-p">Plausible</span><span class="chip src-doc">Doc</span><span class="fid">F04</span></div><h3>The key snaps</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To unlock the door.</dd><dt>Gets</dt><dd>The key breaks off in the lock.</dd><dt>Does</dt><dd>Stares at the stub. Carries on.</dd></dl>
+          <p class="assets">Key in two parts (Lux3D part splitting)</p></figcaption></figure>
+
+      <figure class="panel"><img src="img/F05.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="The figure kneels at the door and works a screwdriver into the lock plate. A drawer of tools stands open beside it.">
+        <figcaption><div class="p-top"><span class="p-code">T5</span><span class="chip cam">3rd person</span><span class="chip tier-p">Plausible</span><span class="chip src-doc">Doc</span><span class="fid">F05</span></div><h3>Improvise</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To open the door some other way.</dd><dt>Gets</dt><dd>A screwdriver in the desk drawer, or a wire hanger by the wardrobe.</dd><dt>Does</dt><dd>Unscrews the lock plate, or hooks the latch through the gap.</dd></dl>
+          <p class="assets">Screwdriver, hanger (Lux3D meshes)</p></figcaption></figure>
+
+      <figure class="panel"><img src="img/F06.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="From behind, the figure faces the doorway. A tall wardrobe has tipped across it and blocks the way out.">
+        <figcaption><div class="p-top"><span class="p-code">T6</span><span class="chip cam">3rd person</span><span class="chip tier-p">Plausible</span><span class="chip src-doc">Doc</span><span class="fid">F06</span></div><h3>The handle</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To open the door, finally.</dd><dt>Gets</dt><dd>The handle comes off in its hand. The wardrobe tips over and blocks the door.</dd><dt>Does</dt><dd>Pushes, pulls, finds leverage.</dd></dl>
+          <p class="assets">Wardrobe (CC0) · topple (physics)</p></figcaption></figure>
+
+      <figure class="panel"><img src="img/F07.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="Top-down view of the dark bedroom. The figure stands at the foot of the bed; one door is on the left wall and another on the right.">
+        <figcaption><div class="p-top"><span class="p-code">T7</span><span class="chip cam">Top-down</span><span class="chip tier-s">Suspicious</span><span class="chip src-doc">Doc</span><span class="fid">F07</span></div><h3>Wrong wall</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To get past the wardrobe.</dd><dt>Gets</dt><dd>When it looks back, the door is on another wall, and the emptied drawer is full again.</dd><dt>Does</dt><dd>Notices. Checks again. Adapts.</dd></dl>
+          <p class="assets">Same meshes, moved by the dream director</p></figcaption></figure>
+
+      <figure class="panel"><img src="img/F08.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="Turn-based battle screen in the bedroom. A giant inside-out dress shirt looms over the figure. Panels show the Hooded One's HP and Focus, and the moves Find Armhole, Button Up and Deep Breath.">
+        <figcaption><div class="p-top"><span class="p-code">T8</span><span class="chip cam">Encounter</span><span class="chip tier-o">Open</span><span class="chip src-doc">Doc</span><span class="fid">F08</span></div><h3>Getting dressed</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To put on a shirt.</dd><dt>Gets</dt><dd>The shirt fights back, turn by turn.</dd><dt>Does</dt><dd>Find Armhole. Button Up. Deep Breath.</dd></dl>
+          <p class="assets">The Shirt (Lux3D mesh + cloth) · encounter UI (UMG)</p></figcaption></figure>
+
+      <figure class="panel"><img src="img/E_payoff.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="Full-color hero shot from a low angle: the masked figure in a white suit and black tie, hands in its pockets, under a cobalt sky with saffron clouds. Black ink spatters burst around its feet.">
+        <figcaption><div class="p-top"><span class="p-code">T9</span><span class="chip cam">Cinematic</span><span class="chip tier-pay">Payoff</span><span class="chip src-doc">Doc</span><span class="fid">Mood E</span></div><h3>The suit</h3>
+          <dl class="beats"><dt>Gets</dt><dd>A magnificent suit, framed like an action hero. The grey world floods with color for three seconds.</dd><dt>Does</dt><dd>Nothing. It earned this.</dd></dl>
+          <p class="assets">Suit (Lux3D garment) · color burst (post process) · sand burst (splat mesh)</p></figcaption></figure>
+
+      <figure class="panel"><div class="noframe"><b>Not boarded yet</b><span>Planned: the door stands open with light pouring in, the figure steps out in its suit, and "Wake up" gets its tick.</span></div>
+        <figcaption><div class="p-top"><span class="p-code">T10</span><span class="chip cam">3rd person</span><span class="chip tier-p">Plausible</span><span class="chip src-doc">Doc</span><span class="fid">No frame</span></div><h3>Out the door</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To leave.</dd><dt>Gets</dt><dd>The door opens. The phone ticks "Wake up."</dd><dt>Does</dt><dd>Walks out into Level 1.</dd></dl>
+          <p class="assets">Phone UI · hallway light</p></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="s5">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s5">Level 1 · Find a job</h2><p class="lede">Goal: write a CV and reach the employment office. The world opens up, and the coincidences get harder to explain.</p></div>
+    <div class="panels">
+      <figure class="panel"><img src="img/F10.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="Over the figure's shoulder at a rainy bus stop: a double-decker bus, route 16, pulls away down a wet cobbled street.">
+        <figcaption><div class="p-top"><span class="p-code">L1</span><span class="chip cam">3rd person</span><span class="chip tier-p">Plausible</span><span class="chip src-doc">Doc</span><span class="fid">F10</span></div><h3>The street</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To get to the employment office.</dd><dt>Gets</dt><dd>The bus pulls away just as it reaches the stop.</dd><dt>Does</dt><dd>Reads the timetable. Walks.</dd></dl>
+          <p class="assets">Street set (source open, see To decide together) · bus (Lux3D mesh)</p></figcaption></figure>
+
+      <figure class="panel"><img src="img/F11.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="The masked figure at a desk under a lamp, pen on a blank sheet. Black sand creeps in from the edges of the page.">
+        <figcaption><div class="p-top"><span class="p-code">L2</span><span class="chip cam">Encounter</span><span class="chip tier-s">Suspicious</span><span class="chip src-doc">Doc</span><span class="fid">F11</span></div><h3>Write a CV</h3>
+          <dl class="beats"><dt>Wants</dt><dd>A CV worth printing.</dd><dt>Gets</dt><dd>A blank page that fights back.</dd><dt>Does</dt><dd>Turns the morning into experience: "Expert in lock removal."</dd></dl>
+          <p class="assets">Desk (CC0) · desk props (Lux3D) · encounter UI</p></figcaption></figure>
+
+      <figure class="panel"><div class="noframe"><b>Not boarded yet</b><span>Planned: a printer with crumpled paper jammed in the top and its JAM light on, pouring black sand onto the floor.</span></div>
+        <figcaption><div class="p-top"><span class="p-code">L3</span><span class="chip cam">3rd person</span><span class="chip tier-s">Suspicious</span><span class="chip src-idea">Idea</span><span class="fid">No frame</span></div><h3>Print it</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To print the CV.</dd><dt>Gets</dt><dd>The printer jams, then prints pages of sand.</dd><dt>Does</dt><dd>Clears the jam. Finds another printer.</dd></dl>
+          <p class="assets">Printer (Lux3D, articulated) · sand pages (splat mesh)</p></figcaption></figure>
+
+      <figure class="panel"><div class="noframe"><b>Not boarded yet</b><span>Planned, from above: a crossroads where the signal always says WAIT, and every lap of the block comes back to the same corner.</span></div>
+        <figcaption><div class="p-top"><span class="p-code">L4</span><span class="chip cam">Top-down</span><span class="chip tier-s">Suspicious</span><span class="chip src-idea">Idea</span><span class="fid">No frame</span></div><h3>Same corner</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To cross the street.</dd><dt>Gets</dt><dd>The light never changes, and every corner is the same corner.</dd><dt>Does</dt><dd>Spots the loop and breaks it.</dd></dl>
+          <p class="assets">Street set · top-down camera</p></figcaption></figure>
+
+      <figure class="panel"><img src="img/F12.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="The figure surfs a wave of black sand down a wet street after bus 09. A bus timetable on a post melts into black drips.">
+        <figcaption><div class="p-top"><span class="p-code">L5</span><span class="chip cam">3rd person</span><span class="chip tier-o">Open</span><span class="chip src-doc">Doc</span><span class="fid">F12</span></div><h3>Catch the bus</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To get on a bus.</dd><dt>Gets</dt><dd>The timetable melts and the bus outruns it.</dd><dt>Does</dt><dd>A short chase, surfing a wave of black sand.</dd></dl>
+          <p class="assets">Bus (Lux3D mesh) · sand wave (splat mesh)</p></figcaption></figure>
+
+      <figure class="panel"><img src="img/F13.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="Over the figure's shoulder in the employment office: it holds ticket 999 while a long queue of identical bald men waits and the display reads 001.">
+        <figcaption><div class="p-top"><span class="p-code">L6</span><span class="chip cam">Top-down</span><span class="chip tier-o">Open</span><span class="chip src-idea">Idea</span><span class="fid">F13</span></div><h3>Take a number</h3>
+          <dl class="beats"><dt>Wants</dt><dd>To reach a clerk.</dd><dt>Gets</dt><dd>Ticket 999. The display says 001 and counts slowly.</dd><dt>Does</dt><dd>Finds the trick that skips the queue.</dd></dl>
+          <p class="fnote">The frame stages the queue over the shoulder. In game this beat is shot top-down.</p>
+          <p class="assets">Office (UE meshes) · ticket machine (Lux3D)</p></figcaption></figure>
+
+      <figure class="panel"><img src="img/F14.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="Full-color payoff: a rubber stamp slams RECEIVED in red onto a job application. Behind it the figure in the white suit stands under a cobalt and saffron sky.">
+        <figcaption><div class="p-top"><span class="p-code">L7</span><span class="chip cam">Cinematic</span><span class="chip tier-pay">Payoff</span><span class="chip src-doc">Doc</span><span class="fid">F14</span></div><h3>Application received</h3>
+          <dl class="beats"><dt>Gets</dt><dd>The stamp lands like a gunshot. Full color, then grey again.</dd><dt>Does</dt><dd>Nothing. It earned this too.</dd></dl>
+          <p class="assets">Sequencer shot · color burst</p></figcaption></figure>
+    </div>
+    <figure class="failband"><img src="img/F15.jpg" width="1600" height="899" loading="lazy" decoding="async" alt="A horse made of black sand and smoke gallops over the bed toward the figure. In the foreground a phone shows Day 763, its calendar crossed out.">
+      <figcaption><div class="p-top"><span class="chip src-doc">Doc · Fail state</span><span class="fid">F15</span></div>
+        <p><b>The day rolls over.</b> Fail anywhere and the phone adds another crossed-out day, then sends you back to the start of the sequence. The house resets. What you learned doesn't, so each attempt gets faster and more deliberate.</p>
+        <p>The frame boards the rollover as the black-sand mare galloping through the room.</p></figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="s6">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s6">Mechanics</h2><p class="lede">One loop drives every beat. The systems underneath stay small enough to build in thirteen days.</p></div>
+    <div class="mech">
+      <figure class="loop">
+        <svg id="loopsvg" viewBox="0 0 640 400" role="img" aria-label="The interaction loop: ordinary intention, plausible obstacle, experiment, suspicious failure, adapt, accomplish, the dream cracks, and back to a new intention at a higher tier."></svg>
+        <figcaption>The loop from our design doc. Each pass through "The dream cracks" raises the tier, so the next obstacle is a little less plausible.</figcaption>
+      </figure>
+      <div class="cards" style="grid-template-columns:1fr">
+        <div class="card"><h3>Interact <span class="chip src-doc">Doc</span></h3><p>Look, Take, Use, Combine. A small inventory (four slots is the <b>idea</b>). The items are ordinary. Their consequences aren't.</p></div>
+        <div class="card"><h3>Time loop <span class="chip src-doc">Doc</span></h3><p>Failing rolls the day over. The house resets, and the player's knowledge carries over. <b>Idea:</b> a notebook on the phone that records facts you've discovered.</p></div>
+        <div class="card"><h3>Dream director <span class="chip src-idea">Idea</span></h3><p>A hidden tier value (Plausible, Suspicious, Open) picks which variant of each obstacle plays. Escalation then tracks the player's progress and attempt count without hand-scripting every combination.</p></div>
+      </div>
+    </div>
+    <div class="encounter">
+      <span class="k">Encounter sketch · T8 Getting dressed</span>
+      <p>Turn-based and mechanically simple. Every move is a mundane verb with a sincere name and real numbers. Stats are <b>Composure</b> (HP) and <b>Resolve</b> (MP), an <b>idea</b>; frame F08 mocks them up as HP and Focus. The doc's own example: in Level 3, staring into the bathroom mirror restores 10 HP.</p>
+      <div class="cols">
+        <div><p class="k" style="color:var(--muted)">The Shirt (inside out) · Lv 30</p><ul><li><b>Sleeve Labyrinth</b>: hides the armhole</li><li><b>Static Cling</b>: drains Resolve</li><li><b>Wrong Button</b>: undoes your progress</li></ul></div>
+        <div><p class="k" style="color:var(--muted)">The Nightmare</p><ul><li><b>Find Armhole</b>: reveals a weak point</li><li><b>Button Up</b>: a timed input, in order</li><li><b>Deep Breath</b>: restores Resolve</li><li><b>Check Mirror</b>: restores Composure</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="s7">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s7">Hero asset pipelines</h2><p class="lede">Everything looks real. Anything the player touches is a mesh, and smoke and sand are Lux3D splats drawn as splat meshes. Lux3D makes the dream objects, the sand and some set dressing; the furniture is free CC0.</p></div>
+    <div class="facts">
+      <div class="fact"><b>G1</b><span>Image or text in. ZIP + GLB with PBR out, plus a PLY splat when requested. Mesh in about 5 min.</span></div>
+      <div class="fact"><b>G1-Turbo</b><span>Can return a PLY splat on its own. A splat preview takes about 20 s, which makes it our iteration loop.</span></div>
+      <div class="fact"><b>Retopology · part split</b><span>Retopologizes to a face budget and splits a GLB into parts (drawers, doors, key halves).</span></div>
+      <div class="fact"><b>Articulation · auto-rig</b><span>Adds joints and animation to a GLB (hinges, lids). Character auto-rig plus animation retargeting.</span></div>
+    </div>
+    <div class="pipes">
+      <article class="pipe">
+        <div class="pipe-head"><h3>The Nightmare</h3><p>The protagonist, on screen the whole time. Unreal's mannequin wearing Lux3D garments.</p><div class="chips"><span class="chip tier-p">Mesh</span></div></div>
+        <ol class="flow">
+          <li><span class="tool">UE mannequin</span><span class="out">skeleton + Third Person anims</span></li>
+          <li class="aholo"><span class="tool">Lux3D G1</span><span class="out">hood, harness, mask as GLB + PBR</span></li>
+          <li class="aholo"><span class="tool">Lux3D retopo</span><span class="out">game face budget</span></li>
+          <li><span class="tool">Unreal 5.8</span><span class="out">garments skinned to the mannequin</span></li>
+        </ol>
+        <p class="note">Every Third Person animation works unchanged under the garments. The sand it sheds comes from the splat meshes below.</p>
+      </article>
+      <article class="pipe">
+        <div class="pipe-head"><h3>Smoke and sand</h3><p>The signature FX: sand hands, trails, waves, the mare. No Niagara.</p><div class="chips"><span class="chip tier-s">Splat mesh</span></div></div>
+        <ol class="flow">
+          <li><span class="tool">Reference image</span><span class="out">hand, horse, any object</span></li>
+          <li class="aholo"><span class="tool">Lux3D G1-Turbo</span><span class="out">PLY Gaussian splat</span></li>
+          <li><span class="tool">PLY → splat mesh</span><span class="out">one quad per Gaussian, in one static mesh</span></li>
+          <li><span class="tool">Material</span><span class="out">cheap effects move it</span></li>
+        </ol>
+        <p class="note">Each quad keeps its Gaussian's spherical harmonics, so its color changes with the view. Any Lux3D object can become a splat mesh, so set dressing can crumble into sand on cue.</p>
+      </article>
+      <article class="pipe">
+        <div class="pipe-head"><h3>Props and dream objects</h3><p>Key, screwdriver, hanger, the shirt, printer, bus, ticket machine, some set dressing.</p><div class="chips"><span class="chip tier-p">Mesh</span></div></div>
+        <ol class="flow">
+          <li><span class="tool">Reference photo</span><span class="out">one object per image</span></li>
+          <li class="aholo"><span class="tool">Lux3D G1</span><span class="out">GLB + PBR</span></li>
+          <li class="aholo"><span class="tool">Retopo + part split</span><span class="out">game budget, separate parts</span></li>
+          <li class="aholo"><span class="tool">Articulation</span><span class="out">hinges, lids</span></li>
+          <li><span class="tool">Unreal 5.8</span><span class="out">static mesh + interaction Blueprint</span></li>
+        </ol>
+      </article>
+      <article class="pipe">
+        <div class="pipe-head"><h3>Furniture</h3><p>Bed, dresser, wardrobe, desk, nightstand. Realistic, from free CC0 models.</p><div class="chips"><span class="chip tier-p">Mesh</span></div></div>
+        <ol class="flow">
+          <li><span class="tool">CC0 model</span><span class="out">one per piece</span></li>
+          <li><span class="tool">Budget check</span><span class="out">scale, triangles, textures</span></li>
+          <li><span class="tool">Unreal 5.8</span><span class="out">static mesh, opening drawers and doors</span></li>
+        </ol>
+      </article>
+      <article class="pipe">
+        <div class="pipe-head"><h3>Bedroom shell</h3><p>A 7.5 × 6 m antique bedroom: three-sided bay window, chimney breast with mantel and firebox, full trims.</p><div class="chips"><span class="chip tier-p">Mesh</span></div></div>
+        <ol class="flow">
+          <li><span class="tool">UE modeling tools</span><span class="out">walls, bay, chimney breast</span></li>
+          <li><span class="tool">Trims + materials</span><span class="out">procedural, cheap</span></li>
+          <li><span class="tool">Unreal 5.8</span><span class="out">lights, light-shaft cards, collision</span></li>
+        </ol>
+        <p class="note">Built in-engine by design: puzzles need exact collision, and the dream director moves the door in T7.</p>
+      </article>
+      <article class="pipe">
+        <div class="pipe-head"><h3>The street (Level 1)</h3><p>The outdoor set for L1, L4 and L5.</p><div class="chips"><span class="chip src-idea">To decide</span></div></div>
+        <p class="note">A full world splat is hard to fit in 1 GB on low-end PCs. Options: modular street meshes with Lux3D dressing, splat-mesh facades in the distance, or both.</p>
+      </article>
+      <article class="pipe">
+        <div class="pipe-head"><h3>Hero shots and trailer</h3><p>T9, L7, and the demo video.</p><div class="chips"><span class="chip tier-pay">Payoff</span></div></div>
+        <ol class="flow">
+          <li><span class="tool">Sequencer</span><span class="out">in-engine shots</span></li>
+          <li><span class="tool">Post process</span><span class="out">grey → burst → grey</span></li>
+          <li class="aholo"><span class="tool">LuxReal</span><span class="out">optional trailer inserts</span></li>
+        </ol>
+      </article>
+    </div>
+    <div class="risk">
+      <h3>Budget: under 1 GB, on low-end PCs</h3>
+      <p>Procedural, cheap materials everywhere. The biggest risk is the splat meshes. Every Gaussian becomes a quad, so quad count and overdraw set the cost, and quads inside one static mesh aren't depth-sorted each frame, so blending can show order artifacts. Spike S2 measures both on a low-end PC and sets a quad cap per splat.</p>
+    </div>
+    <ol class="spikes">
+      <li><b>S1 · Mesh round trip</b><span>Lux3D image → GLB → retopo → imported into Unreal at the correct scale with working PBR.</span></li>
+      <li><b>S2 · Splat mesh</b><span>One Lux3D PLY becomes one static mesh of quads with spherical-harmonic color. A material raises a hand from a mound and pours it away.</span></li>
+      <li><b>S3 · Low-end budget</b><span>The bedroom with sand, smoke and light shafts on a low-end PC: frame time, and a build under 1 GB.</span></li>
+      <li><b>S4 · Garments on the mannequin</b><span>Lux3D hood, harness and mask skinned to the UE mannequin, walking across the bedroom on the Third Person animations.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="s8">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s8">How this scores</h2><p class="lede">Judging: 70% expert panel, 30% community panel, across five criteria.</p></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Weight</th><th scope="col">Criterion</th><th scope="col">What earns it here</th></tr></thead>
+        <tbody>
+          <tr><td class="w">30%</td><td class="c">Use of Manycore tools</td><td>Lux3D makes the Nightmare's garments, the props and dream objects (retopo, part split, articulation), and all the smoke and sand (PLY splats drawn as splat meshes). The report shows each asset's iterations from image to splat to mesh.</td></tr>
+          <tr><td class="w">25%</td><td class="c">Fun and engagement</td><td>A tight puzzle loop with deadpan comedy. The demo video cuts straight to the payoff shots.</td></tr>
+          <tr><td class="w">20%</td><td class="c">Innovation</td><td>Splats as a living material: Lux3D splats baked into static meshes and moved by cheap materials, so generated objects pour out of black sand and back into it, even on a low-end PC.</td></tr>
+          <tr><td class="w">20%</td><td class="c">Completeness</td><td>The tutorial and Level 1 finished and stable, instead of three half-built levels.</td></tr>
+          <tr><td class="w">5%</td><td class="c">Reach</td><td>An X post with #Manycorehackathon on submission day.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="s9">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s9">Thirteen days</h2><p class="lede">A proposal. Two lanes in parallel: A takes gameplay and levels, B takes the art pipeline and FX.</p></div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">When</th><th scope="col">Lane A · gameplay</th><th scope="col">Lane B · art + FX</th></tr></thead>
+        <tbody>
+          <tr><td class="d">Nov 6–7</td><td>Block out the 7.5 × 6 m bedroom. Interaction framework (look, take, use).</td><td>Spikes S1–S4. Set up Lux3D credits and API key.</td></tr>
+          <tr><td class="d">Nov 8–11</td><td>Tutorial playable T1–T7: inventory, door puzzle chain, day rollover.</td><td>CC0 furniture and Lux3D props in. Garments on the mannequin. First splat-mesh sand.</td></tr>
+          <tr><td class="d">Nov 12–13</td><td>Getting-dressed encounter (T8).</td><td>Suit payoff shot (T9): Sequencer, color burst, sand burst.</td></tr>
+          <tr><td class="d">Nov 14–16</td><td>Level 1 slice: pick 3–4 of L1–L7.</td><td>Street set, the mare, light shafts, time-shift blur and tear glitch.</td></tr>
+          <tr><td class="d">Nov 17</td><td colspan="2">Lighting, grade and sand pass, audio, bug fixing. Feature freeze. Check the build is under 1 GB.</td></tr>
+          <tr><td class="d">Nov 18</td><td colspan="2">Demo video, project report (PDF with asset iterations), X post.</td></tr>
+          <tr><td class="d">Nov 19 · 06:00 ET</td><td colspan="2"><b>Submit.</b> <span class="muted">Leave buffer the night before.</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="sec" aria-labelledby="s10">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s10">To decide together</h2></div>
+    <ol class="decide">
+      <li><b>Payoff palette.</b> <span>Frames E and F14 put a white suit under a cobalt and saffron sky, with a red stamp. Board v1 had a cobalt suit with magenta lapels. Do we lock the frames' version?</span></li>
+      <li><b>Where else does the black-sand mare appear?</b> <span>F15 boards it as the day rollover. Also on the main menu, or as the Nightmare's true form? Its gallop has to work with material effects alone.</span></li>
+      <li><b>Hue drift.</b> <span>The tutorial starts as a cold blue-grey night. Which way does the split tone drift by the end of Level 1, and how far?</span></li>
+      <li><b>Where the tear lands.</b> <span>The tear glitch hits the Nightmare only a few times. Which beats get it? T7, L4 and the fail loop are candidates.</span></li>
+      <li><b>The street.</b> <span>Modular meshes with Lux3D dressing, splat-mesh facades in the distance, or both?</span></li>
+      <li><b>Level 1 scope.</b> <span>Which 3–4 of the seven beats make the cut? Four beats still need frames: T3, T10, L3 and L4.</span></li>
+      <li><b>Do we ever see the Sleeper?</b> <span>Coraline has the Other Mother as its comfortable trap. Who or what is ours?</span></li>
+      <li><b>Lanes.</b> <span>Who takes gameplay and who takes art and FX?</span></li>
+    </ol>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Sources: our design doc · aholo.ai/hackathon (rules, judging, deadline) · lux3d.aholo.ai/docs (Lux3D capabilities). Frames are concept stills for look and staging, not in-engine captures.</div>
+</footer>
+
+<script>
+(function loopDiagram() {
+  "use strict";
+  var svg = document.getElementById("loopsvg"); if (!svg) return;
+  var NS = "http://www.w3.org/2000/svg", cx = 320, cy = 200, R0 = 140, n = 7;
+  var labels = ["Ordinary intention", "Plausible obstacle", "Experiment", "Suspicious failure", "Adapt", "Accomplish", "The dream cracks"];
+  function el(name, attrs, text) { var e = document.createElementNS(NS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); if (text) e.textContent = text; svg.appendChild(e); return e; }
+  var defs = document.createElementNS(NS, "defs"); defs.innerHTML = '<marker id="lp-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#a39c8f"></path></marker><marker id="lp-arrow-hot" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e0a052"></path></marker>'; svg.appendChild(defs);
+  function pt(i, r) { var a = -Math.PI / 2 + i * 2 * Math.PI / n; return [cx + Math.cos(a) * r, cy + Math.sin(a) * r]; }
+  var gap = 0.16, i;
+  for (i = 0; i < n; i++) {
+    var a1 = -Math.PI / 2 + i * 2 * Math.PI / n + gap, a2 = -Math.PI / 2 + (i + 1) * 2 * Math.PI / n - gap;
+    var p1 = [cx + Math.cos(a1) * R0, cy + Math.sin(a1) * R0], p2 = [cx + Math.cos(a2) * R0, cy + Math.sin(a2) * R0];
+    var hot = i === n - 1;
+    el("path", { d: "M" + p1[0].toFixed(1) + " " + p1[1].toFixed(1) + " A " + R0 + " " + R0 + " 0 0 1 " + p2[0].toFixed(1) + " " + p2[1].toFixed(1), fill: "none", stroke: hot ? "#e0a052" : "#6b645a", "stroke-width": hot ? 2 : 1.4, "stroke-dasharray": hot ? "5 4" : "none", "marker-end": hot ? "url(#lp-arrow-hot)" : "url(#lp-arrow)" });
+  }
+  for (i = 0; i < n; i++) {
+    var p = pt(i, R0), isHot = i === n - 1 || i === 5;
+    el("circle", { cx: p[0].toFixed(1), cy: p[1].toFixed(1), r: 7, fill: isHot ? "#e0a052" : "#171513", stroke: isHot ? "#e0a052" : "#e9e3d6", "stroke-width": 1.5 });
+    var q = pt(i, R0 + 22), dx = q[0] - cx, anchor = Math.abs(dx) < 20 ? "middle" : dx > 0 ? "start" : "end";
+    el("text", { x: q[0].toFixed(1), y: (q[1] + 4).toFixed(1), "text-anchor": anchor, fill: isHot ? "#e0a052" : "#e9e3d6", "font-family": "IBM Plex Sans, Segoe UI, sans-serif", "font-size": 13 }, labels[i]);
+  }
+  el("text", { x: cx, y: cy - 6, "text-anchor": "middle", fill: "#a39c8f", "font-family": "IBM Plex Mono, Consolas, monospace", "font-size": 11, "letter-spacing": "1" }, "EACH PASS");
+  el("text", { x: cx, y: cy + 12, "text-anchor": "middle", fill: "#a39c8f", "font-family": "IBM Plex Mono, Consolas, monospace", "font-size": 11, "letter-spacing": "1" }, "TIER + 1");
+})();
+</script>
+</body>
+</html>

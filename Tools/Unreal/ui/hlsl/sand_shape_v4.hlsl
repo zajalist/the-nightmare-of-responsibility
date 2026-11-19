@@ -1,0 +1,26 @@
+float2 tx = float2(ddx(UV).x, ddy(UV).y);
+float2 q = UV / tx / Scale;
+float rn = 0.5 + 0.5 * (Texture2DSample(Noise, NoiseSampler, (q * 0.5 + 3.7) * 0.156).b - 0.5);
+uint2 gi = uint2(int2(floor(UV / tx / 1.5)) + 65536);
+uint h = (gi.x * 747796405u) ^ (gi.y * 2891336453u + 1013904223u);
+h = ((h >> ((h >> 28u) + 4u)) ^ h) * 277803737u;
+h = (h >> 22u) ^ h;
+float fine = (float(h & 1023u) + 0.5) / 1024.0;
+float th = 0.4 * rn + 0.6 * saturate(UV.x);
+float gin = saturate((Rev * 1.6 - 0.3 - th) / 0.3);
+float gout = saturate((Out * 1.6 - 0.3 - th) / 0.3);
+float away = (1.0 - gin) + gout;
+float2 r = 0.9 * Scale * tx, s = float2(r.x, -r.y);
+float b = 0.25 * (Texture2DSample(Glyphs, GlyphsSampler, UV + r).a + Texture2DSample(Glyphs, GlyphsSampler, UV - r).a
+        + Texture2DSample(Glyphs, GlyphsSampler, UV + s).a + Texture2DSample(Glyphs, GlyphsSampler, UV - s).a);
+float edge = 1.0 - abs(b * 2.0 - 1.0);
+float n1 = 0.5 + 0.5 * (Texture2DSample(Noise, NoiseSampler, (q * 0.8 + float2(T * 0.35, 0.0)) * 0.156).b - 0.5);
+float n2 = 0.5 + 0.5 * (Texture2DSample(Noise, NoiseSampler, (q * 0.8 + float2(7.3, -T * 0.28)) * 0.156).b - 0.5);
+float n3 = 0.5 + 0.5 * (Texture2DSample(Noise, NoiseSampler, (q * 2.2 + T * 0.7) * 0.156).b - 0.5);
+float2 d = ((float2(n1, n2) - 0.5) * (0.15 + 1.25 * edge) + float2(1.0, -0.25) * edge * edge * (n3 - 0.25) * 1.2) * Scale * E;
+d += float2(gout * 10.0 - (1.0 - gin) * 8.0, (n3 - 0.5) * 5.0 * away - gout * 2.5) * Scale * away;
+float a = Texture2DSample(Glyphs, GlyphsSampler, UV + d * tx * M).a;
+float n = 0.5 + 0.5 * (Texture2DSample(Noise, NoiseSampler, (q * 2.4 + float2(T * 0.6, -T * 0.25)) * 0.156).b - 0.5);
+a *= lerp(1.0, smoothstep(0.0, 0.28, b - (n - 0.45) * 0.7 * M - 0.05), smoothstep(0.1, 0.8, edge) * E);
+a *= step(fine, gin) * (1.0 - step(fine, gout));
+return float4(saturate(a), edge, b, gin * (1.0 - gout));

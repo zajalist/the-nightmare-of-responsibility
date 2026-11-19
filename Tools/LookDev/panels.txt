@@ -1,0 +1,10 @@
+Panel_1 Shot_Wide -340,280,270,-16.9,-50.3,75
+Panel_2 Panel_2 130,-60,210,-37.6,-41.9,55
+Panel_3 Panel_3 342,-61,190,-89.9,0,40
+Panel_4 Shot_DeskClose -245,110,128,0,0,0
+Panel_5 Panel_5 -150,150,100,23.1,90,55
+Panel_6 Panel_6 170,90,45,30.5,70.4,60
+Panel_7 Panel_7 120,60,150,-10.9,6,50
+Still_TP Shot_ThirdPerson -60,-60,175,-8.1,18.7,80
+Still_Wide Shot_Wide -340,280,270,-16.9,-50.3,80
+Still_Window Shot_Window 250,100,160,-2,-124,80

@@ -1,0 +1,13 @@
+{
+ "fps": 5,
+ "holds": [
+  {
+   "name": "sit_hold",
+   "t": 3.0
+  },
+  {
+   "name": "sit_hold_late",
+   "t": 4.0
+  }
+ ]
+}

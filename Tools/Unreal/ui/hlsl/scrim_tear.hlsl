@@ -1,0 +1,12 @@
+float rows = 26.0;
+float r = floor(UV.y * rows);
+float f = floor(T * 15.0);
+uint h = (uint(r + 4096.0) * 747796405u) ^ (uint(f + 4096.0) * 2891336453u + 1013904223u);
+h = ((h >> ((h >> 28u) + 4u)) ^ h) * 277803737u;
+h = (h >> 22u) ^ h;
+float a = float(h & 1023u) / 1023.0;
+float b = float((h >> 10u) & 1023u) / 1023.0;
+float x0 = b * 0.85 - 0.1;
+float bar = step(0.5, a) * step(x0, UV.x) * step(UV.x, x0 + 0.12 + 0.55 * a);
+float scan = 0.5 + 0.5 * cos(UV.y * rows * 6.2831853);
+return saturate(Tear * (bar * 0.9 + 0.2 * scan));

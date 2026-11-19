@@ -1,0 +1,1937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FoA Production Moodboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* Plan: the same darkened bedroom as the Level 1 board. Soot ground, bone type, tungsten as the only everyday accent.
+   Burst colors appear only in the payoff demos. Layout: one long production sheet, a live demo above every build note. */
+:root {
+  --soot: #0e0d0c;
+  --panel: #171513;
+  --panel-2: #1e1b18;
+  --bone: #e9e3d6;
+  --muted: #a39c8f;
+  --line: #2e2a26;
+  --tung: #e0a052;
+  --burst-1: #ff3d7f;
+  --burst-2: #2f6bff;
+  --burst-3: #ffc531;
+  --burst-4: #19c37d;
+  --font-display: "IM Fell English", "Iowan Old Style", Georgia, serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", Consolas, "Courier New", monospace;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--soot); color: var(--bone); font: 400 16px/1.6 var(--font-body); }
+h1, h2, h3, h4 { margin: 0; font-weight: 400; text-wrap: balance; }
+h1, h2 { font-family: var(--font-display); }
+h2 { font-size: clamp(1.9rem, 4vw, 2.6rem); line-height: 1.1; }
+h3 { font: 600 1.02rem/1.3 var(--font-body); }
+p { margin: 0; }
+a { color: var(--tung); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, input:focus-visible, [tabindex]:focus-visible { outline: 2px solid var(--tung); outline-offset: 3px; }
+b { font-weight: 600; }
+code { font-family: var(--font-mono); font-size: 0.84em; color: #d8cfbf; }
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 20px; }
+.lede { color: var(--muted); max-width: 68ch; font-size: 1.05rem; }
+
+/* Hero */
+.hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--line); }
+#sandfield { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(14,13,12,0) 35%, rgba(14,13,12,0.94) 100%); pointer-events: none; }
+.hero-inner { position: relative; z-index: 1; padding: 64px 20px 36px; max-width: 1240px; margin: 0 auto; display: grid; gap: 16px; }
+h1 { font-size: clamp(2.8rem, 8vw, 5.4rem); line-height: 0.98; text-shadow: 0 2px 24px rgba(0,0,0,0.8); max-width: 15ch; }
+.hero .lede { color: #cfc8ba; text-shadow: 0 1px 12px rgba(0,0,0,0.9); }
+.meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.meta > * { font: 500 0.78rem/1 var(--font-mono); padding: 8px 10px; border: 1px solid #3a352f; border-radius: 6px; background: rgba(14,13,12,0.75); color: var(--bone); }
+.meta .due { border-color: var(--tung); color: var(--tung); }
+.meta a { text-decoration: none; color: var(--tung); }
+.toc { display: flex; flex-wrap: wrap; gap: 6px 18px; font: 500 0.8rem/1.4 var(--font-mono); }
+.toc a { color: var(--bone); text-decoration: none; border-bottom: 1px solid #4a443c; padding-bottom: 2px; }
+.toc a:hover { border-color: var(--tung); color: var(--tung); }
+
+/* Sections */
+.sec { padding: 60px 0; border-bottom: 1px solid var(--line); }
+.sec > .wrap { display: grid; gap: 26px; }
+.sec-head { display: grid; gap: 10px; }
+.sub { font: 400 1.6rem/1.15 var(--font-display); margin-top: 12px; }
+.facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+.fact { border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; display: grid; gap: 4px; background: var(--panel); align-content: start; }
+.fact b { font: 500 0.8rem/1.3 var(--font-mono); color: var(--tung); }
+.fact span { color: var(--muted); font-size: 0.9rem; }
+.fact .big { font: 400 2rem/1.05 var(--font-display); color: var(--bone); font-variant-numeric: tabular-nums; }
+.cards { display: grid; gap: 14px; align-content: start; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px 18px; display: grid; gap: 8px; align-content: start; }
+.card p { color: var(--muted); }
+
+/* Chips */
+.chip { display: inline-flex; align-items: center; font: 500 0.75rem/1 var(--font-mono); letter-spacing: 0.07em; text-transform: uppercase; padding: 5px 7px; border-radius: 4px; white-space: nowrap; font-style: normal; }
+.st-built { background: var(--tung); color: #1a1208; border: 1px solid var(--tung); }
+.st-next { border: 1px solid var(--tung); color: var(--tung); }
+.k-est { color: var(--muted); border: 1px solid #4a443c; }
+.k-idea { color: var(--bone); border: 1px dashed var(--bone); }
+.k-ver { color: var(--tung); border: 1px dashed var(--tung); }
+.c-low { color: #cfc8ba; border: 1px solid #5d574e; }
+.c-med { color: #1a1208; background: #b9a888; border: 1px solid #b9a888; }
+.c-high { color: #1a1208; background: var(--tung); border: 1px solid var(--tung); }
+.tier-pay { background: linear-gradient(90deg, var(--burst-1), var(--burst-3), var(--burst-4)); color: #0b0a09; border: 0; font-weight: 600; }
+.firm { color: var(--bone); border: 1px solid var(--bone); }
+.lane { color: var(--bone); background: #2a2622; border: 1px solid #3b3631; }
+.legend { display: flex; flex-wrap: wrap; gap: 12px 22px; color: var(--muted); font-size: 0.9rem; align-items: center; }
+.legend > span { display: inline-flex; gap: 8px; align-items: center; }
+.vf { color: var(--tung); font: 500 0.75rem/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; border: 1px dashed var(--tung); border-radius: 3px; padding: 2px 4px; white-space: nowrap; vertical-align: 1px; }
+
+/* Demo cards */
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 18px; }
+.grid.two { grid-template-columns: repeat(auto-fit, minmax(min(100%, 500px), 1fr)); }
+.demo { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: grid; grid-template-rows: auto 1fr; }
+.demo > canvas { width: 100%; height: auto; aspect-ratio: 16 / 9; display: block; background: #0b0a09; }
+.demo .body { padding: 14px 18px 18px; display: grid; gap: 10px; align-content: start; }
+.demo.headline { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-rows: auto; border-color: #4a443c; }
+.demo.headline > canvas { aspect-ratio: 16 / 9; align-self: start; cursor: grab; touch-action: none; }
+.demo.headline .body { padding: 18px 22px 22px; }
+.demo.headline .body > p { color: #d8cfbf; max-width: 60ch; }
+@media (max-width: 980px) { .demo.headline { grid-template-columns: 1fr; } }
+.top { display: flex; align-items: center; gap: 6px 8px; flex-wrap: wrap; }
+.top h3 { margin-right: 4px; }
+.spec { margin: 0; display: grid; grid-template-columns: 70px 1fr; gap: 6px 12px; font-size: 0.93rem; }
+.spec dt { font: 500 0.75rem/1.8 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.spec dd { margin: 0; }
+.spec dd.m { color: var(--muted); }
+.note { color: var(--muted); font-size: 0.9rem; border-top: 1px solid var(--line); padding-top: 10px; }
+.callout { border-left: 2px solid var(--tung); padding-left: 16px; color: var(--muted); max-width: 88ch; }
+.callout b { color: var(--bone); }
+.risk { border: 1px solid var(--tung); background: #1d160d; border-radius: 10px; padding: 16px 20px; display: grid; gap: 8px; }
+.risk p { color: #d8cfbf; max-width: 92ch; }
+
+/* Controls */
+.ctl { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; font-size: 0.85rem; color: var(--muted); }
+.seg { display: inline-flex; flex-wrap: wrap; border: 1px solid #3b3631; border-radius: 6px; overflow: hidden; }
+.seg button { font: 500 0.75rem/1 var(--font-mono); letter-spacing: 0.04em; color: var(--muted); background: transparent; border: 0; padding: 9px 11px; cursor: pointer; }
+.seg button + button { border-left: 1px solid #3b3631; }
+.seg button[aria-pressed="true"] { background: #2e2924; color: var(--bone); box-shadow: inset 0 -2px 0 var(--tung); }
+.seg button:hover { color: var(--bone); }
+input[type="range"] { accent-color: var(--tung); width: min(100%, 300px); }
+.readout { font: 400 0.78rem/1.5 var(--font-mono); color: var(--muted); }
+.sw { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; border: 1px solid rgba(233,227,214,0.2); }
+
+/* Sand buttons */
+.sand-btn { position: relative; isolation: isolate; display: inline-grid; place-items: center; min-width: 168px; height: 54px; padding: 0 26px; border: 0; border-radius: 10px; background: transparent; color: var(--bone); font: 500 1rem/1 var(--font-body); letter-spacing: 0.02em; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.sand-btn canvas { position: absolute; left: -14px; top: -14px; width: calc(100% + 28px); height: calc(100% + 64px); z-index: -1; pointer-events: none; }
+.sand-btn > span { transition: opacity 0.18s ease, filter 0.18s ease; text-shadow: 0 1px 6px rgba(0,0,0,0.95); }
+.sand-btn.gone > span { opacity: 0; filter: blur(3px); }
+.sand-btn[aria-disabled="true"] { cursor: not-allowed; color: #8f887c; }
+.sand-btn.sm { min-width: 0; width: 100%; height: 42px; font-size: 0.92rem; place-items: center start; padding: 0 16px; }
+.stage { border-radius: 10px; border: 1px solid var(--line); background: radial-gradient(ellipse at 50% 38%, #3d3832 0%, #26221e 45%, #141210 100%); padding: 34px 20px 46px; display: flex; flex-wrap: wrap; gap: 28px 40px; justify-content: center; align-items: start; }
+.stage .cell { display: grid; gap: 12px; justify-items: center; }
+.stage .cell small { font: 500 0.75rem/1.3 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: #c2b9aa; margin-top: 34px; }
+.status { font: 400 0.82rem/1.4 var(--font-mono); color: var(--muted); min-height: 1.4em; }
+
+/* Phone */
+.phone-wrap { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: 28px; align-items: start; }
+@media (max-width: 820px) { .phone-wrap { grid-template-columns: 1fr; } }
+.phone { width: 100%; max-width: 320px; margin: 0 auto; border-radius: 34px; border: 1.5px solid #5d574e; background: linear-gradient(180deg, #1c1b19, #121110); padding: 18px 16px 16px; display: grid; gap: 14px; box-shadow: 0 30px 60px rgba(0,0,0,0.55), inset 0 0 0 6px #0b0a09; }
+.ph-bar { display: flex; justify-content: space-between; font: 500 0.75rem/1 var(--font-mono); color: var(--muted); padding: 6px 8px 0; }
+.ph-head { display: flex; justify-content: space-between; align-items: baseline; padding: 0 6px; }
+.ph-head b { font: 400 1.55rem/1 var(--font-display); }
+.ph-head span { font: 500 0.78rem/1 var(--font-mono); color: var(--tung); }
+.cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; padding: 0 4px; }
+.cal i { position: relative; aspect-ratio: 1; border: 1px solid rgba(233,227,214,0.16); border-radius: 4px; font: 400 0.6rem/1 var(--font-mono); color: #8f887c; display: grid; place-items: start; padding: 3px; font-style: normal; }
+.cal i.x::before, .cal i.x::after { content: ""; position: absolute; left: 16%; right: 16%; top: 52%; height: 1.5px; background: rgba(233,227,214,0.5); transform: rotate(45deg); }
+.cal i.x::after { transform: rotate(-45deg); }
+.cal i.today { border: 1.5px solid var(--tung); color: var(--tung); }
+.tasks { display: grid; gap: 12px; padding: 4px 4px 0; }
+.tasks p { font: 500 0.75rem/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); padding: 0 2px; }
+.ph-foot { display: flex; justify-content: space-between; font: 500 0.75rem/1 var(--font-mono); color: var(--muted); padding: 34px 8px 6px; }
+
+/* Framed mock screens */
+.screen { position: relative; aspect-ratio: 16 / 9; overflow: hidden; }
+.screen > canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.enc-ui { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 50%); grid-template-rows: auto 1fr auto; padding: 3% 3%; gap: 8px 12px; }
+.plate { background: rgba(11,10,9,0.86); border: 1px solid #3b3631; border-radius: 6px; padding: 8px 10px; display: grid; gap: 5px; font: 500 0.75rem/1.2 var(--font-mono); letter-spacing: 0.04em; color: #cfc8ba; }
+.plate .nm { font: 400 1rem/1.1 var(--font-display); letter-spacing: 0; color: var(--bone); }
+.bar { height: 6px; background: rgba(233,227,214,0.12); border-radius: 3px; overflow: hidden; }
+.bar i { display: block; height: 100%; background: var(--bone); border-radius: 3px; transition: width 0.4s ease; }
+.bar.t i { background: var(--tung); }
+.foe { grid-column: 2; grid-row: 1; align-self: start; }
+.me { grid-column: 1; grid-row: 3; align-self: end; max-width: 240px; }
+.moves { grid-column: 2; grid-row: 3; display: grid; grid-template-columns: 1fr 1fr; gap: 8px 10px; align-self: end; }
+.moves .sand-btn { min-width: 0; width: 100%; height: 38px; font-size: 0.8rem; padding: 0 8px; }
+.moves .sand-btn em { font: 400 0.75rem/1 var(--font-mono); font-style: normal; color: #b9b1a3; margin-left: 6px; }
+.log { grid-column: 1 / -1; grid-row: 2; align-self: center; justify-self: center; max-width: 46ch; text-align: center; font: italic 400 1rem/1.35 var(--font-display); color: var(--bone); text-shadow: 0 1px 10px #000, 0 0 4px #000; }
+@media (max-width: 700px) {
+  .screen.enc { aspect-ratio: auto; }
+  .screen.enc > canvas { position: static; aspect-ratio: 16 / 9; height: auto; }
+  .enc-ui { position: static; grid-template-columns: 1fr; grid-template-rows: none; background: #121110; padding: 12px; }
+  .foe, .me, .moves, .log { grid-column: 1; grid-row: auto; max-width: none; }
+}
+.pause-ui { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); padding: 6% 7%; gap: 20px; background: linear-gradient(90deg, rgba(11,10,9,0.9) 0%, rgba(11,10,9,0.6) 55%, rgba(11,10,9,0.35) 100%); }
+.pause-ui h4 { font: 400 2rem/1 var(--font-display); }
+.pause-ui .when { font: 500 0.75rem/1.4 var(--font-mono); color: var(--tung); letter-spacing: 0.06em; margin-top: 6px; }
+.pmenu { list-style: none; margin: 12px 0 0; padding: 0; display: grid; gap: 2px; }
+.ulink { border: 0; padding: 4px 0 7px; color: var(--bone); font: 400 1.02rem/1.2 var(--font-body); cursor: pointer; text-align: left; background: radial-gradient(circle, #8f887c 0.9px, transparent 1.3px) 0 100% / 5px 4px repeat-x; transition: background-position 0.6s linear, color 0.2s; }
+.ulink:hover, .ulink:focus-visible { color: var(--tung); background-image: radial-gradient(circle, var(--tung) 0.9px, transparent 1.4px); background-position: 40px 100%; }
+.ulink.quiet { color: var(--muted); }
+.psettings { align-self: end; justify-self: end; display: grid; gap: 8px; font: 500 0.75rem/1.3 var(--font-mono); color: var(--muted); background: rgba(11,10,9,0.82); border: 1px solid #3b3631; border-radius: 8px; padding: 12px 14px; }
+.psettings .opt { display: flex; gap: 6px; flex-wrap: wrap; }
+.psettings .opt span { border: 1px solid #3b3631; border-radius: 4px; padding: 4px 6px; }
+.psettings .opt span.on { border-color: var(--tung); color: var(--tung); }
+@media (max-width: 640px) { .pause-ui { grid-template-columns: 1fr; padding: 5%; } .psettings { display: none; } .pause-ui h4 { font-size: 1.5rem; } }
+
+/* Tables */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); padding: 6px 8px; }
+table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 0.9rem; }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+th { font: 500 0.75rem/1.2 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+tbody tr:last-child td { border-bottom: 0; }
+td.n { font: 400 1.3rem/1 var(--font-display); color: var(--tung); white-space: nowrap; font-variant-numeric: tabular-nums; }
+td.k { font-weight: 600; min-width: 150px; }
+td .m, td.m { color: var(--muted); }
+tfoot td { font-weight: 600; border-top: 1px solid #4a443c; border-bottom: 0; }
+
+/* Budget bars (tall segmented bar) */
+.budget { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; display: grid; gap: 12px; }
+.budget h3 span { color: var(--muted); font-weight: 400; }
+.sbar { display: flex; gap: 2px; height: 28px; }
+.sbar > span { border-radius: 4px; display: flex; align-items: center; padding-left: 6px; font: 500 0.75rem/1 var(--font-mono); color: #0b0a09; white-space: nowrap; min-width: 0; overflow: hidden; }
+.sbar > span.dk { color: var(--bone); }
+.sbar > span.room { background: transparent; border: 1px dashed #5d574e; color: var(--muted); }
+.sbar > span:focus-visible { outline: 2px solid var(--bone); outline-offset: 2px; }
+@media (max-width: 640px) { .sbar > span.sm { font-size: 0; padding: 0; } }
+.blegend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.82rem; color: var(--muted); }
+.blegend span { display: inline-flex; gap: 6px; align-items: center; }
+.blegend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.scale { display: flex; justify-content: space-between; font: 400 0.75rem/1 var(--font-mono); color: var(--muted); }
+.tip { font: 400 0.8rem/1.4 var(--font-mono); color: var(--bone); min-height: 1.4em; }
+
+/* Diagrams, lists */
+figure.diag { margin: 0; background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; display: grid; gap: 10px; color: var(--bone); }
+figure.diag .scroll { overflow-x: auto; }
+figure.diag svg { width: 100%; height: auto; display: block; }
+figure.diag .scroll svg { min-width: 640px; }
+figure.diag figcaption { color: var(--muted); font-size: 0.9rem; }
+.build { margin: 0; padding: 0; list-style: none; display: grid; gap: 8px; counter-reset: b; }
+.build li { display: grid; grid-template-columns: 34px minmax(0, 1fr) auto; gap: 4px 14px; align-items: start; background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; }
+.build li::before { counter-increment: b; content: counter(b, decimal-leading-zero); font: 500 0.85rem/1.5 var(--font-mono); color: var(--tung); }
+.build li.done { background: #1d160d; border-color: #5a4326; }
+.build li.done::before { content: "\2713"; counter-increment: none; }
+.build li p { color: var(--muted); font-size: 0.92rem; }
+.build li .who { display: flex; gap: 6px; flex-wrap: wrap; justify-content: end; }
+@media (max-width: 640px) { .build li { grid-template-columns: 30px 1fr; } .build li .who { grid-column: 2; justify-content: start; } }
+.split { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 18px; align-items: start; }
+.ticks { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; color: var(--muted); }
+.ticks b { color: var(--bone); }
+footer { padding: 36px 0 56px; color: var(--muted); font: 400 0.8rem/1.6 var(--font-mono); }
+@media (prefers-reduced-motion: reduce) { .ulink, .bar i, .sand-btn > span { transition: none; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="sandfield" aria-hidden="true"></canvas>
+  <div class="hero-inner">
+    <h1>Production moodboard</h1>
+    <p class="lede">How the UI, the dream cinematics and the sand-and-smoke effects get built. Every block has a live demo, an Unreal build note and a cost. The last two sections set the size and performance budget for a game under 1 GB that runs on low-tier PCs.</p>
+    <div class="meta">
+      <span>FoA · The Nightmare of Responsibility</span>
+      <span>Unreal 5.8 · Aholo Lux3D</span>
+      <span class="due">Hard cap · under 1 GB packaged</span>
+      <span>Low tier · GTX 1050 Ti · RX 560 · Iris Xe</span>
+      <a href="https://claude.ai/artifact/9AHdPVWkh8ar5ZV7FSbnJg">Companion to the Level 1 board</a>
+      <span>Moodboard v1 · Nov 5</span>
+    </div>
+    <nav class="toc" aria-label="Sections">
+      <a href="#look">Main style</a><a href="#ui">1 · UI</a><a href="#cine">2 · Dream cinematics</a><a href="#vfx">3 · Splat VFX</a><a href="#mat">4 · Materials</a><a href="#budget">5 · Budget</a><a href="#build">6 · Build order</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<section class="sec" aria-labelledby="s0">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s0">At a glance</h2></div>
+    <div class="facts">
+      <div class="fact"><b>Built in Unreal</b><span class="big">3 assets</span><span>MPC_Dream (ShadowTint, HighlightTint, ColorReveal), M_PP_DreamMono, M_DarkSand.</span></div>
+      <div class="fact"><b>Size plan</b><span class="big">670 MB</span><span>of a 1,000 MB hard cap. Engine and shader size stay estimates until we package the empty project.</span></div>
+      <div class="fact"><b>Low-tier target</b><span class="big">1080p · 30</span><span>at 66.7% screen percentage (720p internal) on a GTX 1050 Ti, RX 560 or Iris Xe with 8 GB RAM.</span></div>
+      <div class="fact"><b>Sand and smoke</b><span class="big">1 draw</span><span>per hero effect: a Lux3D splat baked into one static mesh, about 40k splats, animated in its material. No Niagara.</span></div>
+    </div>
+    <div class="legend">
+      <span><i class="chip st-built">Built</i> exists in the project</span>
+      <span><i class="chip st-next">Next</i> to build</span>
+      <span><i class="chip k-est">Established</i> known technique</span>
+      <span><i class="chip k-idea">Our idea</i> new, to prove</span>
+      <span><i class="vf">Verify</i> unsure for 5.8 or the target PC</span>
+      <span><i class="chip c-low">Low</i><i class="chip c-med">Med</i><i class="chip c-high">High</i> GPU cost</span>
+      <span><i class="chip tier-pay">Payoff</i> burst colors allowed</span>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="look" aria-labelledby="s-look">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s-look">Main style · photoreal grey, inked, smoking</h2><p class="lede">A mix of three moods. C is the base: a believable black-and-white photograph of a grandparent's house. A inks it with hard graphic contrast. D lets dark sand and smoke curl off the Nightmare and out of the corners.</p></div>
+    <div class="grid two" style="align-items:start">
+      <figure class="demo">
+        <canvas id="cvLook" width="960" height="540" role="img" aria-label="The bedroom at night in grey: moonlight from the window, a lamp, a bed with the sleeper, a wardrobe. Bold ink edges and hatched shadows sit on top, and tendrils of dark sand rise from the walking Nightmare and from under the bed."></canvas>
+        <div class="body">
+          <div class="ctl"><span>Layers on the C base</span><div class="seg" id="segLook"><button type="button" aria-pressed="true" data-k="ink">A · ink</button><button type="button" aria-pressed="true" data-k="tend">D · tendrils</button></div></div>
+          <p class="note">This scene is the shared test shot for every dream effect below. Toggle the layers to see what each mood adds.</p>
+        </div>
+      </figure>
+      <div class="cards">
+        <div class="card"><div class="top"><h3>C · Photoreal black and white</h3><span class="chip st-built">Built</span></div><p>Lux3D PBR meshes under real lights, turned grey and split-toned by M_PP_DreamMono. Albedo keeps its real hue, because the payoff bursts reveal it.</p></div>
+        <div class="card"><div class="top"><h3>A · Inked contrast</h3><span class="chip st-next">Next</span><span class="chip c-med">Med</span><span class="chip k-est">Established</span></div><p>Crushed blacks, hard hatched shadows, bold ink edges, all from one post-process pass. Edges come from a Sobel filter on SceneDepth and WorldNormal. Hatching samples a 128² hatch texture (three densities in RGB, 8 KB) projected on the world position the pass rebuilds from depth, so the lines stick to surfaces. A levels curve crushes the blacks before the split tone. Gate the extras with a Quality Switch node. <span class="vf">Verify</span> the cost on a 1050 Ti and whether edges stay stable under TAA upsampling.</p></div>
+        <div class="card"><div class="top"><h3>D · Smoke-and-sand tendrils</h3><span class="chip st-next">Next</span><span class="chip c-low">Low</span><span class="chip k-idea">Our idea</span></div><p>Lux3D splat meshes with a looping drift in the material (section 3). Each tendril is a static mesh that never simulates, so it costs one draw call and no CPU.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="ui" aria-labelledby="s1">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s1">1 · UI concepts</h2><p class="lede">Screen-space UMG draws after the post process, so the dream's grey never touches it. The UI has to hold the palette by itself: soot and bone, tungsten for anything you can act on, burst colors only inside a payoff.</p></div>
+
+    <h3 class="sub">Sand buttons</h3>
+    <div class="stage">
+      <div class="cell"><button class="sand-btn" data-sand="primary" type="button"><span>Wake up</span></button><small>Primary · full slab</small></div>
+      <div class="cell"><button class="sand-btn" data-sand="secondary" type="button"><span>Snooze</span></button><small>Secondary · thin slab</small></div>
+      <div class="cell"><button class="sand-btn" data-sand="refuse" type="button"><span>Stay asleep</span></button><small>Refusal · grains slump</small></div>
+    </div>
+    <p class="status" id="stageStatus" aria-live="polite">Hover or focus a button and the grains stream and drip. Press it and it dissolves into sand and reforms.</p>
+    <div class="grid two">
+      <div class="card">
+        <div class="top"><h3>Ship route · UI material</h3><span class="chip k-est">Established</span><span class="chip c-low">Low</span></div>
+        <dl class="spec">
+          <dt>Build</dt><dd>WBP_SandButton is a Button plus an Image using M_UI_SandButton (Material Domain: User Interface). Hover, Press and Seed scalars go through Get Dynamic Material → Set Scalar Parameter Value, eased by a short UMG animation.</dd>
+          <dt>Rest</dt><dd>A rounded-rect mask computed from UVs, a 128² grain texture panning slowly, a rim light on the top edge.</dd>
+          <dt>Hover</dt><dd>A panning noise band streams grains along the top edge. A 256×64 drip strip pans down from the bottom edge, gated by Hover.</dd>
+          <dt>Press</dt><dd>Noise-threshold dissolve with a glinting edge, Press 0 → 1 → 0 in 0.6 s. The click fires immediately, so the animation never delays the action.</dd>
+          <dt>Label</dt><dd>Wrap the button in a Retainer Box using the same dissolve as its effect material, and the text dissolves with the sand. A Retainer Box renders its children to a render target, so use it only on the few buttons on screen.</dd>
+        </dl>
+      </div>
+      <div class="card">
+        <div class="top"><h3>Live particles in UMG</h3><span class="chip k-ver">Honest note</span></div>
+        <dl class="spec">
+          <dt>Fact</dt><dd>Unreal has no first-party way to draw Niagara inside UMG.</dd>
+          <dt>Routes</dt><dd>A SceneCapture2D of an off-screen system into a render target, shown in an Image, which renders the scene a second time and is too expensive for Low. Or a third-party plugin such as Niagara UI Renderer on Fab <span class="vf">Verify</span> 5.8 support and the license.</dd>
+          <dt>Plan</dt><dd>The UI material route, which also fits our no-Niagara rule. If a button ever needs more motion, bake the sand once into a flipbook and play it in the same material.</dd>
+          <dt>Input</dt><dd>Gamepad focus must look like hover. CommonUI's button base treats them alike <span class="vf">Verify</span>; plain UMG needs OnAddedToFocusPath handling.</dd>
+          <dt>Access</dt><dd class="m">"Dream effects: Reduced" swaps the dissolve for a short fade and keeps hover as a static rim light.</dd>
+        </dl>
+      </div>
+    </div>
+
+    <h3 class="sub">Main menu · the phone</h3>
+    <div class="phone-wrap">
+      <div class="phone" role="group" aria-label="Main menu mock: a phone showing November with seventeen failed days crossed out, day 18 today, and four tasks">
+        <div class="ph-bar"><span>06:42</span><span>Alarm · snoozed 3×</span></div>
+        <div class="ph-head"><b>November</b><span>Day 18</span></div>
+        <div class="cal" id="cal" aria-hidden="true"></div>
+        <div class="tasks">
+          <p>Today</p>
+          <button class="sand-btn sm" data-sand="primary" type="button"><span>Wake up</span></button>
+          <button class="sand-btn sm" data-sand="locked" type="button" aria-disabled="true"><span>Find a job</span></button>
+          <button class="sand-btn sm" data-sand="locked" type="button" aria-disabled="true"><span>Get the job</span></button>
+          <button class="sand-btn sm" data-sand="locked" type="button" aria-disabled="true"><span>Do the job</span></button>
+        </div>
+        <div class="ph-foot"><span>Notebook · 6 facts</span><span>Settings</span></div>
+      </div>
+      <div class="card">
+        <div class="top"><h3>WBP_PhoneMenu</h3><span class="chip st-next">Next</span><span class="chip c-low">Low</span><span class="chip k-est">Established</span></div>
+        <dl class="spec">
+          <dt>Layout</dt><dd>A 9 : 19.5 safe area centred on a dark nightstand. The calendar is a Uniform Grid Panel of WBP_DayCell (failed, today, future) filled from the save game's day count.</dd>
+          <dt>Tasks</dt><dd>Four sand buttons. Only the next task is live; the others are disabled and slump when pressed.</dd>
+          <dt>In world</dt><dd>If the phone becomes a mesh with a world-space Widget Component, it renders inside the scene and M_PP_DreamMono greys it, unless the phone is stencil-flagged. Screen-space UMG stays exactly as designed.</dd>
+          <dt>Fonts</dt><dd>IM Fell English for dates and titles, IBM Plex Sans for UI text, IBM Plex Mono for numbers. All three are SIL OFL, so they can ship, at roughly 0.2–0.5 MB each as Font assets.</dd>
+          <dt>Pointer</dt><dd class="m">The dark-sand hand from the board's T0 frame is the splat-mesh hand in section 3, rendered in a small viewport behind the phone.</dd>
+        </dl>
+      </div>
+    </div>
+
+    <h3 class="sub">In play, in battle, in pause</h3>
+    <div class="grid two">
+      <figure class="demo">
+        <canvas id="cvHud" width="960" height="540" role="img" aria-label="Third-person bedroom view with a minimal HUD: the objective Leave the bedroom at top left, a hold-to-take ring on the key, and four inventory slots at the bottom. The key pours into the first slot as sand."></canvas>
+        <div class="body">
+          <div class="top"><h3>Minimal HUD · prompt · 4 slots</h3><span class="chip st-next">Next</span><span class="chip c-low">Low</span></div>
+          <dl class="spec">
+            <dt>Rule</dt><dd>Nothing on screen unless it helps the next action. The objective fades after four seconds and comes back on a long press.</dd>
+            <dt>Prompt</dt><dd>WBP_Prompt follows its target through Project World Location to Widget Position. The hold ring is a UI material (polar UVs, noise edge, a Progress scalar) driven by an Enhanced Input hold trigger.</dd>
+            <dt>Slots</dt><dd>A Horizontal Box of four WBP_Slot. Icons are thumbnails of the Lux3D meshes rendered once into one 512² atlas. A taken item pours into its slot as sand.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <div class="screen enc">
+          <canvas id="cvEnc" width="960" height="540" aria-hidden="true"></canvas>
+          <div class="enc-ui">
+            <div class="plate foe"><span class="nm">The Shirt (inside out)</span><span>LV 30 · <span id="encFoeState">GUARDED</span></span><div class="bar t"><i id="encFoe" style="width:100%"></i></div></div>
+            <p class="log" id="encLog" aria-live="polite">The Shirt stands between you and the day. It is inside out, and it knows.</p>
+            <div class="plate me"><span class="nm">The Nightmare</span><span>COMPOSURE <span id="encCmpT">42 / 42</span></span><div class="bar"><i id="encCmp" style="width:100%"></i></div><span>RESOLVE <span id="encResT">12 / 20</span></span><div class="bar t"><i id="encRes" style="width:60%"></i></div></div>
+            <div class="moves" role="group" aria-label="Moves">
+              <button class="sand-btn" data-sand="move" data-move="arm" type="button"><span>Find Armhole<em>R2</em></span></button>
+              <button class="sand-btn" data-sand="move" data-move="btn" type="button"><span>Button Up<em>R4</em></span></button>
+              <button class="sand-btn" data-sand="move" data-move="breath" type="button"><span>Deep Breath<em>+6</em></span></button>
+              <button class="sand-btn" data-sand="move" data-move="mirror" type="button"><span>Check Mirror<em>+10</em></span></button>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="top"><h3>RPG encounter</h3><span class="chip st-next">Next</span><span class="chip c-low">Low</span></div>
+          <dl class="spec">
+            <dt>Tone</dt><dd>Sincere. Moves have plain heroic names and real numbers, and the log reads like a war report about a shirt.</dd>
+            <dt>Build</dt><dd>WBP_Encounter over a locked camera. Turn logic lives in a Blueprint component; the log is a Rich Text Block so move names can be styled; the bars are Progress Bars with a sand-edge fill material.</dd>
+            <dt>Timing</dt><dd>Button Up is a timed input, so stutter, datamosh and slit-scan are blocked during its window.</dd>
+          </dl>
+          <p class="note">The moves work. Button Up only lands after Find Armhole.</p>
+        </div>
+      </figure>
+      <figure class="demo">
+        <div class="screen">
+          <canvas id="cvPause" width="960" height="540" aria-hidden="true"></canvas>
+          <div class="pause-ui">
+            <div>
+              <h4>Paused</h4>
+              <p class="when">DAY 18 · 06:42 · T2 THE LOCKED DOOR</p>
+              <ul class="pmenu">
+                <li><button class="ulink" type="button">Resume</button></li>
+                <li><button class="ulink" type="button">Notebook · 6 facts</button></li>
+                <li><button class="ulink" type="button">Settings</button></li>
+                <li><button class="ulink quiet" type="button">Give up for today</button></li>
+              </ul>
+            </div>
+            <div class="psettings"><span>DREAM EFFECTS</span><div class="opt"><span class="on">Full</span><span>Reduced</span><span>Off</span></div><span>SUBTITLES</span><div class="opt"><span class="on">On</span><span>Off</span></div></div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="top"><h3>Pause menu</h3><span class="chip st-next">Next</span><span class="chip c-low">Low</span></div>
+          <dl class="spec">
+            <dt>Build</dt><dd>Set Game Paused, then WBP_Pause over the frozen frame. A Background Blur behind the menu on High; on Low its Low Quality Fallback Brush, a flat dark tint, because a full-screen blur is a real cost on a 1050 Ti.</dd>
+            <dt>Buttons</dt><dd>Secondary actions get a sand underline instead of a slab. It's cheaper, and the primary action stays obvious.</dd>
+            <dt>Settings</dt><dd>Dream effects (Full, Reduced, Off) is the accessibility switch that every effect in section 2 respects.</dd>
+            <dt>Copy</dt><dd class="m">Quitting is "Give up for today". It rolls the day over, like any failure.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="cvRoll" width="960" height="540" role="img" aria-label="Day rollover screen: day 18 gets crossed out with a stroke of sand, day 19 appears, and a line reads The house resets. What you learned doesn't."></canvas>
+        <div class="body">
+          <div class="top"><h3>Day rollover · loading</h3><span class="chip st-next">Next</span><span class="chip c-low">Low</span></div>
+          <dl class="spec">
+            <dt>Beat</dt><dd>You fail, the frame sinks into sand, today gets crossed out, Day 19 appears, and the house resets behind it.</dd>
+            <dt>Build</dt><dd>Reset in place: respawn actors and restore their saved state behind the overlay instead of reloading the level, so slow drives never show a loading bar. Level 1's street streams in with Load Stream Level behind the same screen.</dd>
+            <dt>Length</dt><dd>3–4 s, skippable after the first time.</dd>
+          </dl>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="cine" aria-labelledby="s2">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s2">2 · Dream cinematic effects</h2><p class="lede">All of them run on the same third-person test shot so they can be compared. A post-process material can't read the previous frame, so anything with memory needs a render-target ping-pong or a C++ pass. Every card lists the cheap version we ship first.</p></div>
+
+    <figure class="demo headline">
+      <canvas id="cvShift" width="1120" height="630" tabindex="0" role="application" aria-roledescription="interactive demo" aria-label="Time-shift blur. The Nightmare walks through the bedroom and a glowing key drifts on its own; drag the key, or focus here and use the arrow keys, and it leaves translucent echoes and soft light streaks."></canvas>
+      <div class="body">
+        <div class="top"><h3>Time-shift blur</h3><span class="chip st-next">Next</span><span class="chip k-est">Established</span><span class="chip tier-pay">Headline</span></div>
+        <p>A multiple exposure. Everything that moves leaves translucent ghosts of where it was a moment ago, and lights smear into soft streaks. We use it a lot, in two layers.</p>
+        <div class="ctl"><div class="seg" id="segShift"><button type="button" aria-pressed="true" data-m="3">Both layers</button><button type="button" aria-pressed="false" data-m="1">1 · Full-screen</button><button type="button" aria-pressed="false" data-m="2">2 · Per-object</button><button type="button" aria-pressed="false" data-m="0">Off</button></div></div>
+        <dl class="spec">
+          <dt>Layer 1</dt><dd><b>Full-screen time-shift pass, for dream moments.</b> A post-process material can't read last frame, so we keep it ourselves. A SceneCapture2D on the player camera renders the frame at half resolution; a material drawn with Draw Material to Render Target blends it over the history target with decay and a slight drift and writes the second target; next frame they swap. M_PP_DreamMono then lays the history over the frame with a small UV offset. <span class="chip c-med">Med</span> one half-res capture plus one fullscreen pass, two 640×360 RGBA16F targets (3.7 MB). Dream beats only, 1–3 s.</dd>
+          <dt>Layer 2</dt><dd><b>Per-object echo trails, for the Nightmare and moving props.</b> Every 0.1 s, Copy Pose From Skeletal Component writes the Nightmare's pose into one of four pooled Poseable Mesh Components wearing M_Echo, a translucent material that fades with age through Custom Primitive Data. Rigid props are cheaper still: the same mesh at its last few transforms. <span class="chip c-low">Cheapest · Low tier</span> four extra draws per object, no render target, safe to leave on.</dd>
+          <dt>Use</dt><dd>Layer 2 whenever the Nightmare moves fast and on anything the dream moves. Layer 1 on every dream beat: T7's moved wall, the cut into an encounter, the payoff burst, the rollover. After a stutter hold, release the history for one long smear.</dd>
+          <dt>Safety</dt><dd class="m">The live object stays the most opaque thing (ghosts at 35% at most). Layer 1 never runs during a timed input. Reduced keeps two layer-2 ghosts; Off removes both. A C++ Scene View Extension copying scene color into the history would remove the capture cost <span class="vf">Verify</span>.</dd>
+        </dl>
+      </div>
+    </figure>
+
+    <div class="grid">
+      <figure class="demo">
+        <canvas id="cvMosh" width="960" height="540" role="img" aria-label="Datamosh: blocks of the old frame slide along with the walking figure and the camera drift instead of refreshing, so the room smears into the figure, then the image snaps clean."></canvas>
+        <div class="body">
+          <div class="top"><h3>Datamosh</h3><span class="chip c-med">Fake · Med</span><span class="chip c-high">True · High</span></div>
+          <div class="ctl"><div class="seg" id="segMosh"><button type="button" aria-pressed="true" data-m="true">True · history</button><button type="button" aria-pressed="false" data-m="fake">Fake · no history</button></div></div>
+          <dl class="spec">
+            <dt>Ship</dt><dd>The fake, inside M_PP_DreamMono: quantize UVs to 16 px blocks, read SceneTexture:Velocity per block, offset the sample by velocity × MoshAmount plus a hashed per-block jitter. It can't accumulate, but it reads as a mosh for a second.</dd>
+            <dt>True</dt><dd>Ping-pong two render targets: a material reads last frame's moshed target, moves each block along its motion and writes the other one. Getting the current frame in needs the same capture as time-shift layer 1.</dd>
+            <dt>Safety</dt><dd class="m">Cinematic beats only, one second at most, no input expected. If a tier runs FXAA with motion blur off, the velocity pass may not render and the fake falls back to jitter <span class="vf">Verify</span>.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="cvSlit" width="960" height="540" role="img" aria-label="Slit-scan: each column of the frame comes from a slightly older moment, so the walking figure stretches into a ribbon and the walls lean."></canvas>
+        <div class="body">
+          <div class="top"><h3>Slit-scan</h3><span class="chip c-high">High</span><span class="chip k-est">Established</span></div>
+          <dl class="spec">
+            <dt>Look</dt><dd>Each column comes from a slightly older moment, so motion bends into ribbons and the walls lean.</dd>
+            <dt>Ship</dt><dd>Sequencer shots only. A SceneCapture2D at 480×270 writes each frame into one cell of a 4×4 atlas render target (16 frames, 1920×1080 RGBA8, about 8 MB); the post process picks the cell by screen column.</dd>
+            <dt>Cheap</dt><dd>WPO lean on the walls (section 4) plus time-shift layer 2 sells stretched time for almost nothing.</dd>
+            <dt>Safety</dt><dd class="m">Never while the player steers. Off under Reduced and on Low.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="cvChroma" width="960" height="540" role="img" aria-label="Chromatic split: toward the frame edges the image separates into a cold blue ghost and a warm tungsten ghost, pulsing on a dream-crack beat; the centre stays clean."></canvas>
+        <div class="body">
+          <div class="top"><h3>Chromatic split</h3><span class="chip c-low">Low</span><span class="chip k-est">Established</span></div>
+          <dl class="spec">
+            <dt>Ship</dt><dd>Inside M_PP_DreamMono: two extra PostProcessInput0 samples with radial offsets, converted to luminance and tinted moon blue and tungsten. The split stays in our palette instead of RGB.</dd>
+            <dt>Why</dt><dd>Unreal's Chromatic Aberration runs in the tonemapper, before our After Tonemapping pass, so its fringes would come out grey <span class="vf">Verify</span> the pass order in 5.8.</dd>
+            <dt>Safety</dt><dd class="m">2 px at 1080p at most during play, scaled by distance from the centre so prompts stay clean. Spikes only on dream-crack beats.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="cvBreath" width="960" height="540" role="img" aria-label="Breathing vignette and depth of field: on a slow cycle the vignette closes and the background softens around the Nightmare, then opens again."></canvas>
+        <div class="body">
+          <div class="top"><h3>Breathing vignette and DOF</h3><span class="chip c-low">Vignette · Low</span><span class="chip c-med">DOF · Med</span></div>
+          <dl class="spec">
+            <dt>Ship</dt><dd>The frame breathes with the Sleeper on a 4.5 s cycle. The vignette lives in M_PP_DreamMono, driven by one MPC scalar, Breath. On High, Cinematic DOF on the camera adds the softening, focus locked to the Nightmare.</dd>
+            <dt>Low</dt><dd>DOF off (r.DepthOfFieldQuality 0). The vignette carries the breath alone.</dd>
+            <dt>Safety</dt><dd class="m">Small amplitude in play; the vignette never covers the prompt or the slots. No zoom pumping.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="cvStutter" width="960" height="540" role="img" aria-label="Frame stutter: the image holds for several frames, then skips ahead; a film strip along the bottom marks held and skipped frames."></canvas>
+        <div class="body">
+          <div class="top"><h3>Frame stutter and skip</h3><span class="chip c-low">Free</span><span class="chip k-est">Established</span></div>
+          <dl class="spec">
+            <dt>Ship</dt><dd>Set Global Time Dilation near zero for 2–4 frames so the world holds while the camera can still move, then about 3× for a few frames to skip. Animate the Nightmare on twos for the stop-motion feel.</dd>
+            <dt>Safety</dt><dd class="m">Never during timed inputs. Check physics under extreme dilation <span class="vf">Verify</span>. Off under Reduced.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="cvTrans" width="960" height="540" role="img" aria-label="Sand-dissolve transition: the third-person bedroom crumbles into dark sand from a noise pattern and the top-down layout shot of the same room settles out of it, then back."></canvas>
+        <div class="body">
+          <div class="top"><h3>Sand-dissolve transition</h3><span class="chip c-low">Low</span><span class="chip c-med">With snapshot · Med</span></div>
+          <dl class="spec">
+            <dt>Ship</dt><dd>A full-screen UMG Image with a UI material that uses the same noise threshold as the props. Dissolve to sand, cut or reset behind it, dissolve back. Here it carries the cut to the top-down shot used for T7.</dd>
+            <dt>Live</dt><dd>To dissolve between two live shots, snapshot the outgoing view once (SceneCapture2D with capture every frame off, then Capture Scene) at half resolution and dissolve that image over the new view.</dd>
+            <dt>Safety</dt><dd class="m">1.2 s at most, input locked, glints never flash.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="cvBurst" width="960" height="540" role="img" aria-label="Payoff: the hero shot of the Nightmare in its new suit is grey, then a ring of full color bursts out from it, holds, and drains back to grey."></canvas>
+        <div class="body">
+          <div class="top"><h3>Grey → color burst → grey</h3><span class="chip st-built">Built</span><span class="chip tier-pay">Payoff</span><span class="chip c-low">Low</span></div>
+          <dl class="spec">
+            <dt>Built</dt><dd>ColorReveal in MPC_Dream already blends M_PP_DreamMono back to real color.</dd>
+            <dt>Next</dt><dd>RevealCenter and RevealRadius in the MPC for the ring, keyed in Sequencer with a Material Parameter Collection track (0.4 s out, 2 s hold, 1.2 s back), a bloom bump, the sand-bloom splat mesh and a burst of time-shift layer 1.</dd>
+            <dt>Safety</dt><dd class="m">No full-screen white flash; stay under three flashes a second (WCAG 2.3.1). It's a cutscene, so input is locked.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="cvHue" width="960" height="540" role="img" aria-label="Hue drift: the same grey bedroom, its shadows and highlights tinted by story progress, from cold night blue toward warm dusk."></canvas>
+        <div class="body">
+          <div class="top"><h3>Hue drift</h3><span class="chip st-built">Built</span><span class="chip c-low">Free</span></div>
+          <div class="ctl"><label for="hueRange">Story progress</label><input type="range" id="hueRange" min="0" max="3" step="0.01" value="0"></div>
+          <p class="readout" id="hueOut">Tutorial · night</p>
+          <dl class="spec">
+            <dt>Built</dt><dd>ShadowTint and HighlightTint in MPC_Dream. The values here are a proposal <span class="chip k-idea">Our idea</span></dd>
+            <dt>Next</dt><dd>Per-level values in a Data Table, blended over 3 s as a level starts (Set Vector Parameter Value from a Timeline).</dd>
+            <dt>Know</dt><dd>Split toning keys on luminance, so a warm lamp pool and a cold moon wedge can't both stay colored; the lamp reads warm only where its shade is stencil-flagged. Keeping about 10% of the scene's saturation would bring the warm pools back. To decide.</dd>
+            <dt>Safety</dt><dd class="m">Shift hue only, never the luminance range, and recheck tungsten prompt contrast on every tint.</dd>
+          </dl>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="vfx" aria-labelledby="s3">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s3">3 · Sand and smoke · splat meshes</h2><p class="lede">No Niagara. Smoke and sand are Lux3D Gaussian splats baked into one static mesh per effect and animated entirely in its material. Everything else uses cheap material tricks: dissolve, World Position Offset, panning textures, depth fade and fresnel.</p></div>
+
+    <figure class="diag">
+      <div class="scroll">
+      <svg viewBox="0 0 1020 132" role="img" aria-label="Splat mesh pipeline: a Lux3D G1-Turbo PLY splat is subsampled by an editor Python bake tool into one static mesh with four vertices per splat, drawn by M_SplatMesh, which animates it from time parameters, giving one draw call on screen.">
+        <defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#a39c8f"></path></marker></defs>
+        <g font-family="IBM Plex Mono, Consolas, monospace" font-size="12" fill="currentColor">
+          <rect x="10" y="40" width="160" height="66" rx="8" fill="#1d160d" stroke="#e0a052"></rect>
+          <text x="90" y="68" text-anchor="middle" fill="#e0a052">Lux3D G1-Turbo</text><text x="90" y="88" text-anchor="middle" fill="#a39c8f">PLY splat</text>
+          <rect x="220" y="40" width="160" height="66" rx="8" fill="#13110f" stroke="#5d574e"></rect>
+          <text x="300" y="68" text-anchor="middle">Bake tool</text><text x="300" y="88" text-anchor="middle" fill="#a39c8f">editor Python</text>
+          <rect x="430" y="40" width="160" height="66" rx="8" fill="#13110f" stroke="#5d574e"></rect>
+          <text x="510" y="68" text-anchor="middle">SM_Splat_*</text><text x="510" y="88" text-anchor="middle" fill="#a39c8f">one static mesh</text>
+          <rect x="640" y="40" width="160" height="66" rx="8" fill="#13110f" stroke="#5d574e"></rect>
+          <text x="720" y="68" text-anchor="middle">M_SplatMesh</text><text x="720" y="88" text-anchor="middle" fill="#a39c8f">billboard · falloff</text>
+          <rect x="850" y="40" width="160" height="66" rx="8" fill="#13110f" stroke="#e9e3d6"></rect>
+          <text x="930" y="68" text-anchor="middle">On screen</text><text x="930" y="88" text-anchor="middle" fill="#a39c8f">1 draw call</text>
+          <g stroke="#a39c8f" stroke-width="1.4" marker-end="url(#ar)"><line x1="172" y1="73" x2="216" y2="73"></line><line x1="382" y1="73" x2="426" y2="73"></line><line x1="592" y1="73" x2="636" y2="73"></line><line x1="802" y1="73" x2="846" y2="73"></line></g>
+          <g font-size="11" fill="#a39c8f" text-anchor="middle"><text x="195" y="28">40k subset</text><text x="405" y="28">4 verts each</text><text x="615" y="28">seed, time</text><text x="825" y="28">no sorting</text></g>
+        </g>
+      </svg>
+      </div>
+      <figcaption>The bake runs once per effect in the editor. At runtime nothing simulates: the GPU moves every splat from its own seed and a few time parameters.</figcaption>
+    </figure>
+
+    <div class="split">
+      <div class="table-wrap">
+        <table style="min-width:0">
+          <thead><tr><th scope="col">Channel</th><th scope="col">Holds</th></tr></thead>
+          <tbody>
+            <tr><td class="k">Position</td><td>The splat center. All four corners share it.</td></tr>
+            <tr><td class="k">UV0</td><td>Corner, −1 to 1. WPO expands it to face the camera.</td></tr>
+            <tr><td class="k">UV1</td><td>Radius (3σ of the largest scale) and a random seed.</td></tr>
+            <tr><td class="k">Vertex color</td><td>RGB from the PLY's DC term, A from its opacity.</td></tr>
+            <tr><td class="k">UV2–UV6</td><td>The nine degree-1 spherical harmonic coefficients, plus one spare.</td></tr>
+            <tr><td class="k">Morph meshes</td><td>Target position B goes in UV2–UV3 and SH is dropped, to stay inside Unreal's 8 UV channels.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="top"><h3>M_SplatMesh</h3><span class="chip st-next">Next</span><span class="chip k-idea">Our idea</span><span class="chip c-med">Med</span></div>
+        <dl class="spec">
+          <dt>Billboard</dt><dd>WPO adds the corner times the radius, transformed from view space to world space.</dd>
+          <dt>Falloff</dt><dd>Opacity × exp(−4.5 r²) through DitherTemporalAA into Opacity Mask, Blend Mode Masked. No sorting and any draw order; TAA or TSR resolves the dither, while FXAA leaves it grainy.</dd>
+          <dt>Color</dt><dd>DC plus 0.4886 × (−y·c₁ + z·c₂ − x·c₃) per channel, using the view direction in the PLY's frame <span class="vf">Verify</span> Lux3D's axis convention.</dd>
+          <dt>Motion</dt><dd>A splat shows while its seed sits between Dissolve and Reveal (Custom Primitive Data). Once dissolved, WPO adds gravity × (Dissolve − seed)² and a panning-noise sway. Tendrils loop with frac(Time × rate + seed).</dd>
+          <dt>Setup</dt><dd>Cast Shadow off, Bounds Scale raised so drifting splats aren't culled, Use Full Precision UVs off (half floats are plenty), velocity output for WPO on so TAA doesn't smear <span class="vf">Verify</span> the 5.8 setting name.</dd>
+          <dt>Budget</dt><dd>40k splats per hero effect: 160k vertices, 80k triangles, one draw call, about 9 MB of vertex data with SH (6 MB without) before pak compression. Low draws a 20k LOD, which is just the first half of the seed-shuffled splats.</dd>
+        </dl>
+      </div>
+    </div>
+    <p class="callout"><b>Why it's cheap and where it isn't.</b> One mesh, one material, zero CPU per splat. The cost is overdraw: a masked quad runs its pixel shader until depth rejects it, so the bake keeps quads tight at 3σ and drops splats below 1/255 opacity. Target 1.5 ms per hero effect at 720p on a 1050 Ti <span class="vf">Verify</span> on target hardware.</p>
+
+    <div class="grid">
+      <figure class="demo">
+        <canvas id="vSplat" width="960" height="540" role="img" aria-label="Anatomy of a splat mesh: a clump of dark sand shown as camera-facing quads, then as gaussian falloff, then dithered masked opacity, then the final shaded result."></canvas>
+        <div class="body">
+          <div class="top"><h3>Anatomy of a splat mesh</h3><span class="chip k-idea">Our idea</span></div>
+          <div class="ctl"><div class="seg" id="segSplat"><button type="button" aria-pressed="false" data-m="0">Quads</button><button type="button" aria-pressed="false" data-m="1">Falloff</button><button type="button" aria-pressed="false" data-m="2">Dithered</button><button type="button" aria-pressed="true" data-m="3">Final</button></div></div>
+          <p class="note">The clump orbits so you can watch the quads stay camera-facing and the SH brighten the grains that face the lamp.</p>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="vMorph" width="960" height="540" role="img" aria-label="Pour and morph: a puddle of black sand rises into an antique key, flows into the head of the night mare with smoke tendrils streaming from its mane, and pours back into the puddle."></canvas>
+        <div class="body">
+          <div class="top"><h3>Pour, morph, the night mare</h3><span class="chip k-idea">Our idea</span><span class="chip c-med">Med</span></div>
+          <p>One morph mesh holds the key in Position and the mare in UV2–UV3; WPO lerps between them with a per-splat delay and an arc. Seeds baked from height make the pour rise out of the puddle. The mane's splats loop through drift and fade, so the tendrils never stop.</p>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="vDissolve" width="960" height="540" role="img" aria-label="An alarm clock dissolves from the top into dark sand along a noise edge; the grains fall and pile on the floor, then pour back up and the clock reforms."></canvas>
+        <div class="body">
+          <div class="top"><h3>Object dissolves into sand</h3><span class="chip k-idea">Our idea</span><span class="chip c-low">Low</span></div>
+          <p>The Lux3D mesh dissolves with the masked noise threshold from section 4 while its 20k splat twin takes over. Both read the same world-aligned 256² noise, so splats appear exactly on the dissolve edge, then fall. Played backwards it reforms.</p>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="vShafts" width="960" height="540" role="img" aria-label="Light shafts: moonlight falls from the window in soft additive bands that slide slowly, fading toward the floor and where they meet it, with dust motes glinting only inside the beams."></canvas>
+        <div class="body">
+          <div class="top"><h3>Light shafts</h3><span class="chip st-next">Next</span><span class="chip k-est">Established</span><span class="chip c-low">Low</span></div>
+          <dl class="spec">
+            <dt>Texture</dt><dd>T_Lines: a 128×1024 RGB band texture with a different line pattern in each channel. BC1 without mips is 64 KB.</dd>
+            <dt>Material</dt><dd>M_LightShaft, Unlit and Additive. Emissive is the three channels panned at different speeds, multiplied by a gradient falloff along the card, Depth Fade where it meets floor and walls, Camera Depth Fade near the lens, a fresnel term that hides cards seen edge-on, and MoonIntensity from the MPC.</dd>
+            <dt>Use</dt><dd>2 cards on Low, 4 on High, from each window toward the floor. They stand in for volumetric fog on every tier. Motes are a 2k-quad mesh lit only inside the beam (beam axis and radius in the MPC).</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="vSteps" width="960" height="540" role="img" aria-label="Top-down floorboards: the Nightmare walks a loop and each step leaves a print of dark sand that fades, with a small puff of grains kicked up at every footfall."></canvas>
+        <div class="body">
+          <div class="top"><h3>Sand footstep trail</h3><span class="chip k-est">Established</span><span class="chip c-low">Low</span></div>
+          <p>Footprints are deferred decals with M_DarkSand and Set Fade Out, 24 at most. The puff is a pooled 600-splat mesh, four instances, started by a footstep anim notify through Custom Primitive Data.</p>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="vGlitch" width="960" height="540" role="img" aria-label="Dream glitch: the bedroom door flickers between its old wall and its new one, its geometry snapping into blocks, with short bright sparks streaking off its outline."></canvas>
+        <div class="body">
+          <div class="top"><h3>Dream glitch sparks</h3><span class="chip k-idea">Our idea</span><span class="chip c-low">Low</span></div>
+          <p>A material function on the object snaps its vertices to an 8 cm grid on a hashed time and lights its edges with fresnel. Sparks are a 300-quad mesh whose quads stretch along their drift instead of facing the camera. Pair it with a chromatic split pulse.</p>
+        </div>
+      </figure>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <caption class="m" style="caption-side:top;text-align:left;padding:10px 14px;font-size:0.9rem;color:var(--muted)">Every effect from the brief. Splat counts are per mesh; every mesh is one draw call.</caption>
+        <thead><tr><th scope="col">Effect</th><th scope="col">Splat mesh</th><th scope="col">Material work</th><th scope="col">Budget</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Sand footstep trail</td><td>SM_Splat_Puff, 600 splats, 4 pooled</td><td>Decal prints with M_DarkSand and fade; puff Reveal, Dissolve and gravity drift from a footstep notify</td><td class="m">24 decals · 4 draws</td></tr>
+          <tr><td class="k">Sand hand pouring</td><td>SM_Splat_Hand, 40k, from a Lux3D PLY</td><td>Seed = 0.7 × height + 0.3 × random, so Reveal rises from the puddle; pour-away is Dissolve plus gravity; the puddle is a decal with panning normals</td><td class="m">40k · 1 draw</td></tr>
+          <tr><td class="k">Sand morph between shapes</td><td>SM_Splat_Morph_KeyMare, 40k pairs</td><td>WPO lerps Position → UV2–UV3 with a per-splat delay, an arc and noise sway; the bake pairs splats along a Morton curve so paths stay short</td><td class="m">40k · 1 draw</td></tr>
+          <tr><td class="k">Object dissolving into sand</td><td>Splat twin of the prop, 20k</td><td>Mesh: masked noise dissolve with a sand edge. Twin: Reveal from the same noise, then falls</td><td class="m">20k + mesh · 2 draws</td></tr>
+          <tr><td class="k">The night mare</td><td>SM_Splat_Mare, 40k, 4–6 pose meshes</td><td>A stop-motion gallop on twos by swapping pose meshes; a third of the splats loop through drift for mane and tail tendrils. No quadruped rig needed</td><td class="m">40k · 1 draw</td></tr>
+          <tr><td class="k">Dust motes in moonlight</td><td>SM_Motes, 2k generated quads</td><td>WPO drift from a panning noise texture plus a per-seed sine; brightness masked by the beam in world space; unlit additive</td><td class="m">2k · 1 draw</td></tr>
+          <tr><td class="k">Lock-break and impact puffs</td><td>SM_Splat_Burst, 1.5k, pool of 3</td><td>Direction is the position from the pivot, so WPO pushes each splat out at a seed-scaled speed, adds gravity and fades from BurstTime</td><td class="m">1.5k · 1 draw each</td></tr>
+          <tr><td class="k">Dream glitch sparks</td><td>SM_Sparks, 300 streak quads</td><td>Grid snap and fresnel edges on the object; quads aligned to their drift</td><td class="m">300 · 1 draw</td></tr>
+          <tr><td class="k">Payoff color-burst bloom</td><td>SM_Splat_Bloom, 30k ring</td><td>Burst colors baked in vertex color, stencil-flagged so they stay colored; Reveal by radius; emissive feeds bloom</td><td class="m">30k · payoff only</td></tr>
+          <tr><td class="k">Light shafts</td><td>2–4 cards, no splats</td><td>T_Lines panned; gradient, Depth Fade, Camera Depth Fade, fresnel</td><td class="m">64 KB texture</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="callout"><b>On screen at once.</b> Low: one hero effect at its 20k LOD plus small meshes, about 30k splats. High: two hero effects plus small meshes, about 100k. Both <span class="vf">Verify</span> on an Iris Xe, where overdraw costs the most.</p>
+  </div>
+</section>
+
+<section class="sec" id="mat" aria-labelledby="s4">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s4">4 · Material VFX in Unreal</h2><p class="lede">Procedural where it saves memory, masked instead of translucent where it saves sorting, and one shared noise texture so every dissolve in the game lines up.</p></div>
+    <div class="grid">
+      <figure class="demo">
+        <canvas id="mDis" width="960" height="540" role="img" aria-label="Dissolve breakdown in four panels: the noise, the threshold mask, the thin edge band, and the result where wallpaper crumbles into black sand with amber glints along the edge."></canvas>
+        <div class="body">
+          <div class="top"><h3>Noise dissolve with a sand edge</h3><span class="chip st-next">Next</span><span class="chip c-low">Low</span></div>
+          <dl class="spec">
+            <dt>Graph</dt><dd>Noise from a world-aligned 256² texture, minus Dissolve, into Opacity Mask (Masked). Edge band = 1 − smoothstep(0, EdgeWidth, noise − Dissolve), blended to M_DarkSand with glints.</dd>
+            <dt>Share</dt><dd>MF_SandDissolve is one material function used by props, splat twins, transitions and the UI material.</dd>
+            <dt>Why</dt><dd class="m">Masked writes depth and never sorts, unlike translucency.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="mWpo" width="960" height="540" role="img" aria-label="A wall with a doorway drawn as a vertex grid: the wall slowly breathes in and out, and near the door the geometry leans and wobbles in a way that looks wrong."></canvas>
+        <div class="body">
+          <div class="top"><h3>Breathing walls, wrong geometry</h3><span class="chip st-next">Next</span><span class="chip c-low">Low</span><span class="chip c-med">With VSM · Med</span></div>
+          <dl class="spec">
+            <dt>Graph</dt><dd>Breath: VertexNormal × sin(Time × 2π / 4.5 + phase) × Amplitude × vertex color R painted on the wall. Wrong geometry: a sphere mask around a DreamGlitch point in the MPC skews vertices toward it.</dd>
+            <dt>Watch</dt><dd>Walls need vertices to bend. Collision never follows WPO, so keep wobble off anything the player must path around. Animated WPO invalidates virtual shadow map pages every frame on High (Shadow Cache Invalidation Behavior helps). World Position Offset Disable Distance turns it off far away.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="mSpark" width="960" height="540" tabindex="0" role="application" aria-roledescription="interactive demo" aria-label="Close-up of wet black sand. Glints of amber twinkle as the view moves; move the pointer over it, or use the arrow keys, to move the view."></canvas>
+        <div class="body">
+          <div class="top"><h3>Wet black sand sparkle</h3><span class="chip st-built">Base built</span><span class="chip st-next">Glints next</span><span class="chip c-low">Low</span></div>
+          <dl class="spec">
+            <dt>Built</dt><dd>M_DarkSand: black ↔ sandy color, noise grain, wet roughness.</dd>
+            <dt>Next</dt><dd>Glints: a 64² hash texture tiled at high frequency, its UVs offset by the camera vector so glints twinkle as the view moves, thresholded into amber emissive × fresnel.</dd>
+            <dt>Trick</dt><dd class="m">Flag sand as stencil 2. Black survives the mono pass anyway, so the exception only lets the amber glints and the sandy-color moments through.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="demo">
+        <canvas id="mProc" width="960" height="540" role="img" aria-label="Three procedural swatches: worn wood floorboards, mottled cracked plaster and a faded woven fabric, generated from noise."></canvas>
+        <div class="body">
+          <div class="top"><h3>Procedural wood, plaster, fabric</h3><span class="chip st-next">Next</span><span class="chip c-low">Low</span></div>
+          <div class="ctl"><div class="seg" id="segProc"><button type="button" aria-pressed="true" data-m="mono">In game · grey</button><button type="button" aria-pressed="false" data-m="color">Albedo · real hue</button></div></div>
+          <dl class="spec">
+            <dt>Graph</dt><dd>One 256² RGBA noise pack (BC7, 64 KB) feeds everything. Wood: rings from the warped distance and a per-plank hash of floor(position / plank width). Plaster: low mottling and cracks from the pack's crack channel. Fabric: a 64² weave tile and a fade.</dd>
+            <dt>Memory</dt><dd>The whole house shell needs about 0.2 MB of textures.</dd>
+            <dt>Watch</dt><dd class="m">The Noise material node computes octaves per pixel and gets expensive; sample the pack instead. Keep real hue in the albedo for the payoff.</dd>
+          </dl>
+        </div>
+      </figure>
+      <figure class="diag">
+        <svg viewBox="0 0 520 290" role="img" aria-label="Triplanar mapping: a modular wall block receives the same texture projected along X, Y and Z, and the three are blended by how much the surface normal faces each axis.">
+          <g fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M200 110 L300 80 L380 120 L280 150 Z" fill="#26221e"></path>
+            <path d="M200 110 L200 220 L280 260 L280 150 Z" fill="#1c1916"></path>
+            <path d="M280 150 L380 120 L380 230 L280 260 Z" fill="#221f1b"></path>
+          </g>
+          <g stroke="#e0a052" stroke-width="1.5" fill="none" marker-end="url(#ar2)">
+            <line x1="290" y1="30" x2="290" y2="100"></line><line x1="80" y1="190" x2="190" y2="180"></line><line x1="480" y1="200" x2="390" y2="180"></line>
+          </g>
+          <defs><marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#e0a052"></path></marker></defs>
+          <g font-family="IBM Plex Mono, Consolas, monospace" font-size="12" fill="currentColor">
+            <text x="300" y="24">Z projection · floor, top</text><text x="20" y="176">X projection</text><text x="410" y="230">Y projection</text>
+            <text x="20" y="276" fill="#a39c8f">weight per axis = |normal|^k, normalized · 3 samples per texture</text>
+          </g>
+        </svg>
+        <figcaption><b style="color:var(--bone)">World-aligned and triplanar.</b> <span class="chip k-est">Established</span> <span class="chip c-med">Med on Low</span> WorldAlignedTexture and WorldAlignedNormal project on X, Y and Z and blend by the normal, so greyboxed walls and floors never need a UV unwrap. Use it on the house shell only; moving props feed local position so the texture doesn't swim, and Lux3D props keep their own UVs.</figcaption>
+      </figure>
+      <figure class="demo">
+        <canvas id="mSten" width="960" height="540" role="img" aria-label="Stencil exception breakdown of the bedroom: the final grey frame where only the lamp shade, the key and the wardrobe handles keep their warm color; the original scene color; and the custom stencil mask."></canvas>
+        <div class="body">
+          <div class="top"><h3>Stencil color exception · MPC hue drift</h3><span class="chip st-built">Built</span><span class="chip c-low">Low</span></div>
+          <div class="ctl"><div class="seg" id="segSten"><button type="button" aria-pressed="true" data-m="0">Final</button><button type="button" aria-pressed="false" data-m="1">Scene color</button><button type="button" aria-pressed="false" data-m="2">Custom stencil</button></div></div>
+          <dl class="spec">
+            <dt>Built</dt><dd>M_PP_DreamMono (After Tonemapping): luminance × a tint lerped from ShadowTint to HighlightTint; CustomStencil ≥ 1 or ColorReveal keeps real color.</dd>
+            <dt>Values</dt><dd>1 usable things (tungsten), 2 sand (glints), 3 the payoff trace, such as the suit after T9 <span class="chip k-idea">Our idea</span></dd>
+            <dt>Needs</dt><dd class="m">Custom Depth-Stencil Pass set to Enabled with Stencil. Translucent objects only write stencil with Allow Custom Depth Writes; masked splat meshes write it normally.</dd>
+          </dl>
+        </div>
+      </figure>
+    </div>
+    <figure class="diag">
+      <div class="scroll">
+      <svg viewBox="0 0 1000 176" role="img" aria-label="M_PP_DreamMono: scene color goes to luminance with the ink crush, then is multiplied by a tint lerped between ShadowTint and HighlightTint from MPC_Dream, then lerped back to scene color by a mask that is the max of custom stencil and ColorReveal.">
+        <defs><marker id="ar3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#a39c8f"></path></marker></defs>
+        <g font-family="IBM Plex Mono, Consolas, monospace" font-size="12" fill="currentColor">
+          <rect x="10" y="30" width="170" height="56" rx="8" fill="#13110f" stroke="#5d574e"></rect><text x="95" y="54" text-anchor="middle">PostProcessInput0</text><text x="95" y="72" text-anchor="middle" fill="#a39c8f">scene color</text>
+          <rect x="230" y="30" width="170" height="56" rx="8" fill="#13110f" stroke="#5d574e"></rect><text x="315" y="54" text-anchor="middle">Luminance</text><text x="315" y="72" text-anchor="middle" fill="#a39c8f">+ levels (ink crush)</text>
+          <rect x="450" y="30" width="190" height="56" rx="8" fill="#13110f" stroke="#e0a052"></rect><text x="545" y="54" text-anchor="middle">× lerp(Shadow, High)</text><text x="545" y="72" text-anchor="middle" fill="#e0a052">MPC_Dream tints</text>
+          <rect x="690" y="30" width="150" height="56" rx="8" fill="#13110f" stroke="#5d574e"></rect><text x="765" y="54" text-anchor="middle">Lerp</text><text x="765" y="72" text-anchor="middle" fill="#a39c8f">mono → color</text>
+          <rect x="880" y="30" width="110" height="56" rx="8" fill="#13110f" stroke="#e9e3d6"></rect><text x="935" y="63" text-anchor="middle">Output</text>
+          <rect x="450" y="116" width="190" height="48" rx="8" fill="#13110f" stroke="#e0a052"></rect><text x="545" y="145" text-anchor="middle">max(Stencil ≥ 1, ColorReveal)</text>
+          <g stroke="#a39c8f" stroke-width="1.4" fill="none" marker-end="url(#ar3)"><line x1="182" y1="58" x2="226" y2="58"></line><line x1="402" y1="58" x2="446" y2="58"></line><line x1="642" y1="58" x2="686" y2="58"></line><line x1="842" y1="58" x2="876" y2="58"></line><path d="M642 140 L765 140 L765 90"></path><path d="M95 88 L95 104 L765 104 L765 92" stroke-dasharray="4 4"></path></g>
+          <text x="680" y="132" font-size="11" fill="#a39c8f">alpha</text><text x="300" y="100" font-size="11" fill="#a39c8f">original color, for the exception</text>
+        </g>
+      </svg>
+      </div>
+      <figcaption>M_PP_DreamMono as built, with the ink crush from the main style added before the tint. One shared MPC drives every level, so hue drift is a parameter change, never a material change.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" id="budget" aria-labelledby="s5">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s5">5 · Budget and low-tier plan</h2><p class="lede">We budget against 1,000 MB, decimal, so a tool that reports MiB never surprises us. Lines marked Firm are decisions. Lines marked Verify are estimates until we measure them on target hardware.</p></div>
+
+    <div class="budget">
+      <h3>Packaged build size <span>· plan 670 MB of the 1,000 MB cap</span></h3>
+      <div class="sbar" id="sizeBar" role="group" aria-label="Size plan: engine runtime 220 MB, shader libraries 100, textures 140, meshes and animation 70, splat meshes 60, audio 40, maps and UI 40, leaving 330 MB of headroom under 1,000 MB.">
+        <span tabindex="0" data-tip="Engine runtime · 220 MB · 22% of the cap" style="width:22%;background:#e9e3d6">220</span>
+        <span tabindex="0" data-tip="Shader libraries · 100 MB · 10%" style="width:10%;background:#c9c1b2">100</span>
+        <span tabindex="0" data-tip="Textures · 140 MB · 14%" style="width:14%;background:#e0a052">140</span>
+        <span tabindex="0" data-tip="Meshes, animation, distance fields · 70 MB · 7%" style="width:7%;background:#a39c8f">70</span>
+        <span tabindex="0" data-tip="Splat meshes · 60 MB · 6%" style="width:6%;background:#b9a888">60</span>
+        <span tabindex="0" class="dk sm" data-tip="Audio · 40 MB · 4%" style="width:4%;background:#5f5951">40</span>
+        <span tabindex="0" class="dk sm" data-tip="Maps, Blueprints, materials, UI, fonts · 40 MB · 4%" style="width:4%;background:#4f4943">40</span>
+        <span tabindex="0" class="room" data-tip="Headroom · 330 MB · 33%" style="width:33%">330 headroom</span>
+      </div>
+      <div class="scale" aria-hidden="true"><span>0</span><span>250</span><span>500</span><span>750</span><span>1,000 MB</span></div>
+      <p class="tip" id="sizeTip" aria-live="polite">Hover or focus a block for its line.</p>
+      <div class="blegend"><span><i style="background:#e9e3d6"></i>Engine runtime</span><span><i style="background:#c9c1b2"></i>Shader libraries</span><span><i style="background:#e0a052"></i>Textures</span><span><i style="background:#a39c8f"></i>Meshes, animation</span><span><i style="background:#b9a888"></i>Splat meshes</span><span><i style="background:#5f5951"></i>Audio</span><span><i style="background:#4f4943"></i>Maps, Blueprints, UI</span><span><i style="border:1px dashed #5d574e"></i>Headroom</span></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th scope="col">Line</th><th scope="col">Plan</th><th scope="col">How we hold it</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Engine runtime</td><td class="n">220</td><td>Shipping config, editor content excluded, unused plugins disabled (Water, hair strands, Datasmith runtime and the like). <span class="m">Range 180–300 MB.</span></td><td><span class="vf">Verify day 1</span></td></tr>
+          <tr><td class="k">Shader libraries</td><td class="n">100</td><td>One shader format (D3D12 SM6), Share Material Shader Code on, a few master materials with instances, Shader Permutation Reduction switches off for features we don't use, no static lighting permutations. <span class="m">Range 60–200 MB, the biggest unknown.</span></td><td><span class="vf">Verify day 1</span></td></tr>
+          <tr><td class="k">Textures</td><td class="n">140</td><td>2k sets only for 3 hero assets (11.2 MB each: BC1 base, BC5 normal, BC1 ORM, with mips), 1k for about 25 props (2.8 MB each), 512 for about 40 small props (0.7 MB each). The procedural house shell is about 0.2 MB, the UI about 8 MB. Cap imports with Maximum Texture Size.</td><td><span class="chip firm">Firm</span></td></tr>
+          <tr><td class="k">Meshes and animation</td><td class="n">70</td><td>Lux3D retopo budgets below, two LODs, compressed animation. Mesh distance fields are only needed for Lumen on High.</td><td><span class="chip firm">Firm</span> <span class="vf">Verify DF size</span></td></tr>
+          <tr><td class="k">Splat meshes</td><td class="n">60</td><td>Hand, morph, mare, Nightmare twin, bloom and prop twins come to about 72 MB raw; four corners repeat the same data, so it compresses well. Never ship raw PLY: SH degree 3 costs 248 bytes per splat.</td><td><span class="vf">Verify compression</span></td></tr>
+          <tr><td class="k">Audio</td><td class="n">40</td><td>No voice, because the Nightmare is silent. Music 12 min at 128 kbps (11.5 MB), ambience 8 min at 96 kbps (5.8 MB), about 250 effects (10 MB). Compressed formats, music streamed.</td><td><span class="chip firm">Firm</span></td></tr>
+          <tr><td class="k">Maps, Blueprints, UI</td><td class="n">40</td><td>Fully dynamic lighting, so no lightmaps. No pre-rendered movies.</td><td><span class="chip firm">Firm</span></td></tr>
+        </tbody>
+        <tfoot><tr><td>Plan · headroom</td><td class="n">670</td><td>330 MB stays free under the cap, because the two engine lines are unmeasured.</td><td></td></tr></tfoot>
+      </table>
+    </div>
+
+    <div class="split">
+      <div class="table-wrap">
+        <table style="min-width:520px">
+          <caption style="caption-side:top;text-align:left;padding:10px 14px;font-size:0.9rem;color:var(--muted)">Lux3D retopo and texture budgets</caption>
+          <thead><tr><th scope="col">Asset class</th><th scope="col">Triangles</th><th scope="col">Textures</th><th scope="col">LODs</th></tr></thead>
+          <tbody>
+            <tr><td class="k">The Nightmare</td><td>15–20k</td><td>2k set</td><td>2</td></tr>
+            <tr><td class="k">Suit, Shirt</td><td>8–12k</td><td>2k set</td><td>2</td></tr>
+            <tr><td class="k">Large props</td><td>3–6k</td><td>1k set</td><td>2</td></tr>
+            <tr><td class="k">Small props</td><td>0.5–1.5k</td><td>512 set</td><td>1</td></tr>
+            <tr><td class="k">Set dressing</td><td>0.3–1k, or a splat mesh</td><td>512 or none</td><td>1</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <div class="top"><h3>Target low-tier PC</h3><span class="chip firm">Firm</span></div>
+        <dl class="spec">
+          <dt>GPU</dt><dd>GTX 1050 Ti 4 GB, RX 560 4 GB, or Intel Iris Xe (96 EU, shared memory).</dd>
+          <dt>CPU</dt><dd>4 cores, such as a Core i5-7400, Ryzen 3 1200 or Core i5-1135G7.</dd>
+          <dt>Memory</dt><dd>8 GB system RAM with the game under 3.5 GB; under 2.5 GB of VRAM on 4 GB cards.</dd>
+          <dt>Output</dt><dd>1080p at 66.7% screen percentage (720p internal) with TAA upsampling, capped at 30 fps. Iris Xe falls back to 1600×900 at 66.7% <span class="vf">Verify</span>.</dd>
+          <dt>Disk</dt><dd>Under 1 GB. A hard drive is fine, because the house resets in place.</dd>
+        </dl>
+      </div>
+    </div>
+
+    <div class="budget">
+      <h3>Frame time at 30 fps on a GTX 1050 Ti, 720p internal <span>· targets, not measurements</span></h3>
+      <div class="sbar" id="frameBar" role="group" aria-label="Frame budget of 33.3 ms: base pass and depth 6 ms, shadows 4, lighting and SSAO 4, splat meshes and translucency 4, post and UI 4.5, leaving 10.8 ms of headroom.">
+        <span tabindex="0" data-tip="Base pass and depth · 6.0 ms" style="width:18%;background:#e9e3d6">6.0</span>
+        <span tabindex="0" data-tip="Shadows (moon CSM, one lamp) · 4.0 ms" style="width:12%;background:#c9c1b2">4.0</span>
+        <span tabindex="0" data-tip="Lighting, skylight, SSAO · 4.0 ms" style="width:12%;background:#a39c8f">4.0</span>
+        <span tabindex="0" data-tip="Splat meshes, light shafts, translucency · 4.0 ms" style="width:12%;background:#e0a052">4.0</span>
+        <span tabindex="0" data-tip="Post: ink, dream mono, bloom, TAA, plus UI · 4.5 ms" style="width:13.5%;background:#b9a888">4.5</span>
+        <span tabindex="0" class="room" data-tip="Headroom for spikes · 10.8 ms" style="width:32.5%">10.8 headroom</span>
+      </div>
+      <div class="scale" aria-hidden="true"><span>0</span><span>10</span><span>20</span><span>33.3 ms</span></div>
+      <p class="tip" id="frameTip" aria-live="polite">Profile with stat gpu, ProfileGPU and Unreal Insights on the target PC before trusting any of these.</p>
+      <div class="blegend"><span><i style="background:#e9e3d6"></i>Base pass</span><span><i style="background:#c9c1b2"></i>Shadows</span><span><i style="background:#a39c8f"></i>Lighting</span><span><i style="background:#e0a052"></i>Splats, shafts</span><span><i style="background:#b9a888"></i>Post and UI</span><span><i style="border:1px dashed #5d574e"></i>Headroom</span></div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <caption style="caption-side:top;text-align:left;padding:10px 14px;font-size:0.9rem;color:var(--muted)">Scalability: what Low turns off and what replaces it</caption>
+        <thead><tr><th scope="col">Feature</th><th scope="col">Low</th><th scope="col">High</th><th scope="col">Fallback on Low</th><th scope="col">Status</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Global illumination</td><td>None · <code>r.DynamicGlobalIlluminationMethod 0</code></td><td>Lumen, software tracing</td><td>Skylight from a captured cubemap, per-room fill lights, SSAO</td><td><span class="chip firm">Firm</span></td></tr>
+          <tr><td class="k">Reflections</td><td>Captures · <code>r.ReflectionMethod 0</code></td><td>Lumen</td><td>Box and sphere captures per room; wet sand tuned against them</td><td><span class="chip firm">Firm</span></td></tr>
+          <tr><td class="k">Shadows</td><td>Shadow maps · <code>r.Shadow.Virtual.Enable 0</code></td><td>Virtual shadow maps</td><td>Moon cascades (2), one shadowed lamp spot; splat meshes never cast</td><td><span class="chip firm">Firm</span></td></tr>
+          <tr><td class="k">Volumetric fog</td><td>Off · <code>r.VolumetricFog 0</code></td><td>Off</td><td>Light-shaft cards on every tier</td><td><span class="chip firm">Firm</span></td></tr>
+          <tr><td class="k">Anti-aliasing</td><td>TAA · <code>r.AntiAliasingMethod 2</code></td><td>TSR · <code>4</code></td><td>FXAA only in an emergency, since it leaves splat dither grainy</td><td><span class="vf">Verify TSR cost</span></td></tr>
+          <tr><td class="k">DOF, motion blur</td><td>Off · <code>r.DepthOfFieldQuality 0</code></td><td>DOF in Sequencer shots only</td><td>The breathing vignette</td><td><span class="chip firm">Firm</span></td></tr>
+          <tr><td class="k">Dream post</td><td>Mono, split, ink edges, vignette, chroma</td><td>+ hatching, time-shift layer 1, datamosh fake</td><td>Quality Switch picks the cheap branch; time-shift layer 2 stays on</td><td><span class="vf">Verify ink cost</span></td></tr>
+          <tr><td class="k">Splat meshes</td><td>20k LOD, one hero effect at a time</td><td>40k, two at a time</td><td>Quality Level Min LOD on each mesh</td><td><span class="vf">Verify</span></td></tr>
+          <tr><td class="k">Textures</td><td>Pool 512 MB · <code>r.Streaming.PoolSize</code></td><td>Default</td><td>LOD bias 1 on props for the Iris Xe</td><td><span class="vf">Verify</span></td></tr>
+          <tr><td class="k">Nanite</td><td>Off</td><td>Off</td><td>Retopo meshes are low-poly; classic LODs keep one path</td><td><span class="chip firm">Firm</span></td></tr>
+          <tr><td class="k">Shader hitches</td><td colspan="2">PSO precaching plus a short warm-up behind the phone menu</td><td></td><td><span class="vf">Verify on a clean driver cache</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="split">
+      <div class="card"><div class="top"><h3>Firm now</h3></div><ul class="ticks"><li><b>One shader format, no static lighting, no Nanite.</b> Fewer permutations means a smaller build and one render path.</li><li><b>Lumen, virtual shadow maps and volumetric fog are off on Low,</b> with the fallbacks above already art-directed.</li><li><b>No Niagara.</b> Sand and smoke are splat meshes with one draw call each.</li><li><b>Texture caps per asset class</b> and a procedural house shell.</li><li><b>30 fps cap on Low,</b> and the Dream effects setting on every effect.</li></ul></div>
+      <div class="card"><div class="top"><h3>Verify on target hardware</h3></div><ul class="ticks"><li><b>Engine and shader size:</b> package the empty project on day 1.</li><li><b>Ink pass and TSR cost</b> on the 1050 Ti at 720p internal.</li><li><b>Splat overdraw</b> on the Iris Xe, and how far the 20k LOD carries.</li><li><b>Time-shift layer 1:</b> the half-res capture cost during dream beats.</li><li><b>Lux3D output:</b> texture resolution, triangle counts and the PLY axis convention at import.</li><li><b>First-run shader hitches</b> with a cleared driver cache.</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="build" aria-labelledby="s6">
+  <div class="wrap">
+    <div class="sec-head"><h2 id="s6">6 · Build order and ownership</h2><p class="lede">Lanes follow the Level 1 board: A takes gameplay and UI, B takes the art pipeline, materials and effects. Names are still to decide.</p></div>
+    <ol class="build">
+      <li class="done"><div><h3>MPC_Dream</h3><p>ShadowTint, HighlightTint, ColorReveal.</p></div><div class="who"><span class="chip st-built">Built</span></div></li>
+      <li class="done"><div><h3>M_PP_DreamMono</h3><p>After Tonemapping: luminance × split-tone tint, stencil and ColorReveal keep real color.</p></div><div class="who"><span class="chip st-built">Built</span></div></li>
+      <li class="done"><div><h3>M_DarkSand</h3><p>Black ↔ sandy color, noise grain, wet roughness.</p></div><div class="who"><span class="chip st-built">Built</span></div></li>
+      <li><div><h3>Measure the empty build</h3><p>Package the template with ship settings; record size and fps on a low-tier PC. Every number in section 5 starts here.</p></div><div class="who"><span class="chip lane">A + B</span><span class="chip st-next">Day 1</span></div></li>
+      <li><div><h3>Scalability presets</h3><p>Low and High in DefaultScalability.ini and a device profile; the 30 fps cap; the Dream effects setting.</p></div><div class="who"><span class="chip lane">A</span></div></li>
+      <li><div><h3>Splat-mesh bake tool and M_SplatMesh</h3><p>Editor Python from Lux3D PLY to SM_Splat_*, with seeds, radius and SH1. This replaces spike S2.</p></div><div class="who"><span class="chip lane">B</span></div></li>
+      <li><div><h3>Ink pass</h3><p>Edges, hatching and crushed blacks merged into M_PP_DreamMono behind a Quality Switch.</p></div><div class="who"><span class="chip lane">B</span></div></li>
+      <li><div><h3>Sand button and the phone menu</h3><p>WBP_SandButton with M_UI_SandButton, then WBP_PhoneMenu.</p></div><div class="who"><span class="chip lane">A</span></div></li>
+      <li><div><h3>HUD, prompt ring, four slots</h3><p>With the item-pours-into-slot moment.</p></div><div class="who"><span class="chip lane">A</span></div></li>
+      <li><div><h3>Time-shift layer 2 and MF_SandDissolve</h3><p>Pose-snapshot echoes on the Nightmare; the shared dissolve on props, twins, transitions and UI.</p></div><div class="who"><span class="chip lane">B</span></div></li>
+      <li><div><h3>Color burst for T9</h3><p>RevealCenter and RevealRadius, the Sequencer MPC track, the bloom mesh.</p></div><div class="who"><span class="chip lane">B</span></div></li>
+      <li><div><h3>Encounter UI for T8</h3><p>Moves, bars, the log, the Button Up timing window.</p></div><div class="who"><span class="chip lane">A</span></div></li>
+      <li><div><h3>House materials and light shafts</h3><p>Noise pack, wood, plaster, fabric, triplanar shell; T_Lines cards and motes.</p></div><div class="who"><span class="chip lane">B</span></div></li>
+      <li><div><h3>Cheap dream effects</h3><p>Chromatic split, breathing vignette, stutter, sand transitions, datamosh fake, then time-shift layer 1.</p></div><div class="who"><span class="chip lane">B</span></div></li>
+      <li><div><h3>The night mare, footsteps, glitch</h3><p>Pose meshes and tendrils, decal prints and puffs, the glitch function.</p></div><div class="who"><span class="chip lane">B</span></div></li>
+      <li><div><h3>Profiling pass</h3><p>On the target PC: cut or downgrade anything over the frame budget.</p></div><div class="who"><span class="chip lane">A + B</span></div></li>
+    </ol>
+    <p class="callout"><b>Stretch, only with time left:</b> true datamosh and slit-scan through render-target ping-pong, and the C++ Scene View Extension that would make time-shift layer 1 cheaper.</p>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap">Sources: our design doc · the Level 1 board · Unreal Engine documentation for the named features (items marked Verify are unconfirmed for 5.8). Demos are canvas sketches of the techniques, not captures from the engine.</div>
+</footer>
+<script>
+(function () {
+"use strict";
+var RM = !!(window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+var TAU = Math.PI * 2;
+
+/* ---------- utilities ---------- */
+function rng(seed) { var s = seed >>> 0; return function () { s = (s + 0x6D2B79F5) >>> 0; var t = s; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function hashStr(str) { var h = 2166136261; for (var i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; }
+function clamp(x, a, b) { return x < a ? a : x > b ? b : x; }
+function lerp(a, b, t) { return a + (b - a) * t; }
+function sstep(a, b, x) { var t = clamp((x - a) / (b - a), 0, 1); return t * t * (3 - 2 * t); }
+function h2(x, y) { var h = (Math.imul(x | 0, 374761393) + Math.imul(y | 0, 668265263)) | 0; h = Math.imul(h ^ (h >>> 13), 1274126177); return ((h ^ (h >>> 16)) >>> 0) / 4294967296; }
+function vn(x, y) { var xi = Math.floor(x), yi = Math.floor(y), xf = x - xi, yf = y - yi, u = xf * xf * (3 - 2 * xf), v = yf * yf * (3 - 2 * yf), a = h2(xi, yi), b = h2(xi + 1, yi), c = h2(xi, yi + 1), d = h2(xi + 1, yi + 1); return a + (b - a) * u + (c - a) * v + (a - b - c + d) * u * v; }
+function fbm(x, y, o) { var s = 0, a = 0.5, n = 0; for (var i = 0; i < (o || 4); i++) { s += a * vn(x, y); n += a; a *= 0.5; x = x * 2.03 + 17.1; y = y * 2.03 + 9.7; } return s / n; }
+function rgb(hex) { var n = parseInt(hex.slice(1), 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255]; }
+function css(r, g, b, a) { return (a == null || a >= 1) ? "rgb(" + (r | 0) + "," + (g | 0) + "," + (b | 0) + ")" : "rgba(" + (r | 0) + "," + (g | 0) + "," + (b | 0) + "," + Math.max(0, a).toFixed(3) + ")"; }
+function hex2(c) { return "#" + c.map(function (v) { v = clamp(Math.round(v), 0, 255); return (v < 16 ? "0" : "") + v.toString(16); }).join(""); }
+function mk(w, h) { var c = document.createElement("canvas"); c.width = w; c.height = h; return c; }
+function rr(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+function poly(c, p) { c.beginPath(); c.moveTo(p[0], p[1]); for (var i = 2; i < p.length; i += 2) c.lineTo(p[i], p[i + 1]); c.closePath(); }
+function line(c, a, b, x, y) { c.beginPath(); c.moveTo(a, b); c.lineTo(x, y); c.stroke(); }
+function glow(c, x, y, r, c0, c1) { var g = c.createRadialGradient(x, y, 0, x, y, r); g.addColorStop(0, c0); g.addColorStop(1, c1); c.fillStyle = g; c.fillRect(x - r, y - r, 2 * r, 2 * r); }
+function ink(c, w) { c.strokeStyle = "rgba(6,6,8,0.92)"; c.lineWidth = w || 2; c.lineJoin = "round"; c.lineCap = "round"; c.stroke(); }
+function hatch(c, dense) {
+  var k = dense ? "_h2" : "_h1";
+  if (!c[k]) { var t = mk(6, 6), x = t.getContext("2d"); x.strokeStyle = "rgba(4,4,6,0.78)"; x.lineWidth = 1; x.beginPath(); x.moveTo(-1, 7); x.lineTo(7, -1); x.moveTo(-1, 1); x.lineTo(1, -1); x.moveTo(5, 7); x.lineTo(7, 5); if (dense) { x.moveTo(-1, -1); x.lineTo(7, 7); } x.stroke(); c[k] = c.createPattern(t, "repeat"); }
+  return c[k];
+}
+function tag(c, s, x, y, col, align) { c.font = '500 8px "IBM Plex Mono", Consolas, monospace'; c.fillStyle = col || "rgba(233,227,214,0.7)"; c.textAlign = align || "left"; c.textBaseline = "middle"; c.fillText(s, x, y); }
+
+/* ---------- the dream palette: a JS mirror of M_PP_DreamMono ---------- */
+var TINTS = [
+  { name: "Tutorial · night", s: [0.80, 0.90, 1.18], h: [0.98, 1.00, 1.04] },
+  { name: "Find a job · dawn", s: [0.88, 0.94, 1.06], h: [1.05, 1.01, 0.94] },
+  { name: "Get the job · day", s: [0.97, 0.97, 0.97], h: [1.04, 1.02, 0.97] },
+  { name: "Do the job · dusk", s: [1.08, 0.95, 0.84], h: [1.09, 1.00, 0.84] }
+];
+function tintAt(p) { var i = Math.min(2, Math.floor(p)), f = p - i, A = TINTS[i], B = TINTS[i + 1]; return { s: [0, 1, 2].map(function (k) { return lerp(A.s[k], B.s[k], f); }), h: [0, 1, 2].map(function (k) { return lerp(A.h[k], B.h[k], f); }) }; }
+// mode: "mono" (default), "color" (scene color), "mask" (custom stencil view). flag 1 = usable things, 2 = sand.
+function Pal(tint, o) {
+  o = o || {}; var cache = {}, n = 0, crush = o.crush !== false, sat = o.sat || 0, mode = o.mode || "mono";
+  function mono(c) {
+    var L = (0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2]) / 255;
+    if (crush) L = Math.pow(clamp((L - 0.07) / 0.88, 0, 1), 1.15);
+    return [0, 1, 2].map(function (k) { return lerp(255 * L * lerp(tint.s[k], tint.h[k], L), c[k], sat); });
+  }
+  function col(hex, flag) {
+    var c = rgb(hex);
+    if (mode === "mask") return flag === 2 ? [128, 128, 128] : flag ? [255, 255, 255] : [0, 0, 0];
+    if (mode === "color" || flag) return c;
+    return mono(c);
+  }
+  var P = function (hex, a, flag) {
+    var key = hex + "|" + (a == null ? 1 : a) + "|" + (flag || 0), v = cache[key];
+    if (v) return v;
+    if (++n > 4000) { cache = {}; n = 0; }
+    var c = col(hex, flag); return (cache[key] = css(c[0], c[1], c[2], a));
+  };
+  P.rgb = col; P.mono = mono; P.mode = mode; P.tint = tint;
+  return P;
+}
+var NIGHT = TINTS[0];
+var PAL = Pal(NIGHT), PAL_SOFT = Pal(NIGHT, { crush: false }), PAL_COLOR = Pal(NIGHT, { mode: "color" }), PAL_MASK = Pal(NIGHT, { mode: "mask" });
+
+/* ---------- shared loop: one rAF, demos pause offscreen ---------- */
+var DEMOS = [];
+var io = ("IntersectionObserver" in window) ? new IntersectionObserver(function (es) { es.forEach(function (e) { var d = e.target.__d; if (d) d.vis = e.isIntersecting; }); }, { rootMargin: "120px" }) : null;
+function demo(el, fn, still, opts) {
+  var cv = typeof el === "string" ? document.getElementById(el) : el; if (!cv) return null;
+  var d = { cv: cv, c: cv.getContext("2d"), fn: fn, still: still == null ? 2.2 : still, vis: !io, sx: cv.width / 480, sy: cv.height / 270 };
+  if (opts) for (var k in opts) d[k] = opts[k];
+  cv.__d = d; if (io) io.observe(cv); DEMOS.push(d); return d;
+}
+function run(d, t, dt) {
+  if (!d.fn) return;
+  try { if (!d.raw) d.c.setTransform(d.sx, 0, 0, d.sy, 0, 0); d.fn(d.c, t, dt, d); }
+  catch (e) { console.error("demo " + (d.cv.id || d.cv.className), e); d.fn = null; }
+}
+var NOW = 0;
+function redraw(d) { if (d && (RM || !d.vis)) run(d, RM ? d.still : NOW, 1 / 60); }
+function tick(ms) {
+  var t = ms / 1000, dt = clamp(t - NOW, 0.001, 0.05); NOW = t;
+  for (var i = 0; i < DEMOS.length; i++) { var d = DEMOS[i]; if (d.vis && d.fn) run(d, t, dt); }
+  requestAnimationFrame(tick);
+}
+
+/* ---------- the shared test shot: the bedroom, side view, 480 x 270 ---------- */
+var HORSE = [[128, 6], [120, 30], [104, 40], [78, 58], [52, 86], [30, 116], [18, 138], [22, 152], [38, 158], [54, 152], [72, 146], [92, 150], [110, 164], [126, 186], [150, 198], [184, 198], [180, 160], [176, 120], [170, 84], [160, 52], [146, 34], [140, 12]];
+function horsePath(c, x, y, s) { c.save(); c.translate(x, y); c.scale(s, s); c.beginPath(); c.moveTo(134, 9); for (var i = 0; i < HORSE.length; i++) { var p = HORSE[i], q = HORSE[(i + 1) % HORSE.length]; c.quadraticCurveTo(p[0], p[1], (p[0] + q[0]) / 2, (p[1] + q[1]) / 2); } c.closePath(); c.restore(); }
+function curtain(c, P, I, xo, xi) {
+  c.beginPath(); c.moveTo(xo, 22); c.lineTo(xi, 22); c.quadraticCurveTo(lerp(xo, xi, 0.7), 70, lerp(xo, xi, 0.32), 104); c.quadraticCurveTo(lerp(xo, xi, 0.6), 130, lerp(xo, xi, 0.78), 160); c.lineTo(xo, 160); c.closePath();
+  c.fillStyle = P("#6b1f25"); c.fill(); if (I) ink(c, 1.8);
+  c.strokeStyle = P("#4a1418"); c.lineWidth = 1.3;
+  for (var f = 1; f < 4; f++) { var fx = lerp(xo, xi, f * 0.22); line(c, fx, 25, lerp(xo, fx, 0.62), 100); line(c, lerp(xo, fx, 0.62), 108, lerp(xo, fx, 0.88), 157); }
+}
+function drawRoom(c, t, P, I, o) {
+  o = o || {}; var x, y, k;
+  c.fillStyle = P("#5e614f"); c.fillRect(-24, -24, 528, 176);
+  c.fillStyle = P("#55584a"); for (x = -20; x < 504; x += 18) c.fillRect(x, -24, 7, 176);
+  c.fillStyle = P("#6a6c5a"); for (y = 10, k = 0; y < 146; y += 22, k++) for (x = -14 + (k % 2) * 9; x < 504; x += 18) { c.beginPath(); c.ellipse(x, y, 1.8, 3, 0, 0, TAU); c.fill(); }
+  glow(c, 354, 128, 125, P("#ffd9a0", 0.34), P("#ffd9a0", 0));
+  c.fillStyle = P("#4b3526"); c.fillRect(-24, 150, 528, 52);
+  c.strokeStyle = P("#36261b"); c.lineWidth = 1.2; for (x = -18; x < 504; x += 62) c.strokeRect(x + 6, 158, 50, 34);
+  c.fillStyle = P("#2c1f15"); c.fillRect(-24, 147, 528, 4);
+  c.fillStyle = P("#3e2b1d"); c.fillRect(-24, 200, 528, 96);
+  c.strokeStyle = P("#2a1d13"); c.lineWidth = 1;
+  var rows = [200, 208, 219, 233, 251, 274, 296];
+  for (k = 1; k < rows.length; k++) { line(c, -24, rows[k], 504, rows[k]); for (var s = 0; s < 5; s++) { x = ((k * 131 + s * 107) % 528) - 24; line(c, x, rows[k - 1], x, rows[k]); } }
+  // window and moon
+  c.fillStyle = P("#d6cfbf"); c.fillRect(50, 30, 80, 98);
+  var g = c.createLinearGradient(0, 37, 0, 121); g.addColorStop(0, P("#121a30")); g.addColorStop(1, P("#2a344e")); c.fillStyle = g; c.fillRect(57, 37, 66, 84);
+  c.save(); c.beginPath(); c.rect(57, 37, 66, 84); c.clip(); glow(c, 80, 56, 30, P("#eef1f6", 0.8), P("#eef1f6", 0)); c.restore();
+  c.fillStyle = P("#f1f3f7"); c.beginPath(); c.arc(80, 56, 7, 0, TAU); c.fill();
+  c.fillStyle = P("#d6cfbf"); c.fillRect(88, 37, 4, 84); c.fillRect(57, 77, 66, 4);
+  if (I) { c.beginPath(); c.rect(50, 30, 80, 98); ink(c, 2.2); }
+  c.strokeStyle = P("#7a5a30"); c.lineWidth = 3; line(c, 28, 22, 152, 22);
+  curtain(c, P, I, 34, 66); curtain(c, P, I, 146, 114);
+  // Fuseli's horse, framed
+  c.save(); c.translate(222, 72);
+  c.fillStyle = P("#1d1915"); c.beginPath(); c.ellipse(0, 0, 20, 26, 0, 0, TAU); c.fill();
+  c.strokeStyle = P("#8a6a36"); c.lineWidth = 4; c.stroke();
+  if (I) { c.beginPath(); c.ellipse(0, 0, 22.5, 28.5, 0, 0, TAU); ink(c, 1.5); }
+  horsePath(c, -12, -16, 0.12); c.fillStyle = P("#7a766c"); c.fill(); c.restore();
+  // moonlight wedge
+  var wg = c.createLinearGradient(90, 120, 200, 280); wg.addColorStop(0, P("#dde6f7", 0.22)); wg.addColorStop(1, P("#dde6f7", 0.04));
+  c.fillStyle = wg; poly(c, [58, 121, 122, 121, 262, 296, 112, 296]); c.fill();
+  // bed and the Sleeper
+  c.fillStyle = P("#3b2a1e"); rr(c, 150, 108, 14, 94, 3); c.fill(); if (I) ink(c, 1.8);
+  c.beginPath(); c.arc(157, 106, 5, 0, TAU); c.fill(); if (I) ink(c, 1.4);
+  c.fillStyle = P("#cfc6b4"); c.fillRect(162, 180, 144, 14);
+  c.beginPath(); c.moveTo(162, 172); c.quadraticCurveTo(196, 168, 214, 160); c.quadraticCurveTo(246, 146, 280, 158); c.quadraticCurveTo(296, 164, 306, 168); c.lineTo(306, 190); c.lineTo(162, 190); c.closePath();
+  c.fillStyle = P("#7b6a55"); c.fill(); if (I) ink(c, 1.8);
+  c.strokeStyle = P("#665642"); c.lineWidth = 1; for (x = 190; x < 306; x += 24) line(c, x, 172, x, 189);
+  c.fillStyle = P("#d4ccbc"); c.beginPath(); c.ellipse(184, 166, 18, 7, -0.1, 0, TAU); c.fill(); if (I) ink(c, 1.3);
+  c.fillStyle = P("#2a2420"); c.beginPath(); c.ellipse(194, 160, 8, 5.5, 0.3, 0, TAU); c.fill();
+  c.fillStyle = P("#3b2a1e"); rr(c, 304, 136, 12, 66, 3); c.fill(); if (I) ink(c, 1.8);
+  // nightstand, lamp, key
+  c.fillStyle = P("#4b3526"); c.fillRect(332, 158, 46, 42); if (I) { c.beginPath(); c.rect(332, 158, 46, 42); ink(c, 1.8); }
+  c.strokeStyle = P("#2f2117"); c.lineWidth = 1; line(c, 334, 172, 376, 172);
+  c.fillStyle = P("#c99a4a", null, 1); c.fillRect(353, 176, 4, 3);
+  c.fillStyle = P("#2c2620"); c.fillRect(351, 138, 6, 20);
+  poly(c, [338, 117, 370, 117, 378, 139, 330, 139]); c.fillStyle = P("#d9b27a", null, 1); c.fill(); if (I) ink(c, 1.6);
+  glow(c, 354, 132, 30, P("#ffce8c", 0.55, 1), P("#ffce8c", 0, 1));
+  if (!o.noKey) { c.strokeStyle = P("#c99a4a", null, 1); c.lineWidth = 1.6; c.beginPath(); c.arc(362, 154, 2.6, 0, TAU); c.stroke(); line(c, 364.6, 154, 373, 154); line(c, 371, 154, 371, 156.5); }
+  // wardrobe
+  c.fillStyle = P("#33241a"); c.fillRect(388, 48, 84, 8);
+  c.fillStyle = P("#3d2b1f"); c.fillRect(392, 56, 76, 144);
+  if (I) { c.beginPath(); c.rect(392, 56, 76, 144); ink(c, 2); c.beginPath(); c.rect(388, 48, 84, 8); ink(c, 1.5); }
+  c.strokeStyle = P("#2a1d14"); c.lineWidth = 1.2; line(c, 430, 60, 430, 196); c.strokeRect(398, 66, 26, 120); c.strokeRect(436, 66, 26, 120);
+  c.fillStyle = P("#c99a4a", null, 1); c.fillRect(425, 122, 2.5, 9); c.fillRect(432.5, 122, 2.5, 9);
+  // A: hard hatched shadows and a crisp floor line
+  if (I) {
+    c.fillStyle = hatch(c, false);
+    poly(c, [160, 192, 308, 192, 320, 207, 150, 207]); c.fill();
+    poly(c, [330, 200, 380, 200, 392, 208, 326, 208]); c.fill();
+    poly(c, [468, 56, 486, 64, 486, 210, 468, 200]); c.fill();
+    c.fillStyle = hatch(c, true);
+    poly(c, [-24, 150, 38, 150, 32, 200, -24, 200]); c.fill();
+    poly(c, [380, 62, 392, 56, 392, 200, 380, 200]); c.fill();
+    c.beginPath(); c.moveTo(-24, 200); c.lineTo(504, 200); ink(c, 2.2);
+  }
+}
+// D: a tendril of dark sand with a pale smoke wisp beside it
+function tendril(c, x0, y0, t, seed, len, lean, P) {
+  var ph = t * 0.9 + seed * 7.3, k, s, x, y, gl = P.rgb("#e0a052", 2), sd = P.rgb("#0a0909", 2);
+  for (k = 0; k < 30; k++) {
+    s = k / 29; x = x0 + lean * s * len * 0.6 + Math.sin(s * 5.2 + ph) * 8 * s; y = y0 - s * len + Math.cos(s * 3.1 + ph * 0.7) * 3 * s;
+    var a = (1 - s) * 0.9, q = k % 7 === 3 ? gl : sd;
+    c.fillStyle = css(q[0], q[1], q[2], k % 7 === 3 ? a * 0.85 : a); c.beginPath(); c.arc(x, y, 0.6 + 2 * (1 - s), 0, TAU); c.fill();
+  }
+  c.strokeStyle = P("#e6e9ef", 0.07); c.lineWidth = 5; c.lineCap = "round"; c.beginPath();
+  for (k = 0; k <= 12; k++) { s = k / 12; x = x0 + lean * s * len * 0.75 + Math.sin(s * 4 + ph + 1) * 10 * s; y = y0 - s * len * 1.15; if (k) c.lineTo(x, y); else c.moveTo(x, y); }
+  c.stroke();
+}
+function figAt(t) { var span = 170, sp = 24, u = ((t * sp) % (2 * span) + 2 * span) % (2 * span), fwd = u < span; return { x: fwd ? 140 + u : 140 + 2 * span - u, dir: fwd ? 1 : -1, ph: t * sp / 8.5 }; }
+function camAt(t) { return [Math.sin(t * 0.33) * 7, Math.sin(t * 0.21) * 2.5]; }
+function leg(c, a, w) { var kx = Math.sin(a) * 23, ky = -46 + Math.cos(a) * 23, b = a - (a < 0 ? 0.55 : 0.1), fx = kx + Math.sin(b) * 22, fy = ky + Math.cos(b) * 22; c.lineWidth = w; c.beginPath(); c.moveTo(0, -46); c.lineTo(kx, ky); c.lineTo(fx, fy); c.lineTo(fx + 5, fy); c.stroke(); }
+function arm(c, a) { var ex = 1 + Math.sin(a) * 16, ey = -73 + Math.cos(a) * 16, b = a + 0.35; c.lineWidth = 5.5; c.beginPath(); c.moveTo(1, -73); c.lineTo(ex, ey); c.lineTo(ex + Math.sin(b) * 14, ey + Math.cos(b) * 14); c.stroke(); }
+// The Nightmare: faceless dark-sand mannequin, side view, walking
+function nightmare(c, f, P, o) {
+  o = o || {}; var s = Math.sin(f.ph), bob = Math.abs(Math.cos(f.ph)) * 1.5, sc = o.scale || 1, body = o.body || P("#0b0a09", null, 2);
+  c.save(); c.translate(f.x, (o.floor || 205) - bob * sc); c.scale(f.dir * sc, sc);
+  if (!o.noShadow) { c.fillStyle = "rgba(4,4,5,0.45)"; c.beginPath(); c.ellipse(0, bob, 18, 3.2, 0, 0, TAU); c.fill(); }
+  c.strokeStyle = body; c.fillStyle = body; c.lineCap = "round"; c.lineJoin = "round";
+  leg(c, s * 0.45, 7.5); leg(c, -s * 0.45, 7.5);
+  c.beginPath(); c.moveTo(-8, -46); c.quadraticCurveTo(-10.5, -64, -9, -76); c.quadraticCurveTo(0, -82, 9, -76); c.quadraticCurveTo(10.5, -63, 7.5, -46); c.closePath(); c.fill();
+  arm(c, -s * 0.5); c.fillRect(-2.5, -86, 5, 9);
+  c.beginPath(); c.ellipse(1.5, -94, 7.2, 9.4, 0.12, 0, TAU); c.fill();
+  if (!o.noRim) {
+    var side = f.dir > 0 ? 0 : Math.PI;
+    c.strokeStyle = o.rim || P("#e9e3d6", 0.35); c.lineWidth = 1.2;
+    c.beginPath(); c.ellipse(1.5, -94, 7.2, 9.4, 0.12, side - 1.1, side + 1.1); c.stroke();
+    c.beginPath(); if (f.dir > 0) { c.moveTo(9, -75); c.quadraticCurveTo(10.5, -63, 7.5, -47); } else { c.moveTo(-9, -75); c.quadraticCurveTo(-10.5, -64, -8, -47); } c.stroke();
+    c.strokeStyle = P("#e9e3d6", 0.12); c.lineWidth = 0.8; c.beginPath(); c.ellipse(3, -94, 3, 9, 0.12, -1.4, 1.4); c.stroke();
+  }
+  c.restore();
+}
+function shed(c, f, t, P) {
+  var g = P.rgb("#e0a052", 2), sd = P.rgb("#0a0909", 2);
+  for (var k = 0; k < 12; k++) { var p = (t * 0.7 + k / 12) % 1, x = f.x - f.dir * (5 + p * 14) + Math.sin(k * 3.7) * 4, y = 127 + p * 76 + Math.sin(k) * 2, q = k % 5 === 0 ? g : sd; c.fillStyle = css(q[0], q[1], q[2], 0.85 * (1 - p)); c.fillRect(x, y, 1.5, 1.5); }
+}
+function motes(c, t, P) {
+  var m = P.rgb("#f2f0ea");
+  for (var i = 0; i < 26; i++) {
+    var u = (i * 0.618034) % 1, v = (i * 0.414214 + 0.3) % 1, y = 128 + v * 140 + Math.sin(t * 0.4 + i) * 6;
+    var xl = 58 + 0.3195 * (y - 121), xr = 122 + 0.828 * (y - 121), x = lerp(xl, xr, u) + Math.sin(t * 0.3 + i * 1.7) * 6, tw = Math.sin(t * 1.3 + i * 2.1);
+    c.fillStyle = css(m[0], m[1], m[2], 0.3 + 0.35 * tw * tw); c.fillRect(x, y, 1.4, 1.4);
+  }
+}
+var VIG = {};
+function vignette(c, a) {
+  a = a == null ? 0.75 : a;
+  if (!VIG[a]) { var v = mk(960, 540), x = v.getContext("2d"), g = x.createRadialGradient(480, 280, 180, 480, 280, 600); g.addColorStop(0, "rgba(5,5,6,0)"); g.addColorStop(1, "rgba(5,5,6," + a + ")"); x.fillStyle = g; x.fillRect(0, 0, 960, 540); VIG[a] = v; }
+  c.drawImage(VIG[a], 0, 0, 480, 270);
+}
+// The room never changes within a palette, so it renders once into a 2x cache (shortcut: per-frame palettes pass nocache).
+function room(c, t, P, I, o) {
+  if (o.nocache) { drawRoom(c, t, P, I, o); return; }
+  var key = (I ? 1 : 0) + (o.noKey ? 2 : 0); P._rc = P._rc || {};
+  if (!P._rc[key]) { var cv = mk(1056, 640), x = cv.getContext("2d"); x.setTransform(2, 0, 0, 2, 48, 48); drawRoom(x, t, P, I, o); P._rc[key] = cv; }
+  c.drawImage(P._rc[key], -24, -24, 528, 320);
+}
+// o: pal, ink, tend, fig, cam, echo(c, P) hook drawn under the figure, figure:false, vig, noKey
+function scene(c, t, o) {
+  o = o || {}; var P = o.pal || PAL, I = o.ink !== false, T = o.tend !== false, cam = o.cam === false ? [0, 0] : camAt(t), f = o.fig || figAt(t);
+  c.save(); c.translate(cam[0], cam[1]);
+  room(c, t, P, I, o);
+  if (T) { tendril(c, 176, 206, t, 3, 46, 0.6, P); tendril(c, 292, 206, t, 5, 38, -0.5, P); }
+  if (o.echo) o.echo(c, P);
+  if (o.figure !== false) {
+    nightmare(c, f, P); shed(c, f, t, P);
+    if (T) { tendril(c, f.x - f.dir * 3, 113, t, 1, 36, -f.dir, P); tendril(c, f.x - f.dir * 7, 131, t, 2.2, 28, -f.dir * 1.3, P); }
+  }
+  motes(c, t, P);
+  c.restore();
+  if (o.vig !== false) vignette(c, o.vig);
+  return cam;
+}
+// one shared render of the test shot per frame, for effects that post-process it
+var SRCC = null, SRCT = -1;
+function SRC(t) { if (!SRCC) SRCC = mk(480, 270); if (t !== SRCT) { SRCT = t; var x = SRCC.getContext("2d"); x.setTransform(1, 0, 0, 1, 0, 0); scene(x, t, {}); } return SRCC; }
+
+// the same room from above, for the top-down beats
+function mannequinTop(c, x, y, ang, P) { c.save(); c.translate(x, y); c.rotate(ang); c.fillStyle = "rgba(4,4,5,0.5)"; c.beginPath(); c.ellipse(2, 3, 13, 8, 0, 0, TAU); c.fill(); c.fillStyle = P("#0b0a09", null, 2); c.beginPath(); c.ellipse(0, 0, 12, 7, 0, 0, TAU); c.fill(); c.strokeStyle = P("#e9e3d6", 0.32); c.lineWidth = 1; c.stroke(); c.beginPath(); c.arc(0, 0, 5, 0, TAU); c.fillStyle = "#050404"; c.fill(); c.restore(); }
+function topDown(c, t, P, o) {
+  o = o || {};
+  c.fillStyle = "#0b0a09"; c.fillRect(0, 0, 480, 270);
+  c.fillStyle = P("#3e2b1d"); c.fillRect(70, 22, 340, 226);
+  c.strokeStyle = P("#2a1d13"); c.lineWidth = 1; for (var y = 34; y < 248; y += 12) line(c, 70, y, 410, y);
+  c.fillStyle = P("#dde6f7", 0.13); poly(c, [70, 70, 70, 140, 250, 214, 250, 96]); c.fill();
+  c.fillStyle = P("#6b1f25"); rr(c, 210, 124, 110, 70, 6); c.fill(); ink(c, 1.6);
+  c.fillStyle = P("#7b6a55"); rr(c, 90, 36, 76, 116, 4); c.fill(); ink(c, 1.8);
+  c.fillStyle = P("#d4ccbc"); rr(c, 98, 42, 60, 20, 3); c.fill();
+  c.fillStyle = P("#4b3526"); c.fillRect(176, 30, 30, 26); c.beginPath(); c.rect(176, 30, 30, 26); ink(c, 1.5);
+  glow(c, 191, 43, 46, P("#ffd9a0", 0.32, 1), P("#ffd9a0", 0, 1)); c.fillStyle = P("#d9b27a", null, 1); c.beginPath(); c.arc(191, 43, 7, 0, TAU); c.fill();
+  c.fillStyle = P("#3d2b1f"); c.fillRect(330, 28, 70, 28); c.beginPath(); c.rect(330, 28, 70, 28); ink(c, 1.6);
+  c.fillStyle = hatch(c, true); c.fillRect(73, 25, 334, 9); c.fillRect(73, 25, 9, 220);
+  c.strokeStyle = P("#d6cfbf"); c.lineWidth = 6; c.strokeRect(70, 22, 340, 226);
+  c.fillStyle = P("#9fb3d8"); c.fillRect(66, 74, 8, 60);
+  if (!o.noDoor) { c.fillStyle = P("#3e2b1d"); c.fillRect(405, 150, 10, 40); c.strokeStyle = P("#e9e3d6"); c.lineWidth = 2.5; line(c, 410, 150, 384, 158); c.save(); c.setLineDash([2, 4]); c.lineWidth = 1; c.strokeStyle = P("#e9e3d6", 0.3); c.beginPath(); c.arc(410, 150, 27, Math.PI * 0.55, Math.PI * 0.93); c.stroke(); c.restore(); }
+  var a = t * 0.5; mannequinTop(c, 262 + Math.cos(a) * 56, 156 + Math.sin(a) * 30, a + Math.PI / 2, P);
+  vignette(c, 0.6);
+}
+// the payoff hero shot: the Nightmare in its suit, framed like an action hero
+var BURST = ["#ff3d7f", "#2f6bff", "#ffc531", "#19c37d"];
+function heroFigure(c, x, y, s, P) {
+  c.save(); c.translate(x, y); c.scale(s, s); c.lineCap = "round"; c.lineJoin = "round";
+  c.fillStyle = P("#1a2f7a"); poly(c, [-18, 40, -22, 118, -6, 118, 0, 52, 6, 118, 22, 118, 18, 40]); c.fill();
+  c.strokeStyle = P("#2f6bff"); c.lineWidth = 10; c.beginPath(); c.moveTo(-30, -24); c.lineTo(-48, 8); c.lineTo(-26, 26); c.moveTo(30, -24); c.lineTo(48, 8); c.lineTo(26, 26); c.stroke();
+  c.fillStyle = P("#2f6bff"); poly(c, [-34, -30, 34, -30, 26, 48, -26, 48]); c.fill(); ink(c, 1.6);
+  c.fillStyle = P("#ff3d7f"); poly(c, [-12, -30, 0, 12, 12, -30, 5, -30, 0, -8, -5, -30]); c.fill();
+  c.fillStyle = P("#ffc531"); poly(c, [-3, -29, 3, -29, 4, 8, 0, 14, -4, 8]); c.fill();
+  c.fillStyle = "#0a0908"; c.fillRect(-5, -38, 10, 9); c.beginPath(); c.ellipse(0, -54, 15, 19, 0, 0, TAU); c.fill();
+  c.strokeStyle = P("#ffc531", 0.85); c.lineWidth = 1.5; c.stroke();
+  c.restore();
+}
+function heroShot(c, t, P) {
+  c.fillStyle = "#0b0a09"; c.fillRect(0, 0, 480, 270);
+  var i, R = rng(5);
+  for (i = 0; i < 22; i++) { var a0 = -Math.PI + i * (Math.PI / 22) + Math.sin(t * 0.3) * 0.02, a1 = a0 + (Math.PI / 22) * 0.55; c.fillStyle = P(BURST[i % 4], 0.8); c.beginPath(); c.moveTo(240, 250); c.arc(240, 250, 560, a0, a1); c.closePath(); c.fill(); }
+  var g = c.createRadialGradient(240, 170, 60, 240, 170, 330); g.addColorStop(0, "rgba(11,10,9,0)"); g.addColorStop(1, "rgba(11,10,9,0.92)"); c.fillStyle = g; c.fillRect(0, 0, 480, 270);
+  c.fillStyle = P("#2a241f"); c.beginPath(); c.ellipse(240, 262, 210, 26, 0, 0, TAU); c.fill();
+  for (i = 0; i < 700; i++) { var an = -Math.PI * R(), r = 30 + R() * 150, x = 240 + Math.cos(an) * r * 1.4, y = 258 + Math.sin(an) * r * 0.42 - Math.sin(t * 2 + i) * 1.2; c.fillStyle = R() < 0.55 ? P(BURST[(R() * 4) | 0], 0.9) : "rgba(6,5,5,0.9)"; c.fillRect(x, y, 1.6, 1.6); }
+  heroFigure(c, 240, 142, 1.02, P);
+}
+
+/* ---------- controls ---------- */
+function seg(id, onPick, multi) {
+  var el = document.getElementById(id); if (!el) return;
+  el.addEventListener("click", function (e) {
+    var b = e.target.closest("button"); if (!b) return;
+    if (multi) b.setAttribute("aria-pressed", b.getAttribute("aria-pressed") === "true" ? "false" : "true");
+    else el.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    onPick(b);
+  });
+}
+
+/* ---------- hero sand field (from the Level 1 board) ---------- */
+(function () {
+  var cv = document.getElementById("sandfield"); if (!cv) return;
+  var c = cv.getContext("2d"), R = rng(7), W = 0, H = 0, parts = [], tt = 0;
+  function step() {
+    tt += 0.0025; c.fillStyle = "rgba(14,13,12,0.07)"; c.fillRect(0, 0, W, H);
+    for (var i = 0; i < parts.length; i++) {
+      var p = parts[i], a = Math.sin(p.x * 0.004 + tt) * 1.6 + Math.cos(p.y * 0.006 - tt * 1.3) * 1.2 + 0.4;
+      p.x += Math.cos(a) * 0.55; p.y += Math.sin(a) * 0.4;
+      if (p.x < 0) p.x += W; if (p.x > W) p.x -= W; if (p.y < 0) p.y += H; if (p.y > H) p.y -= H;
+      c.fillStyle = p.g ? "rgba(224,160,82,0.55)" : "rgba(78,71,62,0.6)"; c.fillRect(p.x, p.y, 1.2, 1.2);
+    }
+  }
+  function size() {
+    var r = cv.getBoundingClientRect(), d = Math.min(window.devicePixelRatio || 1, 2);
+    W = Math.max(1, r.width); H = Math.max(1, r.height);
+    cv.width = Math.round(W * d); cv.height = Math.round(H * d); c.setTransform(d, 0, 0, d, 0, 0);
+    c.fillStyle = "#0e0d0c"; c.fillRect(0, 0, W, H);
+    parts = []; var n = Math.min(2400, Math.floor(W * H / 150));
+    for (var i = 0; i < n; i++) parts.push({ x: R() * W, y: R() * H, g: R() < 0.05 });
+    for (var k = 0; k < 140; k++) step();
+  }
+  size();
+  var rt; window.addEventListener("resize", function () { clearTimeout(rt); rt = setTimeout(size, 150); });
+  demo(cv, function () { step(); }, 0, { raw: true });
+})();
+
+/* ---------- main style ---------- */
+var LOOK = { ink: true, tend: true };
+var dLook = demo("cvLook", function (c, t) { scene(c, t, { ink: LOOK.ink, tend: LOOK.tend, pal: LOOK.ink ? PAL : PAL_SOFT }); }, 3.1);
+seg("segLook", function (b) { LOOK[b.getAttribute("data-k")] = b.getAttribute("aria-pressed") === "true"; redraw(dLook); }, true);
+
+/* ---------- sand buttons ---------- */
+var touched = false;
+function inRR(x, y, w, h, r) { var cx = x < r ? r : x > w - r ? w - r : x, cy = y < r ? r : y > h - r ? h - r : y, dx = x - cx, dy = y - cy; return dx * dx + dy * dy <= r * r; }
+function SandButton(btn) {
+  var kind = btn.getAttribute("data-sand"), locked = btn.getAttribute("aria-disabled") === "true";
+  var cv = document.createElement("canvas"); cv.setAttribute("aria-hidden", "true"); btn.insertBefore(cv, btn.firstChild);
+  var c = cv.getContext("2d"), R = rng(hashStr(btn.textContent + kind)), dpr = 1, X, Y, VX, VY, HX, HY, TY;
+  var S = { hv: false, hover: 0, press: -9, drips: [], N: 0, w: 0, h: 0, r: 8, W: 0, H: 0, dirty: true, auto: btn.hasAttribute("data-auto"), lastAuto: -1, autoHover: false };
+  function layout() {
+    var w = btn.offsetWidth, h = btn.offsetHeight; if (!w || !h || (w === S.w && h === S.h && X)) return;
+    dpr = Math.min(2, window.devicePixelRatio || 1); S.W = w + 28; S.H = h + 64;
+    cv.width = Math.round(S.W * dpr); cv.height = Math.round(S.H * dpr);
+    var dens = kind === "secondary" ? 0.11 : locked ? 0.06 : 0.14, N = Math.min(2400, Math.round(w * h * dens)), r = Math.min(10, h / 2);
+    X = new Float32Array(N); Y = new Float32Array(N); VX = new Float32Array(N); VY = new Float32Array(N); HX = new Float32Array(N); HY = new Float32Array(N); TY = new Uint8Array(N);
+    for (var i = 0; i < N; i++) {
+      var px = 0, py = 0;
+      for (var k = 0; k < 8; k++) { px = R() * w; py = R() * h; if (!inRR(px, py, w, h, r)) continue; if (kind === "secondary" && Math.min(px, w - px, py, h - py) > 5 && R() > 0.14) continue; break; }
+      HX[i] = X[i] = 14 + px; HY[i] = Y[i] = 14 + py;
+      var q = R(); TY[i] = (py < 3 && q < 0.6) ? 1 : q < 0.035 ? 2 : q < 0.11 ? 1 : 0;
+    }
+    S.N = N; S.w = w; S.h = h; S.r = r; S.dirty = true;
+  }
+  function pressAt(px, py, t) {
+    S.press = t; btn.classList.add("gone"); setTimeout(function () { btn.classList.remove("gone"); }, 560);
+    var soft = kind === "refuse" || locked;
+    for (var i = 0; i < S.N; i++) {
+      var dx = HX[i] - px, dy = HY[i] - py, d = Math.sqrt(dx * dx + dy * dy) + 1, sp = (soft ? 18 : 60) + R() * (soft ? 30 : 90);
+      VX[i] = dx / d * sp + (R() - 0.5) * (soft ? 10 : 40); VY[i] = dy / d * sp * 0.6 - (soft ? 0 : 30) + (R() - 0.5) * 40;
+    }
+  }
+  function update(t, dt) {
+    var age = t - S.press, spring = age > (locked ? 0.15 : 0.32), maxd = 0, i;
+    for (i = 0; i < S.N; i++) {
+      if (spring) { var k = 60 + (i % 13) * 3; VX[i] += ((HX[i] - X[i]) * k - VX[i] * 9) * dt; VY[i] += ((HY[i] - Y[i]) * k - VY[i] * 9) * dt; }
+      else { VY[i] += 300 * dt; VX[i] *= 1 - 1.2 * dt; }
+      X[i] += VX[i] * dt; Y[i] += VY[i] * dt;
+      var dd = Math.abs(X[i] - HX[i]) + Math.abs(Y[i] - HY[i]); if (dd > maxd) maxd = dd;
+    }
+    if ((age > 1 && maxd < 0.6) || age > 3) { for (i = 0; i < S.N; i++) { X[i] = HX[i]; Y[i] = HY[i]; } S.press = -9; }
+  }
+  function drips(t, dt) {
+    if (S.hover > 0.5 && S.press < 0 && kind !== "refuse" && !locked && S.drips.length < 12 && R() < dt * 3.5) S.drips.push({ x: 24 + R() * (S.w - 20), t0: t, y: 14 + S.h, vy: 0, n: 3 + ((R() * 4) | 0) });
+    for (var i = S.drips.length - 1; i >= 0; i--) { var d = S.drips[i], a = t - d.t0; if (a > 0.7) { d.vy += 420 * dt; d.y += d.vy * dt; } if (a > 1.6 || d.y > S.H) S.drips.splice(i, 1); }
+  }
+  function draw(t) {
+    c.setTransform(dpr, 0, 0, dpr, 0, 0); c.clearRect(0, 0, S.W, S.H);
+    var w = S.w, h = S.h, hv = S.hover, age = t - S.press, gone = S.press >= 0 ? clamp(1 - Math.max(0, age - 0.45) / 0.5, 0, 1) : 0, i;
+    var baseA = (locked ? 0.5 : kind === "secondary" ? 0.55 : 0.86) * (1 - gone);
+    if (baseA > 0.01) { rr(c, 14, 14 + (kind === "refuse" ? hv * 2 : 0), w, h, S.r); c.fillStyle = locked ? "rgba(36,33,30," + baseA.toFixed(3) + ")" : "rgba(9,8,8," + baseA.toFixed(3) + ")"; c.fill(); }
+    if (hv > 0.01 && !locked && kind !== "refuse") { c.strokeStyle = "rgba(224,160,82," + (0.55 * hv).toFixed(3) + ")"; c.lineWidth = 1.2; line(c, 14 + S.r, 14.6, 14 + w - S.r, 14.6); }
+    var cols = locked ? ["rgba(40,37,33,0.95)", "rgba(110,103,93,0.8)", "rgba(140,130,115,0.8)"] : ["rgba(6,6,6,0.95)", "rgba(128,120,108,0.85)", "rgba(224,160,82,0.95)"];
+    for (var ty = 0; ty < 3; ty++) {
+      c.fillStyle = cols[ty];
+      for (i = 0; i < S.N; i++) {
+        if (TY[i] !== ty) continue;
+        var x = X[i], y = Y[i], ly = HY[i] - 14;
+        if (hv > 0.01 && S.press < 0 && !locked) {
+          if (kind === "refuse") y += hv * 5 * Math.sin(Math.PI * (HX[i] - 14) / w) * (ly / h);
+          else if (ly < 3.2 && !RM) x = 14 + ((HX[i] - 14 + t * 22 * (0.5 + (i % 7) * 0.12)) % w);
+        }
+        c.fillRect(x, y, 1.5, 1.5);
+      }
+    }
+    var list = S.drips;
+    if (RM && hv > 0.5 && kind !== "refuse" && !locked) list = [0.2, 0.55, 0.8].map(function (u) { return { x: 14 + u * w, t0: t - 0.5, y: 14 + h, vy: 0, n: 5 }; });
+    for (i = 0; i < list.length; i++) {
+      var d = list[i], a = t - d.t0, fall = a > 0.7, al = fall ? clamp(1 - (a - 0.7) / 0.8, 0, 1) : 1, len = Math.min(1, a / 0.7) * 7;
+      for (var j = 0; j < d.n; j++) { c.fillStyle = j === 1 ? "rgba(224,160,82," + (0.9 * al).toFixed(3) + ")" : "rgba(6,6,6," + (0.95 * al).toFixed(3) + ")"; if (fall) c.fillRect(d.x + Math.sin(j * 2.1) * 1.4, d.y + j * 1.6, 1.6, 1.6); else c.fillRect(d.x + Math.sin(j * 1.7) * 0.8, 14 + h - 1 + j * len / d.n, 1.7, 1.7); }
+    }
+  }
+  S.frame = function (cc, t, dt) {
+    layout(); if (!X) return;
+    if (S.auto && !touched && !RM) { var cyc = t % 6, n = Math.floor(t / 6); S.autoHover = cyc > 1 && cyc < 3.6; if (cyc > 3.4 && S.lastAuto !== n && t > 6) { S.lastAuto = n; pressAt(14 + S.w * 0.55, 14 + S.h * 0.5, t); } }
+    else S.autoHover = false;
+    var target = (S.hv || S.autoHover) ? 1 : 0;
+    var live = S.hover !== target || S.press >= 0 || S.drips.length > 0 || (S.hover > 0 && !RM);
+    if (!live && !S.dirty) return;
+    S.hover += (target - S.hover) * Math.min(1, dt * 7); if (Math.abs(S.hover - target) < 0.004 || RM) S.hover = target;
+    if (S.press >= 0) update(t, Math.min(dt, 0.033));
+    drips(t, dt); draw(t); S.dirty = false;
+  };
+  function poke() { S.dirty = true; if (RM) S.frame(null, 0, 1); }
+  btn.addEventListener("pointerenter", function () { S.hv = true; touched = true; poke(); });
+  btn.addEventListener("pointerleave", function () { S.hv = false; poke(); });
+  btn.addEventListener("focus", function () { S.hv = true; touched = true; poke(); });
+  btn.addEventListener("blur", function () { S.hv = false; poke(); });
+  btn.addEventListener("click", function (e) {
+    touched = true; var r = btn.getBoundingClientRect(), mouse = e.detail > 0;
+    if (!RM) pressAt(mouse ? e.clientX - r.left + 14 : 14 + S.w / 2, mouse ? e.clientY - r.top + 14 : 14 + S.h / 2, NOW);
+    if (S.onpress) S.onpress(btn, locked);
+  });
+  if (window.ResizeObserver) new ResizeObserver(function () { S.w = 0; poke(); }).observe(btn);
+  demo(cv, function (cc, t, dt) { S.frame(cc, t, dt); }, 0, { raw: true });
+  return S;
+}
+var stageMsg = { primary: "Wake up pressed. The click fired at once; the sand only catches up.", secondary: "Snooze pressed. A thin slab costs fewer grains.", refuse: "Stay asleep pressed. The grains slump, and the button still works." };
+document.querySelectorAll(".stage .sand-btn, .tasks .sand-btn").forEach(function (b, i) { if (i === 0 || (b.closest(".tasks") && b.getAttribute("data-sand") === "primary")) b.setAttribute("data-auto", ""); });
+var SANDS = [];
+document.querySelectorAll(".sand-btn").forEach(function (b) {
+  var S = SandButton(b); SANDS.push(S);
+  if (b.closest(".stage")) S.onpress = function () { var st = document.getElementById("stageStatus"); if (st) st.textContent = stageMsg[b.getAttribute("data-sand")] || ""; };
+});
+
+/* ---------- phone calendar ---------- */
+(function () { var cal = document.getElementById("cal"); if (!cal) return; var h = ""; for (var i = 1; i <= 21; i++) h += '<i class="' + (i < 18 ? "x" : i === 18 ? "today" : "") + '">' + i + "</i>"; cal.innerHTML = h; })();
+
+/* ---------- HUD ---------- */
+function keyIcon(c, x, y, s, col) { c.save(); c.translate(x, y); c.scale(s, s); c.strokeStyle = col; c.lineWidth = 1.6; c.beginPath(); c.arc(-5, 0, 3.4, 0, TAU); c.stroke(); line(c, -1.6, 0, 7, 0); line(c, 5, 0, 5, 3); line(c, 7, 0, 7, 2.4); c.restore(); }
+demo("cvHud", function (c, t) {
+  var T = t % 7, taken = T > 2.6, i;
+  scene(c, t, { fig: { x: 318, dir: 1, ph: 0.4 }, noKey: taken, cam: false, vig: 0.65 });
+  var oa = T < 4 ? 1 : Math.max(0, 1 - (T - 4) / 0.6);
+  if (oa > 0) { c.globalAlpha = oa; c.fillStyle = "rgba(11,10,9,0.78)"; rr(c, 10, 9, 140, 40, 4); c.fill(); tag(c, "T2 · THE LOCKED DOOR", 18, 19, "rgba(224,160,82,0.95)"); c.font = 'italic 400 15px "IM Fell English", Georgia, serif'; c.fillStyle = "#e9e3d6"; c.textAlign = "left"; c.textBaseline = "alphabetic"; c.fillText("Leave the bedroom.", 18, 40); c.globalAlpha = 1; }
+  if (!taken) {
+    var p = clamp((T - 0.9) / 1.4, 0, 1), cx = 368, cy = 136;
+    c.fillStyle = "rgba(11,10,9,0.82)"; c.beginPath(); c.arc(cx, cy, 9, 0, TAU); c.fill();
+    c.lineWidth = 2; c.strokeStyle = "rgba(233,227,214,0.25)"; c.beginPath(); c.arc(cx, cy, 9, 0, TAU); c.stroke();
+    if (p > 0) { c.strokeStyle = "#e0a052"; c.beginPath(); c.arc(cx, cy, 9, -Math.PI / 2, -Math.PI / 2 + TAU * p); c.stroke(); }
+    tag(c, "E", cx, cy + 0.5, "#e9e3d6", "center");
+    c.fillStyle = "rgba(11,10,9,0.82)"; rr(c, cx + 14, cy - 8, 84, 16, 3); c.fill(); tag(c, "HOLD · TAKE KEY", cx + 19, cy, "#e9e3d6");
+  }
+  if (T > 2.6 && T < 3.7) {
+    var R = rng(9);
+    for (i = 0; i < 46; i++) { var r1 = R(), r2 = R(), r3 = R(), r4 = R(), u = clamp((T - 2.6 - r1 * 0.3) / 0.6, 0, 1); if (u <= 0 || u >= 1) continue; var e = u * u * (3 - 2 * u), qx = lerp(lerp(366, 300, e), lerp(300, 195, e), e), qy = lerp(lerp(154, 96, e), lerp(96, 249, e), e); c.fillStyle = r2 < 0.14 ? "rgba(224,160,82,0.95)" : "rgba(8,8,9,0.92)"; c.fillRect(qx + (r3 - 0.5) * 5, qy + (r4 - 0.5) * 5, 1.8, 1.8); }
+  }
+  for (i = 0; i < 4; i++) {
+    var x = 183 + i * 30, y = 237, hot = i === 0 && T > 3.4;
+    c.fillStyle = "rgba(11,10,9,0.8)"; rr(c, x, y, 24, 24, 4); c.fill();
+    c.strokeStyle = hot ? "rgba(224,160,82," + (0.55 + 0.4 * Math.max(0, 1 - (T - 3.4) / 1.2)).toFixed(3) + ")" : "rgba(233,227,214,0.25)"; c.lineWidth = 1; c.stroke();
+    tag(c, String(i + 1), x + 3.5, y + 5.5, "rgba(233,227,214,0.45)");
+  }
+  if (T > 3.4) keyIcon(c, 196, 249, 1, "#e0a052");
+}, 1.9);
+
+/* ---------- encounter ---------- */
+function shirt(c, x, y, s, P) {
+  c.save(); c.translate(x, y); c.scale(s, s);
+  c.beginPath(); c.moveTo(-14, -30); c.lineTo(-34, -20); c.lineTo(-44, 0); c.lineTo(-32, 6); c.lineTo(-24, -6); c.lineTo(-24, 34); c.lineTo(24, 34); c.lineTo(24, -6); c.lineTo(32, 6); c.lineTo(44, 0); c.lineTo(34, -20); c.lineTo(14, -30); c.quadraticCurveTo(0, -20, -14, -30); c.closePath();
+  c.fillStyle = P("#8c8273"); c.fill(); ink(c, 2 / s);
+  c.fillStyle = hatch(c, false); c.fill();
+  c.setLineDash([2, 2]); c.strokeStyle = "rgba(233,227,214,0.35)"; c.lineWidth = 1 / s; line(c, -24, 4, -44, 0); line(c, 24, 4, 44, 0); line(c, -20, 30, 20, 30); c.setLineDash([]);
+  c.strokeStyle = "rgba(10,10,12,0.6)"; line(c, 0, -22, 0, 34);
+  for (var i = 0; i < 5; i++) { c.beginPath(); c.arc(i % 2 ? 2.6 : -2.6, -14 + i * 10, 1.5, 0, TAU); c.fillStyle = "#e9e3d6"; c.fill(); }
+  c.restore();
+}
+demo("cvEnc", function (c, t) {
+  c.fillStyle = "#0d0c0b"; c.fillRect(0, 0, 480, 270);
+  glow(c, 330, 104, 170, "rgba(233,227,214,0.08)", "rgba(233,227,214,0)");
+  c.fillStyle = PAL("#3e2b1d"); c.fillRect(0, 200, 480, 70); c.beginPath(); c.moveTo(0, 200); c.lineTo(480, 200); ink(c, 2);
+  shirt(c, 330, 100 + Math.sin(t * 1.6) * 3, 1.5, PAL);
+  nightmare(c, { x: 116, dir: 1, ph: 0.25 + Math.sin(t * 0.8) * 0.05 }, PAL, { scale: 1.3, floor: 244 });
+  tendril(c, 112, 128, t, 4, 40, -1, PAL);
+  vignette(c, 0.8);
+}, 1.2);
+(function () {
+  var E = { foe: 100, cmp: 42, res: 12, exp: false, turn: 0 };
+  function $(id) { return document.getElementById(id); }
+  function show(msg) {
+    var foe = $("encFoe"); if (!foe) return;
+    foe.style.width = E.foe + "%"; $("encCmp").style.width = (E.cmp / 42 * 100) + "%"; $("encRes").style.width = (E.res / 20 * 100) + "%";
+    $("encCmpT").textContent = E.cmp + " / 42"; $("encResT").textContent = E.res + " / 20";
+    $("encFoeState").textContent = E.foe <= 0 ? "WORN" : E.exp ? "EXPOSED" : "GUARDED"; $("encLog").textContent = msg;
+  }
+  function act(m) {
+    var msg;
+    if (E.foe <= 0) { E.foe = 100; E.cmp = 42; E.res = 12; E.exp = false; E.turn = 0; show("The Shirt is inside out again. It's a new morning."); return; }
+    if (m === "arm") { if (E.res < 2) msg = "Not enough Resolve. Take a Deep Breath."; else { E.res -= 2; E.exp = true; msg = "You find the armhole. It was always there."; } }
+    else if (m === "btn") { if (!E.exp) msg = "The buttons refuse. Find the armhole first."; else if (E.res < 4) msg = "Not enough Resolve. Take a Deep Breath."; else { E.res -= 4; E.foe = Math.max(0, E.foe - 34); msg = E.foe <= 0 ? "Every button meets its hole. The Shirt is worn." : "Button " + (3 + E.turn % 4) + " of 7 meets its hole. The Shirt staggers."; } }
+    else if (m === "breath") { E.res = Math.min(20, E.res + 6); msg = "You breathe in. The room is very quiet."; }
+    else { E.cmp = Math.min(42, E.cmp + 10); msg = "The mirror shows someone who can do this."; }
+    if (E.foe > 0) { var k = E.turn++ % 3; if (k === 0) { E.res = Math.max(0, E.res - 3); msg += " Static Cling drains 3 Resolve."; } else if (k === 1) { E.cmp = Math.max(1, E.cmp - 7); msg += " Sleeve Labyrinth: −7 Composure."; } else { E.foe = Math.min(100, E.foe + 8); msg += " Wrong Button undoes a little progress."; } }
+    show(msg);
+  }
+  SANDS.forEach(function (S, i) { var b = document.querySelectorAll(".sand-btn")[i]; if (b && b.hasAttribute("data-move")) S.onpress = function () { act(b.getAttribute("data-move")); }; });
+})();
+
+/* ---------- pause: one frozen frame ---------- */
+demo("cvPause", function (c, t, dt, d) { if (d.done) return; d.done = true; scene(c, 14.2, { cam: false, vig: 0.85 }); }, 14.2);
+
+/* ---------- day rollover ---------- */
+var GRAIN = null;
+function sandStroke(c, x1, y1, x2, y2, f, seed) { var R = rng(seed), n = 46; for (var i = 0; i < n * f; i++) { var u = i / n, a = R(), b = R(), g = R(); c.fillStyle = g < 0.1 ? "rgba(224,160,82,0.9)" : "rgba(214,207,191," + (0.45 + a * 0.3).toFixed(3) + ")"; c.fillRect(lerp(x1, x2, u) + (a - 0.5) * 2.4, lerp(y1, y2, u) + (b - 0.5) * 2.4, 1.6, 1.6); } }
+demo("cvRoll", function (c, t) {
+  if (!GRAIN) { GRAIN = mk(480, 270); var g = GRAIN.getContext("2d"), R = rng(21); g.fillStyle = "#0a0909"; g.fillRect(0, 0, 480, 270); for (var i = 0; i < 9000; i++) { var q = R(); g.fillStyle = q < 0.02 ? "rgba(224,160,82,0.45)" : q < 0.12 ? "rgba(90,84,76,0.5)" : "rgba(30,28,25,0.8)"; g.fillRect(R() * 480, R() * 270, 1.2, 1.2); } }
+  c.drawImage(GRAIN, 0, 0, 480, 270);
+  var T = t % 6.5, fade = T < 0.4 ? T / 0.4 : T > 6 ? (6.5 - T) / 0.5 : 1, x0 = 110, y0 = 72, cs = 44;
+  c.globalAlpha = clamp(fade, 0, 1);
+  for (var k = 0; k < 5; k++) {
+    var day = 15 + k, x = x0 + k * 54, on = clamp((T - 2.2) / 0.5, 0, 1);
+    c.lineWidth = day === 19 ? 1.6 : 1; c.strokeStyle = day === 19 ? "rgba(224,160,82," + on.toFixed(3) + ")" : "rgba(233,227,214,0.24)"; rr(c, x, y0, cs, cs, 4); c.stroke();
+    tag(c, String(day), x + 5, y0 + 8, day === 19 ? "rgba(224,160,82," + Math.max(0.35, on).toFixed(3) + ")" : "rgba(233,227,214,0.5)");
+    var f = day < 18 ? 1 : day === 18 ? clamp((T - 0.6) / 1.4, 0, 1) : 0;
+    if (f > 0) { sandStroke(c, x + 9, y0 + 9, x + cs - 9, y0 + cs - 9, clamp(f * 2, 0, 1), day * 3); sandStroke(c, x + cs - 9, y0 + 9, x + 9, y0 + cs - 9, clamp(f * 2 - 1, 0, 1), day * 7); }
+  }
+  c.textAlign = "center"; c.textBaseline = "alphabetic";
+  c.font = '400 34px "IM Fell English", Georgia, serif'; c.fillStyle = "rgba(233,227,214," + clamp((T - 2.4) / 0.6, 0, 1).toFixed(3) + ")"; c.fillText("Day 19", 240, 170);
+  c.font = '400 11px "IBM Plex Sans", "Segoe UI", sans-serif'; c.fillStyle = "rgba(163,156,143," + clamp((T - 3) / 0.6, 0, 1).toFixed(3) + ")"; c.fillText("The house resets. What you learned doesn't.", 240, 193);
+  var p = clamp(T / 5.6, 0, 1); c.fillStyle = "rgba(233,227,214,0.12)"; c.fillRect(170, 228, 140, 2); c.fillStyle = "#e0a052"; c.fillRect(170, 228, 140 * p, 2);
+  for (var j = 0; j < 14; j++) { var u = (t * 0.9 + j / 14) % 1; c.fillStyle = "rgba(214,207,191,0.5)"; c.fillRect(170 + 140 * p - 1 + Math.sin(j * 7) * 3, 202 + u * 26, 1.4, 1.4); }
+  c.globalAlpha = 1;
+}, 3.6);
+
+/* ---------- 2 · dream cinematics ---------- */
+function blit(c, d, src) { c.setTransform(1, 0, 0, 1, 0, 0); c.drawImage(src, 0, 0, c.canvas.width, c.canvas.height); c.setTransform(d.sx, 0, 0, d.sy, 0, 0); }
+
+// Time-shift blur: layer 1 = half-res history fed back (ping-pong), layer 2 = per-object pose echoes
+var SH = { mode: 3, kx: 300, ky: 110, tx: 300, ty: 110, drag: false, lastUser: -99, acc: 0, trail: [], cur: null, hA: null, hB: null, lastT: -1 };
+function keyGlow(c, x, y, a) {
+  glow(c, x, y, 28, "rgba(255,206,140," + (0.6 * a).toFixed(3) + ")", "rgba(255,206,140,0)");
+  c.save(); c.translate(x, y); c.rotate(-0.4); c.strokeStyle = "rgba(232,178,98," + a.toFixed(3) + ")"; c.lineWidth = 2.2; c.lineCap = "round";
+  c.beginPath(); c.arc(-7, 0, 5, 0, TAU); c.stroke(); line(c, -2, 0, 12, 0); line(c, 9, 0, 9, 4); line(c, 12, 0, 12, 3.4); c.restore();
+}
+var dShift = demo("cvShift", function (c, t, dt, d) {
+  if (!SH.cur) { SH.cur = mk(480, 270); SH.hA = mk(480, 270); SH.hB = mk(480, 270); }
+  var gap = SH.lastT < 0 || t - SH.lastT > 0.25 || t < SH.lastT; SH.lastT = t;
+  if (!SH.drag && t - SH.lastUser > 5 && NOW - SH.lastUser > 5) { SH.tx = 250 + Math.sin(t * 0.9) * 130; SH.ty = 108 + Math.sin(t * 1.7) * 52; }
+  var e = RM ? 1 : Math.min(1, dt * 9); SH.kx += (SH.tx - SH.kx) * e; SH.ky += (SH.ty - SH.ky) * e;
+  var f = figAt(t * 1.5), m = SH.mode;
+  if (gap) SH.trail = [];
+  SH.acc += dt; if (SH.acc > 0.09) { SH.acc = 0; SH.trail.push({ f: { x: f.x, dir: f.dir, ph: f.ph }, x: SH.kx, y: SH.ky }); if (SH.trail.length > 5) SH.trail.shift(); }
+  var cc = SH.cur.getContext("2d");
+  scene(cc, t, { fig: f, echo: (m & 2) ? function (c2, P) { for (var i = 0; i < SH.trail.length; i++) { c2.globalAlpha = 0.07 + 0.065 * i; nightmare(c2, SH.trail[i].f, P, { noShadow: true, noRim: true, body: P("#3a3f48") }); } c2.globalAlpha = 1; } : null });
+  if (m & 2) for (var i = 0; i < SH.trail.length; i++) keyGlow(cc, SH.trail[i].x, SH.trail[i].y, 0.1 + 0.06 * i);
+  keyGlow(cc, SH.kx, SH.ky, 1);
+  var out = SH.cur;
+  if (m & 1) {
+    if (gap) { var g0 = SH.hA.getContext("2d"); g0.globalAlpha = 1; g0.globalCompositeOperation = "source-over"; g0.drawImage(SH.cur, 0, 0); }
+    var o = SH.hB.getContext("2d"), k = Math.pow(0.87, dt * 60);
+    o.globalCompositeOperation = "source-over"; o.globalAlpha = 1; o.drawImage(SH.cur, 0, 0);
+    o.globalAlpha = k; o.drawImage(SH.hA, -2.4, -2.2, 484.8, 272.7);
+    o.globalCompositeOperation = "lighten"; o.globalAlpha = 0.45; o.drawImage(SH.hA, -1.2, -1.8, 482.4, 271.4);
+    o.globalCompositeOperation = "source-over"; o.globalAlpha = 1;
+    var sw = SH.hA; SH.hA = SH.hB; SH.hB = sw; out = SH.hA;
+  }
+  blit(c, d, out);
+  tag(c, ["OFF", "LAYER 1 · HALF-RES HISTORY, PING-PONG", "LAYER 2 · POSE-SNAPSHOT ECHOES", "LAYER 1 + LAYER 2"][m], 12, 258, "rgba(233,227,214,0.8)");
+  if (!SH.drag && NOW - SH.lastUser > 5) tag(c, "DRAG THE KEY", 468, 258, "rgba(224,160,82,0.9)", "right");
+}, 3.4, { warm: 1.2 });
+(function () {
+  var cv = document.getElementById("cvShift"); if (!cv) return;
+  function pos(e) { var r = cv.getBoundingClientRect(); return [(e.clientX - r.left) / r.width * 480, (e.clientY - r.top) / r.height * 270]; }
+  function set(p) { SH.tx = clamp(p[0], 8, 472); SH.ty = clamp(p[1], 8, 262); SH.lastUser = NOW; if (RM) { SH.kx = SH.tx; SH.ky = SH.ty; redraw(dShift); } }
+  cv.addEventListener("pointerdown", function (e) { SH.drag = true; set(pos(e)); try { cv.setPointerCapture(e.pointerId); } catch (x) { /* capture is optional */ } });
+  cv.addEventListener("pointermove", function (e) { if (SH.drag) set(pos(e)); });
+  function up() { SH.drag = false; SH.lastUser = NOW; }
+  cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
+  cv.addEventListener("keydown", function (e) { var k = { ArrowLeft: [-16, 0], ArrowRight: [16, 0], ArrowUp: [0, -12], ArrowDown: [0, 12] }[e.key]; if (!k) return; e.preventDefault(); set([SH.tx + k[0], SH.ty + k[1]]); });
+})();
+seg("segShift", function (b) { SH.mode = +b.getAttribute("data-m"); SH.lastT = -1; redraw(dShift); });
+
+// Datamosh: true = P-frames move blocks of last frame's moshed image; fake = velocity smear of the current frame
+var MO = { mode: "true", buf: null, tmp: null, lastT: -1 };
+var dMosh = demo("cvMosh", function (c, t, dt, d) {
+  if (!MO.buf) { MO.buf = mk(480, 270); MO.tmp = mk(480, 270); }
+  var src = SRC(t), cyc = t % 4.4, clean = cyc < 1.3 || MO.lastT < 0 || Math.abs(t - MO.lastT) > 0.25; MO.lastT = t;
+  var b = MO.buf.getContext("2d"), tm = MO.tmp.getContext("2d"), B = 16, tru = MO.mode === "true";
+  var f = figAt(t), fp = figAt(t - 1 / 30), ca = camAt(t), cp = camAt(t - 1 / 30), cvx = ca[0] - cp[0], cvy = ca[1] - cp[1], fvx = f.x - fp.x + cvx, fx = f.x + ca[0];
+  if (clean) { b.drawImage(src, 0, 0); tm.drawImage(src, 0, 0); }
+  else {
+    var from = tru ? MO.buf : src, amp = tru ? 2.2 : 7, fr = Math.floor(t * 12);
+    tm.drawImage(from, 0, 0);
+    for (var by = 0; by < 270; by += B) for (var bx = 0; bx < 480; bx += B) {
+      var inFig = Math.abs(bx + 8 - fx) < 34 && by > 88 && by < 214, j = h2(bx * 7 + fr, by * 13);
+      if (!tru && !inFig && j > 0.18) continue;
+      var mvx = (inFig ? fvx * 1.6 : cvx) * amp, mvy = (inFig ? 0.6 : cvy) * amp;
+      if (!tru) { mvx += (j - 0.5) * 6; mvy += (h2(bx, by + fr) - 0.5) * 4; }
+      tm.drawImage(from, clamp(bx - mvx, 0, 480 - B), clamp(by - mvy, 0, 270 - B), B, B, bx, by, B, B);
+    }
+    if (tru) { for (var r = 0; r < 6; r++) { var rx = ((h2(r, fr) * 30) | 0) * B, ry = ((h2(r + 9, fr) * 17) | 0) * B; tm.drawImage(src, rx, ry, B, B, rx, ry, B, B); } b.drawImage(MO.tmp, 0, 0); }
+  }
+  blit(c, d, tru ? MO.buf : MO.tmp);
+  tag(c, clean ? "I-FRAME · CLEAN" : tru ? "P-FRAMES ONLY · HISTORY" : "VELOCITY SMEAR · 16 PX BLOCKS", 12, 258, "rgba(233,227,214,0.8)");
+}, 3.0, { warm: 1.6 });
+seg("segMosh", function (b) { MO.mode = b.getAttribute("data-m"); MO.lastT = -1; redraw(dMosh); });
+
+// Slit-scan: a ring of 36 half-res frames, each column reads an older one
+var SL = { n: 36, ring: [], head: 0, last: -1 };
+demo("cvSlit", function (c, t, dt, d) {
+  if (!SL.ring.length) for (var i = 0; i < SL.n; i++) SL.ring.push(mk(240, 135));
+  var stp = 1 / 30;
+  function push(tt) { SL.head = (SL.head + 1) % SL.n; var rc = SL.ring[SL.head].getContext("2d"); rc.setTransform(0.5, 0, 0, 0.5, 0, 0); scene(rc, tt, {}); }
+  if (SL.last < 0 || t - SL.last > 0.5 || t < SL.last) { for (var k = SL.n - 1; k >= 0; k--) push(t - k * stp); SL.last = t; }
+  else { var guard = 0; while (t - SL.last >= stp && guard++ < 4) { SL.last += stp; push(SL.last); } if (t - SL.last >= stp) SL.last = t; }
+  c.setTransform(1, 0, 0, 1, 0, 0);
+  var cols = 80, sw = 240 / cols, W = c.canvas.width, H = c.canvas.height;
+  for (i = 0; i < cols; i++) { var dl = Math.round(i / (cols - 1) * (SL.n - 1)), fr = SL.ring[(SL.head - dl + SL.n) % SL.n]; c.drawImage(fr, i * sw, 0, sw, 135, Math.floor(i * sw * W / 240), 0, Math.ceil(sw * W / 240) + 1, H); }
+  c.setTransform(d.sx, 0, 0, d.sy, 0, 0);
+  tag(c, "LEFT · NOW      RIGHT · 1.2 S AGO", 12, 258, "rgba(233,227,214,0.8)");
+}, 2.6);
+
+// Chromatic split in the split-tone colors: warm + cold copies add back to the original where aligned
+var CH = null;
+demo("cvChroma", function (c, t) {
+  if (!CH) CH = { w: mk(480, 270), k: mk(480, 270) };
+  var src = SRC(t), pulse = Math.pow(Math.max(0, Math.sin(t * 1.9)), 10), s = 0.002 + 0.03 * pulse;
+  function tintTo(cv2, col) { var x = cv2.getContext("2d"); x.globalCompositeOperation = "copy"; x.drawImage(src, 0, 0); x.globalCompositeOperation = "multiply"; x.fillStyle = col; x.fillRect(0, 0, 480, 270); x.globalCompositeOperation = "source-over"; }
+  tintTo(CH.w, "rgb(255,184,107)"); tintTo(CH.k, "rgb(0,71,148)");
+  c.fillStyle = "#000"; c.fillRect(0, 0, 480, 270);
+  c.globalCompositeOperation = "lighter";
+  var z1 = 1 + s, z2 = 1 - s * 0.25;
+  c.drawImage(CH.w, 240 - 240 * z1, 135 - 135 * z1, 480 * z1, 270 * z1);
+  c.drawImage(CH.k, 240 - 240 * z2, 135 - 135 * z2, 480 * z2, 270 * z2);
+  c.globalCompositeOperation = "source-over";
+  tag(c, pulse > 0.3 ? "DREAM CRACK · WIDE SPLIT" : "AMBIENT · ABOUT 2 PX AT 1080P", 12, 258, "rgba(233,227,214,0.8)");
+}, 0.83);
+
+// Breathing vignette and DOF: a downsampled blur under a sharp, breathing focus mask
+var BR = null;
+demo("cvBreath", function (c, t) {
+  if (!BR) BR = { a: mk(160, 90), b: mk(54, 30), s: mk(480, 270) };
+  var src = SRC(t), b = Math.sin(t * TAU / 4.5) * 0.5 + 0.5, A = BR.a.getContext("2d"), B2 = BR.b.getContext("2d"), S2 = BR.s.getContext("2d");
+  A.drawImage(src, 0, 0, 160, 90); B2.drawImage(BR.a, 0, 0, 54, 30);
+  c.imageSmoothingEnabled = true; c.drawImage(BR.b, 0, 0, 480, 270);
+  var f = figAt(t), cam = camAt(t), fx = f.x + cam[0], fy = 150 + cam[1];
+  S2.globalCompositeOperation = "copy"; S2.drawImage(src, 0, 0); S2.globalCompositeOperation = "destination-in";
+  var g = S2.createRadialGradient(fx, fy, 26 + 50 * (1 - b), fx, fy, 110 + 150 * (1 - b)); g.addColorStop(0, "rgba(0,0,0,1)"); g.addColorStop(1, "rgba(0,0,0,0)");
+  S2.fillStyle = g; S2.fillRect(0, 0, 480, 270); S2.globalCompositeOperation = "source-over";
+  c.drawImage(BR.s, 0, 0);
+  var vg = c.createRadialGradient(240, 135, 50 + 80 * (1 - b), 240, 135, 270 - 40 * b); vg.addColorStop(0, "rgba(3,3,4,0)"); vg.addColorStop(1, "rgba(3,3,4," + (0.5 + 0.42 * b).toFixed(3) + ")");
+  c.fillStyle = vg; c.fillRect(0, 0, 480, 270);
+  tag(c, (Math.cos(t * TAU / 4.5) > 0 ? "INHALE" : "EXHALE") + " · 4.5 S CYCLE", 12, 258, "rgba(233,227,214,0.8)");
+}, 1.1);
+
+// Frame stutter and skip: holds, then a jump ahead; the strip marks each frame
+var STU = { held: null };
+demo("cvStutter", function (c, t) {
+  var n = Math.floor(t * 30), p = n % 90, cyc = Math.floor(n / 90);
+  function isHold(q) { return (q >= 45 && q <= 52) || (q >= 59 && q <= 64); }
+  var hold = isHold(p), tt = t + 0.6 * (cyc + (p >= 65 ? 1 : 0));
+  if (!hold || STU.held == null) STU.held = tt;
+  scene(c, hold ? STU.held : tt, {});
+  for (var i = 0; i < 30; i++) { var q = (((p - 29 + i) % 90) + 90) % 90; c.fillStyle = isHold(q) ? "rgba(224,160,82,0.9)" : q === 65 ? "rgba(233,227,214,0.95)" : "rgba(233,227,214,0.22)"; c.fillRect(150 + i * 10, 251, 7, 9); }
+  tag(c, hold ? "HOLD" : (p >= 65 && p < 69) ? "SKIP +0.6 S" : "PLAY", 12, 255, "rgba(233,227,214,0.85)");
+}, 1.6);
+
+// Sand-dissolve transition: third person -> top-down layout shot, through a noise threshold with a sand edge
+var TR = null;
+demo("cvTrans", function (c, t) {
+  var i;
+  if (!TR) {
+    TR = { n: new Float32Array(8160), m: mk(120, 68), e: mk(120, 68), b: mk(480, 270) };
+    for (var y = 0; y < 68; y++) for (var x = 0; x < 120; x++) { var ed = Math.min(x / 60, (119 - x) / 60, y / 34, (67 - y) / 34); TR.n[y * 120 + x] = 0.55 * fbm(x * 0.07, y * 0.07, 4) + 0.45 * clamp(ed, 0, 1); }
+    TR.id = TR.m.getContext("2d").createImageData(120, 68); TR.ie = TR.e.getContext("2d").createImageData(120, 68);
+  }
+  var T = t % 6, th = T < 1.2 ? 0 : T < 2.6 ? (T - 1.2) / 1.4 : T < 3.8 ? 1 : T < 5.2 ? 1 - (T - 3.8) / 1.4 : 0;
+  th = th * 1.08 - 0.04;
+  var md = TR.id.data, ee = TR.ie.data;
+  for (i = 0; i < 8160; i++) { var v = TR.n[i], a = clamp((th - v) / 0.025, 0, 1), bd = clamp(1 - Math.abs(v - th) / 0.035, 0, 1), gl = h2(i, 77) < 0.08, o = i * 4; md[o + 3] = a * 255; ee[o] = gl ? 224 : 8; ee[o + 1] = gl ? 160 : 8; ee[o + 2] = gl ? 82 : 9; ee[o + 3] = bd * 235; }
+  TR.m.getContext("2d").putImageData(TR.id, 0, 0); TR.e.getContext("2d").putImageData(TR.ie, 0, 0);
+  c.drawImage(SRC(t), 0, 0);
+  var bx = TR.b.getContext("2d"); bx.globalCompositeOperation = "source-over"; topDown(bx, t, PAL);
+  bx.globalCompositeOperation = "destination-in"; bx.imageSmoothingEnabled = true; bx.drawImage(TR.m, 0, 0, 480, 270); bx.globalCompositeOperation = "source-over";
+  c.drawImage(TR.b, 0, 0);
+  c.imageSmoothingEnabled = false; c.drawImage(TR.e, 0, 0, 480, 270); c.imageSmoothingEnabled = true;
+  if (th > 0 && th < 1) for (var k = 0; k < 220; k++) { var idx = (h2(k, 5) * 8160) | 0; if (Math.abs(TR.n[idx] - th) > 0.05) continue; var fall = ((t * 1.7 + h2(k, 9)) % 1) * 18; c.fillStyle = h2(k, 3) < 0.15 ? "rgba(224,160,82,0.9)" : "rgba(8,8,9,0.9)"; c.fillRect((idx % 120) * 4 + 1, ((idx / 120) | 0) * 4 + fall, 1.6, 1.6); }
+  tag(c, th <= 0 ? "THIRD PERSON" : th >= 1 ? "TOP-DOWN · T7 LAYOUT SHOT" : "SAND DISSOLVE", 12, 258, "rgba(233,227,214,0.85)");
+}, 2.0);
+
+// Payoff: grey -> ring of color from the hero -> hold -> drain -> grey
+demo("cvBurst", function (c, t) {
+  var T = t % 7, lab;
+  if (T < 1.6 || T >= 5.6) { heroShot(c, t, PAL); lab = "GREY"; }
+  else if (T < 2.1) {
+    var r = sstep(1.6, 2.1, T) * 330; heroShot(c, t, PAL);
+    c.save(); c.beginPath(); c.arc(240, 150, r, 0, TAU); c.clip(); heroShot(c, t, PAL_COLOR); c.restore();
+    c.strokeStyle = "rgba(255,240,220,0.5)"; c.lineWidth = 3; c.beginPath(); c.arc(240, 150, r, 0, TAU); c.stroke(); lab = "BURST · A RING FROM THE HERO";
+  }
+  else if (T < 4.2) { heroShot(c, t, PAL_COLOR); c.globalCompositeOperation = "lighter"; glow(c, 240, 140, 210, "rgba(255,200,120," + (0.22 * (1 - (T - 2.1) / 2.1)).toFixed(3) + ")", "rgba(255,200,120,0)"); c.globalCompositeOperation = "source-over"; lab = "HOLD · FULL COLOR"; }
+  else { heroShot(c, t, Pal(NIGHT, { sat: 1 - sstep(4.2, 5.6, T) })); lab = "DRAIN BACK TO GREY"; }
+  tag(c, lab, 12, 258, "rgba(233,227,214,0.9)");
+}, 2.9);
+
+// Hue drift: the same frame under the split-tone tint for each part of the day
+var HU = { p: 0, user: false, txt: "" };
+function hueOut(tint) {
+  var el = document.getElementById("hueOut"); if (!el) return;
+  var sh = [0, 1, 2].map(function (k) { return 255 * 0.2 * lerp(tint.s[k], tint.h[k], 0.2); }), hi = [0, 1, 2].map(function (k) { return 255 * 0.85 * lerp(tint.s[k], tint.h[k], 0.85); });
+  var f2 = function (a) { return "(" + a.map(function (v) { return v.toFixed(2); }).join(", ") + ")"; };
+  var html = TINTS[Math.round(HU.p)].name + " · ShadowTint " + f2(tint.s) + ' <i class="sw" style="background:' + hex2(sh) + '"></i> · HighlightTint ' + f2(tint.h) + ' <i class="sw" style="background:' + hex2(hi) + '"></i>';
+  if (html !== HU.txt) { HU.txt = html; el.innerHTML = html; }
+}
+var dHue = demo("cvHue", function (c, t) {
+  if (!HU.user && !RM) { var q = (t * 0.08) % 2; HU.p = (q < 1 ? q : 2 - q) * 3; var r = document.getElementById("hueRange"); if (r) r.value = HU.p.toFixed(2); }
+  var tint = tintAt(HU.p); scene(c, t, { pal: Pal(tint), nocache: true }); hueOut(tint);
+  tag(c, TINTS[Math.round(HU.p)].name.toUpperCase(), 12, 258, "rgba(233,227,214,0.85)");
+}, 2.5);
+(function () { var r = document.getElementById("hueRange"); if (!r) return; r.addEventListener("input", function () { HU.user = true; HU.p = clamp(+r.value, 0, 3); redraw(dHue); }); })();
+
+/* ---------- 3 · splat meshes ---------- */
+function samp(a, x) { x = ((x % a.length) + a.length) % a.length; var i = x | 0, f = x - i; return lerp(a[i], a[(i + 1) % a.length], f); }
+function stageBg(c) { var g = c.createRadialGradient(240, 110, 30, 240, 140, 300); g.addColorStop(0, "#4a443d"); g.addColorStop(1, "#151311"); c.fillStyle = g; c.fillRect(0, 0, 480, 270); }
+
+// Anatomy: quads, gaussian falloff (needs sorting), dithered mask (any order), final with SH-style lighting
+var SPL = { mode: 3, pts: null };
+var dSplat = demo("vSplat", function (c, t) {
+  var i, j;
+  if (!SPL.pts) { var R = rng(31); SPL.pts = []; for (i = 0; i < 320; i++) { var u = R() * TAU, v = Math.acos(2 * R() - 1), rad = 1 - Math.pow(R(), 3) * 0.5, lump = 0.8 + 0.4 * fbm(Math.cos(u) * 2 + 3, Math.sin(v) * 2 + 1, 3), x = Math.sin(v) * Math.cos(u) * rad * lump, y = Math.cos(v) * rad * lump * 0.72, z = Math.sin(v) * Math.sin(u) * rad * lump, nl = Math.sqrt(x * x + y * y + z * z) || 1; SPL.pts.push({ x: x, y: y, z: z, nx: x / nl, ny: y / nl, nz: z / nl, r: 0.06 + R() * 0.09, o: 0.55 + R() * 0.45, g: R() < 0.07 }); } }
+  stageBg(c); c.fillStyle = "rgba(0,0,0,0.35)"; c.beginPath(); c.ellipse(240, 222, 110, 14, 0, 0, TAU); c.fill();
+  var th = t * 0.45, ct = Math.cos(th), st = Math.sin(th), S = 92;
+  var pr = SPL.pts.map(function (p, n) { var x = p.x * ct + p.z * st, z = -p.x * st + p.z * ct, nx = p.nx * ct + p.nz * st, nz = -p.nx * st + p.nz * ct, k = 1 / (1 + z * 0.25); return { i: n, x: 240 + x * S * k, y: 140 + p.y * S * k, z: z, r: p.r * S * k, o: p.o, nx: nx, ny: p.ny, nz: nz, g: p.g }; });
+  if (SPL.mode === 1) pr.sort(function (a, b) { return b.z - a.z; });
+  for (i = 0; i < pr.length; i++) {
+    var q = pr[i], lit = Math.max(0, q.nx * 0.6 - q.ny * 0.5 - q.nz * 0.62), view = Math.max(0, -q.nz), sh = 12 + 80 * lit * (0.45 + 0.55 * view), cs = "rgb(" + (sh | 0) + "," + ((sh * 0.95) | 0) + "," + ((sh * 0.9) | 0) + ")";
+    if (SPL.mode === 0) { c.strokeStyle = "rgba(233,227,214,0.5)"; c.lineWidth = 0.8; c.strokeRect(q.x - q.r, q.y - q.r, q.r * 2, q.r * 2); }
+    else if (SPL.mode === 1) glow(c, q.x, q.y, q.r, "rgba(" + (sh | 0) + "," + ((sh * 0.95) | 0) + "," + ((sh * 0.9) | 0) + "," + (q.o * 0.9).toFixed(2) + ")", "rgba(0,0,0,0)");
+    else { var R2 = rng(q.i * 7 + 1); for (j = 0; j < 14; j++) { var an = R2() * TAU, rr2 = Math.sqrt(-2 * Math.log(1 - R2() * 0.95)) * 0.38 * q.r; if (R2() > q.o) continue; c.fillStyle = SPL.mode === 2 ? "rgb(200,194,182)" : (q.g && j < 2 ? "rgba(224,160,82,0.95)" : cs); c.fillRect(q.x + Math.cos(an) * rr2, q.y + Math.sin(an) * rr2, 1.3, 1.3); } }
+  }
+  tag(c, ["QUADS · ALWAYS FACING THE CAMERA", "GAUSSIAN FALLOFF · NEEDS SORTING", "DITHERED MASK · ANY ORDER, NO SORT", "FINAL · LIT BY SH TOWARD THE LAMP"][SPL.mode], 12, 258, "rgba(233,227,214,0.85)");
+}, 2.0);
+seg("segSplat", function (b) { SPL.mode = +b.getAttribute("data-m"); redraw(dSplat); });
+
+// Pour and morph: puddle -> key -> night mare (looping mane tendrils) -> puddle
+var MF = null;
+function samplePts(draw, n, seed) {
+  var cv = mk(480, 270), x = cv.getContext("2d"); x.fillStyle = "#fff"; x.strokeStyle = "#fff"; draw(x);
+  var d = x.getImageData(0, 0, 480, 270).data, all = [], R = rng(seed), out = [];
+  for (var y = 0; y < 270; y += 2) for (var xx = 0; xx < 480; xx += 2) if (d[(y * 480 + xx) * 4 + 3] > 128) all.push([xx, y]);
+  for (var i = 0; i < n; i++) { var p = all[(R() * all.length) | 0] || [240, 230]; out.push([p[0] + R() * 2, p[1] + R() * 2]); }
+  out.sort(function (a, b) { return b[1] - a[1]; });
+  return out;
+}
+function initMorph() {
+  var N = 1500;
+  var puddle = samplePts(function (x) { x.beginPath(); x.ellipse(240, 232, 96, 9, 0, 0, TAU); x.fill(); }, N, 1);
+  var key = samplePts(function (x) { x.lineWidth = 15; x.beginPath(); x.arc(176, 140, 27, 0, TAU); x.stroke(); x.fillRect(200, 133, 136, 15); x.fillRect(206, 126, 9, 29); x.fillRect(300, 148, 12, 22); x.fillRect(318, 148, 10, 16); x.fillRect(330, 140, 8, 24); }, N, 2);
+  var mare = samplePts(function (x) { horsePath(x, 150, 28, 1.02); x.fill(); }, N, 3);
+  var rowMax = {}; mare.forEach(function (p) { var r = Math.round(p[1] / 6); rowMax[r] = Math.max(rowMax[r] || 0, p[0]); });
+  var R = rng(4), seeds = []; for (var i = 0; i < N; i++) seeds.push([R(), R(), R()]);
+  MF = { N: N, sh: [puddle, key, mare, puddle], mane: mare.map(function (p) { return p[0] > (rowMax[Math.round(p[1] / 6)] || 0) - 14 && p[1] < 200; }), seeds: seeds };
+}
+var MT = [[0, 1.2, 0, 0, "PUDDLE"], [1.2, 3.2, 0, 1, "POUR · RISES BY SEED"], [3.2, 4.8, 1, 1, "KEY"], [4.8, 7.0, 1, 2, "MORPH · KEY TO MARE"], [7.0, 9.6, 2, 2, "NIGHT MARE · LOOPING TENDRILS"], [9.6, 11.6, 2, 3, "POUR AWAY"], [11.6, 12, 3, 3, "PUDDLE"]];
+demo("vMorph", function (c, t) {
+  if (!MF) initMorph();
+  var T = t % 12, sg = MT[0], k, i;
+  for (k = 0; k < MT.length; k++) if (T >= MT[k][0] && T < MT[k][1]) sg = MT[k];
+  var A = MF.sh[sg[2]], B = MF.sh[sg[3]], m = sg[2] === sg[3] ? 0 : (T - sg[0]) / (sg[1] - sg[0]), mare = sg[2] === 2 && sg[3] === 2;
+  stageBg(c); c.fillStyle = "#1f1c19"; c.fillRect(0, 236, 480, 34); c.beginPath(); c.moveTo(0, 236); c.lineTo(480, 236); ink(c, 2);
+  if (mare) { c.strokeStyle = "rgba(230,232,240,0.07)"; c.lineWidth = 6; c.lineCap = "round"; for (var w = 0; w < 4; w++) { c.beginPath(); for (var s = 0; s <= 10; s++) { var u0 = s / 10, xx = 326 + u0 * 96 + Math.sin(u0 * 5 + t + w) * 8, yy = 72 + w * 24 - u0 * 34; if (s) c.lineTo(xx, yy); else c.moveTo(xx, yy); } c.stroke(); } }
+  for (var ty = 0; ty < 3; ty++) {
+    c.fillStyle = ["rgba(8,8,9,0.95)", "rgba(110,104,95,0.9)", "rgba(224,160,82,0.95)"][ty];
+    for (i = 0; i < MF.N; i++) {
+      var sd = MF.seeds[i]; if ((sd[2] < 0.04 ? 2 : sd[2] < 0.13 ? 1 : 0) !== ty) continue;
+      var u = clamp((m - (i / MF.N) * 0.45 - sd[0] * 0.1) / 0.45, 0, 1), e = u * u * (3 - 2 * u), arc = Math.sin(Math.PI * u);
+      var x = lerp(A[i][0], B[i][0], e) + arc * Math.sin(i * 0.37 + t * 2) * 9, y = lerp(A[i][1], B[i][1], e) - arc * (14 + 26 * sd[1]);
+      if (mare && MF.mane[i]) { var ph = (t * 0.45 + sd[0]) % 1; if (ph > 0.78) continue; x += ph * 46 + Math.sin(ph * 6 + i) * 5; y -= ph * 24 - Math.sin(ph * 4 + sd[1] * 6) * 4; }
+      c.fillRect(x, y, 1.7, 1.7);
+    }
+  }
+  tag(c, sg[4], 12, 258, "rgba(233,227,214,0.85)");
+}, 8.3);
+
+// Object dissolves into sand: noise edge on the mesh, splat twin falls and piles, then plays backwards
+var DS = null;
+function drawClock(x) {
+  var P = PAL; x.lineCap = "round";
+  x.fillStyle = P("#8a8478"); [[198, 80], [282, 80]].forEach(function (b) { x.beginPath(); x.arc(b[0], b[1], 17, Math.PI, 0); x.closePath(); x.fill(); ink(x, 2); });
+  x.strokeStyle = P("#5d574e"); x.lineWidth = 4; line(x, 240, 64, 240, 80); x.fillStyle = P("#5d574e"); x.beginPath(); x.arc(240, 62, 5, 0, TAU); x.fill();
+  x.strokeStyle = P("#5d574e"); x.lineWidth = 5; line(x, 212, 172, 200, 192); line(x, 268, 172, 280, 192);
+  x.fillStyle = P("#9a9384"); x.beginPath(); x.arc(240, 132, 52, 0, TAU); x.fill(); ink(x, 2.4);
+  x.fillStyle = P("#d8d1c1"); x.beginPath(); x.arc(240, 132, 42, 0, TAU); x.fill(); ink(x, 1.4);
+  x.save(); x.beginPath(); x.moveTo(240, 132); x.arc(240, 132, 52, -0.2, 2.2); x.closePath(); x.clip(); x.fillStyle = hatch(x, false); x.fillRect(180, 76, 120, 120); x.restore();
+  x.strokeStyle = P("#2a2622"); x.lineWidth = 2; for (var i = 0; i < 12; i++) { var a = i / 12 * TAU; line(x, 240 + Math.cos(a) * 34, 132 + Math.sin(a) * 34, 240 + Math.cos(a) * 38, 132 + Math.sin(a) * 38); }
+  x.lineWidth = 3; line(x, 240, 132, 240, 106); line(x, 240, 132, 258, 140);
+}
+function initDis() {
+  var cv = mk(480, 270), x = cv.getContext("2d"); drawClock(x);
+  var d = x.getImageData(0, 0, 480, 270).data, cells = [], grid = new Float32Array(64 * 70).fill(2), lo = 1, hi = 0, R = rng(8);
+  for (var y = 56; y < 196; y += 2) for (var xx = 176; xx < 304; xx += 2) { if (d[(y * 480 + xx) * 4 + 3] < 100) continue; var n = 0.6 * fbm(xx * 0.035, y * 0.035, 4) + 0.4 * ((y - 56) / 140); cells.push({ x: xx, y: y, n: n, gi: ((y - 56) / 2) * 64 + (xx - 176) / 2 }); lo = Math.min(lo, n); hi = Math.max(hi, n); }
+  cells.forEach(function (q) { q.n = (q.n - lo) / (hi - lo); grid[q.gi] = q.n; q.vx = (R() - 0.5) * 30; q.vy = -10 - R() * 25; var lx = q.x + q.vx * 0.9; q.fy = 236 - 22 * Math.exp(-Math.pow((lx - 240) / 64, 2)) * R() - 1; q.tl = (-q.vy + Math.sqrt(q.vy * q.vy + 600 * Math.max(0, q.fy - q.y))) / 300; q.r = R(); q.ty = q.r < 0.05 ? 2 : q.r < 0.15 ? 1 : 0; });
+  var m = mk(64, 70); DS = { cv: cv, cells: cells, grid: grid, m: m, md: m.getContext("2d").createImageData(64, 70), w: mk(480, 270) };
+}
+demo("vDissolve", function (c, t) {
+  if (!DS) initDis();
+  var T = t % 7.4, s = T < 3.8 ? T : T < 6.2 ? 3.8 - (T - 3.8) * 1.25 : 0.8, th = clamp((s - 0.8) / 2.2, 0, 1), i, q;
+  stageBg(c); c.fillStyle = "#1f1c19"; c.fillRect(0, 236, 480, 34); c.beginPath(); c.moveTo(0, 236); c.lineTo(480, 236); ink(c, 2);
+  var md = DS.md.data; for (i = 0; i < 4480; i++) md[i * 4 + 3] = DS.grid[i] >= th ? 255 : 0;
+  DS.m.getContext("2d").putImageData(DS.md, 0, 0);
+  var w = DS.w.getContext("2d"); w.globalCompositeOperation = "copy"; w.drawImage(DS.cv, 0, 0); w.globalCompositeOperation = "destination-in"; w.imageSmoothingEnabled = false; w.drawImage(DS.m, 176, 56, 128, 140); w.globalCompositeOperation = "source-over";
+  c.drawImage(DS.w, 0, 0);
+  var cols = ["rgba(8,8,9,0.95)", "rgba(120,114,104,0.9)", "rgba(224,160,82,0.95)"];
+  for (var ty = 0; ty < 3; ty++) {
+    c.fillStyle = cols[ty];
+    for (i = 0; i < DS.cells.length; i++) {
+      q = DS.cells[i]; if (q.ty !== ty) continue;
+      if (q.n >= th) { if (th > 0 && q.n < th + 0.05) c.fillRect(q.x, q.y, 2, 2); continue; }
+      if (q.r > 0.6) continue;
+      var a = s - (0.8 + q.n * 2.2); if (a <= 0) continue;
+      var y = q.y + q.vy * a + 150 * a * a, x;
+      if (y >= q.fy) { y = q.fy; x = q.x + q.vx * q.tl; } else x = q.x + q.vx * a + Math.sin(a * 3 + i) * 2 * a;
+      c.fillRect(x, y, 1.6, 1.6);
+    }
+  }
+  tag(c, th <= 0 ? "INTACT" : T >= 3.8 && T < 6.2 ? "PLAYED BACKWARDS · REFORM" : th >= 1 ? "PILE" : "DISSOLVE · SPLAT TWIN TAKES OVER", 12, 258, "rgba(233,227,214,0.85)");
+}, 2.1);
+
+// Light shafts: three panned channels of a band texture on additive cards, falloff, depth fade, fresnel
+var LS = null;
+demo("vShafts", function (c, t) {
+  var i, k;
+  if (!LS) { var R = rng(12); LS = { ch: [[], [], []], mo: [], buf: mk(480, 270) }; for (k = 0; k < 3; k++) for (i = 0; i < 128; i++) LS.ch[k].push(Math.pow(fbm(i * [0.09, 0.2, 0.45][k] + k * 10, k * 3.1, 3), 2.2) * 1.7); for (i = 0; i < 180; i++) LS.mo.push([R(), R(), R()]); }
+  c.fillStyle = PAL("#4a4c40"); c.fillRect(0, 0, 480, 200); c.fillStyle = PAL("#3e2b1d"); c.fillRect(0, 200, 480, 70);
+  c.fillStyle = PAL("#d6cfbf"); c.fillRect(40, 26, 92, 104); c.fillStyle = PAL("#20283e"); c.fillRect(47, 33, 78, 90); c.fillStyle = PAL("#d6cfbf"); c.fillRect(84, 33, 4, 90); c.fillRect(47, 76, 78, 4);
+  c.beginPath(); c.rect(40, 26, 92, 104); ink(c, 2.2); c.beginPath(); c.moveTo(0, 200); c.lineTo(480, 200); ink(c, 2);
+  c.fillStyle = hatch(c, true); poly(c, [0, 200, 480, 200, 480, 206, 0, 206]); c.fill();
+  var b = LS.buf.getContext("2d"); b.globalCompositeOperation = "source-over"; b.clearRect(0, 0, 480, 270);
+  var cards = [[60, 0], [84, 1.3], [108, 2.6]], fy = 236;
+  for (k = 0; k < cards.length; k++) {
+    var x0 = cards[k][0], fres = 0.55 + 0.45 * Math.abs(Math.cos(t * 0.25 + cards[k][1])), tx = x0 + 10, bx = x0 + 170;
+    for (i = 0; i < 28; i++) {
+      var u = i / 28, u2 = (i + 1) / 28, v = samp(LS.ch[0], i * 4.5 + t * 7) * 0.5 + samp(LS.ch[1], i * 4.5 + 40 - t * 12) * 0.35 + samp(LS.ch[2], i * 4.5 + 80 + t * 21) * 0.25;
+      var g = b.createLinearGradient(tx, 50, bx, fy), al = clamp(v, 0, 1) * 0.34 * fres;
+      g.addColorStop(0, "rgba(206,218,240," + al.toFixed(3) + ")"); g.addColorStop(0.7, "rgba(206,218,240," + (al * 0.35).toFixed(3) + ")"); g.addColorStop(1, "rgba(206,218,240,0)");
+      b.fillStyle = g; poly(b, [tx + u * 22, 50, tx + u2 * 22, 50, bx + u2 * 64, fy, bx + u * 64, fy]); b.fill();
+    }
+  }
+  c.globalCompositeOperation = "lighter"; c.drawImage(LS.buf, 0, 0); c.globalCompositeOperation = "source-over";
+  for (i = 0; i < LS.mo.length; i++) {
+    var mo = LS.mo[i], y = 40 + ((mo[1] * 190 + t * 3.5 * (0.5 + mo[2])) % 190), x = 30 + mo[0] * 330 + Math.sin(t * 0.3 + i) * 7, br = 0.05;
+    for (k = 0; k < cards.length; k++) { var sv = (y - 50) / (fy - 50), cx = lerp(cards[k][0] + 21, cards[k][0] + 202, sv), hw = lerp(11, 32, sv); if (sv > 0 && sv < 1 && Math.abs(x - cx) < hw) br = Math.max(br, 0.85 * (1 - sv * 0.6)); }
+    c.fillStyle = "rgba(240,238,230," + br.toFixed(3) + ")"; c.fillRect(x, y, 1.4, 1.4);
+  }
+  vignette(c, 0.6);
+  tag(c, "T_LINES · 3 CHANNELS PANNED · ADDITIVE · DEPTH FADE AT THE FLOOR", 12, 258, "rgba(233,227,214,0.85)");
+}, 3.0);
+
+// Footstep trail: decal prints that fade, a small puff per footfall
+demo("vSteps", function (c, t) {
+  var k, j, r;
+  c.fillStyle = PAL("#3e2b1d"); c.fillRect(0, 0, 480, 270);
+  c.strokeStyle = PAL("#2a1d13"); c.lineWidth = 1; for (r = 0; r < 17; r++) { line(c, 0, 10 + r * 16, 480, 10 + r * 16); for (j = 0; j < 3; j++) { var sx = (r * 151 + j * 173) % 480; line(c, sx, 10 + r * 16, sx, 26 + r * 16); } }
+  c.fillStyle = PAL("#dde6f7", 0.08); poly(c, [0, 30, 0, 140, 300, 270, 380, 270]); c.fill();
+  var w = 0.33, sd = 0.42, now = Math.floor(t / sd);
+  function at(tt) { return [240 + Math.cos(tt * w) * 160, 135 + Math.sin(tt * w * 2) * 70]; }
+  for (k = now - 23; k <= now; k++) {
+    var ts = k * sd, p = at(ts), p2 = at(ts + 0.05), ang = Math.atan2(p2[1] - p[1], p2[0] - p[0]), side = (k % 2 ? 1 : -1) * 5, age = t - ts, al = clamp(1 - age / 9.5, 0, 1);
+    var fx = p[0] - Math.sin(ang) * side, fy = p[1] + Math.cos(ang) * side, R = rng(k * 31 + 7);
+    c.save(); c.translate(fx, fy); c.rotate(ang);
+    for (j = 0; j < 34; j++) { var a = R() * TAU, rr2 = Math.sqrt(R()), q = R(); c.fillStyle = q < 0.06 ? "rgba(224,160,82," + (0.9 * al).toFixed(3) + ")" : "rgba(7,7,8," + (0.85 * al).toFixed(3) + ")"; c.fillRect(Math.cos(a) * rr2 * 6.5, Math.sin(a) * rr2 * 2.8, 1.5, 1.5); }
+    c.restore();
+    if (age < 0.7 && age >= 0) { var R2 = rng(k * 17 + 3), e = 1 - Math.pow(1 - age / 0.7, 2); c.fillStyle = "rgba(7,7,8," + ((1 - age / 0.7) * 0.9).toFixed(3) + ")"; for (j = 0; j < 16; j++) { var aa = R2() * TAU, sp = 6 + R2() * 14; c.fillRect(fx + Math.cos(aa) * sp * e, fy + Math.sin(aa) * sp * e - e * 3, 1.4, 1.4); } }
+  }
+  var pc = at(t), pn = at(t + 0.05); mannequinTop(c, pc[0], pc[1], Math.atan2(pn[1] - pc[1], pn[0] - pc[0]) + Math.PI / 2, PAL);
+  vignette(c, 0.6);
+  tag(c, "DECAL PRINTS · 24 MAX · PUFF ON EACH FOOTSTEP NOTIFY", 12, 258, "rgba(233,227,214,0.85)");
+}, 6.1);
+
+// Dream glitch: the door flickers between walls, snapped to a grid, throwing sparks
+demo("vGlitch", function (c, t) {
+  topDown(c, t, PAL, { noDoor: true });
+  var per = 2.2, k = Math.floor(t / per), a = t - k * per, gl = a < 0.42, flick = gl && Math.floor(a * 24) % 2 === 0, i;
+  function doorB() { c.fillStyle = PAL("#3e2b1d"); c.fillRect(405, 150, 10, 40); c.strokeStyle = PAL("#e9e3d6"); c.lineWidth = 2.5; line(c, 410, 150, 384, 158); }
+  function doorA() { c.fillStyle = PAL("#3e2b1d"); c.fillRect(296, 17, 40, 10); c.strokeStyle = PAL("#e9e3d6"); c.lineWidth = 2.5; line(c, 296, 22, 304, 48); }
+  if (!gl) doorB();
+  else {
+    for (var s = 0; s < 6; s++) { var j = (h2(s, Math.floor(a * 30)) - 0.5) * 12; c.save(); c.beginPath(); c.rect(0, s * 45, 480, 45); c.clip(); c.translate(Math.round(j / 4) * 4, 0); if (flick) doorA(); else doorB(); c.restore(); }
+    c.save(); c.setLineDash([3, 3]); c.strokeStyle = "rgba(233,227,214,0.45)"; c.lineWidth = 1; if (flick) c.strokeRect(404, 149, 12, 42); else c.strokeRect(295, 16, 42, 12); c.restore();
+  }
+  if (a < 0.9) { var R = rng(k * 13 + 5), al = clamp(1 - a / 0.9, 0, 1); c.lineWidth = 1.2; for (i = 0; i < 30; i++) { var onA = R() < 0.5, px = onA ? 296 + R() * 40 : 405 + R() * 10, py = onA ? 17 + R() * 10 : 150 + R() * 40, an = R() * TAU, sp = 40 + R() * 70, d = sp * (1 - Math.exp(-3 * a)) / 3, x = px + Math.cos(an) * d, y = py + Math.sin(an) * d, len = 9 * Math.exp(-3 * a) + 1; c.strokeStyle = R() < 0.4 ? "rgba(224,160,82," + al.toFixed(3) + ")" : "rgba(240,236,226," + al.toFixed(3) + ")"; line(c, x, y, x - Math.cos(an) * len, y - Math.sin(an) * len); } }
+  tag(c, gl ? "GLITCH · GRID SNAP AND SPARKS" : "THE DOOR IS ON THE WRONG WALL", 12, 258, "rgba(233,227,214,0.85)");
+}, 0.12);
+
+/* ---------- 4 · materials ---------- */
+var MD = null;
+demo("mDis", function (c, t) {
+  var i, k;
+  if (!MD) {
+    MD = { n: new Float32Array(5600), cv: [mk(56, 100), mk(56, 100), mk(56, 100), mk(56, 100), mk(56, 100)], wall: mk(112, 200), tmp: mk(112, 200) };
+    var lo = 1, hi = 0;
+    for (i = 0; i < 5600; i++) { MD.n[i] = fbm((i % 56) * 0.09 + 3, ((i / 56) | 0) * 0.09 + 7, 4); lo = Math.min(lo, MD.n[i]); hi = Math.max(hi, MD.n[i]); }
+    for (i = 0; i < 5600; i++) MD.n[i] = (MD.n[i] - lo) / (hi - lo);
+    MD.id = MD.cv.map(function (q) { return q.getContext("2d").createImageData(56, 100); });
+    var w = MD.wall.getContext("2d"); w.fillStyle = PAL("#5e614f"); w.fillRect(0, 0, 112, 200); w.fillStyle = PAL("#55584a"); for (var xx = 0; xx < 112; xx += 14) w.fillRect(xx, 0, 6, 200);
+    w.fillStyle = PAL("#6a6c5a"); for (var yy = 8; yy < 150; yy += 18) for (xx = 4; xx < 112; xx += 14) { w.beginPath(); w.ellipse(xx + 3, yy, 1.6, 2.6, 0, 0, TAU); w.fill(); }
+    w.fillStyle = PAL("#4b3526"); w.fillRect(0, 150, 112, 50); w.fillStyle = PAL("#2c1f15"); w.fillRect(0, 148, 112, 3);
+  }
+  var th = 0.5 + 0.42 * Math.sin(t * 0.55), D = MD.id.map(function (q) { return q.data; });
+  for (i = 0; i < 5600; i++) {
+    var v = MD.n[i], g = v * 255, keep = v > th, band = keep ? 1 - sstep(0, 0.07, v - th) : 0, gl = band > 0.4 && h2(i, 3) < 0.2, o = i * 4, m = keep ? 232 : 10;
+    D[0][o] = D[0][o + 1] = D[0][o + 2] = g; D[0][o + 3] = 255;
+    D[1][o] = D[1][o + 1] = D[1][o + 2] = m; D[1][o + 3] = 255;
+    D[2][o] = gl ? 224 : 200 * band; D[2][o + 1] = gl ? 160 : 170 * band; D[2][o + 2] = gl ? 82 : 120 * band; D[2][o + 3] = 255;
+    D[3][o + 3] = keep ? 255 : 0;
+    D[4][o] = gl ? 224 : 8; D[4][o + 1] = gl ? 160 : 8; D[4][o + 2] = gl ? 82 : 9; D[4][o + 3] = band * 255;
+  }
+  for (k = 0; k < 5; k++) MD.cv[k].getContext("2d").putImageData(MD.id[k], 0, 0);
+  c.fillStyle = "#0e0d0c"; c.fillRect(0, 0, 480, 270); c.imageSmoothingEnabled = false;
+  for (k = 0; k < 3; k++) c.drawImage(MD.cv[k], 10 + k * 117, 46, 112, 200);
+  var tm = MD.tmp.getContext("2d"); tm.globalCompositeOperation = "copy"; tm.drawImage(MD.wall, 0, 0); tm.globalCompositeOperation = "destination-in"; tm.imageSmoothingEnabled = false; tm.drawImage(MD.cv[3], 0, 0, 112, 200); tm.globalCompositeOperation = "source-over";
+  c.fillStyle = "#050505"; c.fillRect(361, 46, 112, 200); c.drawImage(MD.tmp, 361, 46); c.drawImage(MD.cv[4], 361, 46, 112, 200);
+  c.imageSmoothingEnabled = true;
+  for (k = 0; k < 4; k++) { c.beginPath(); c.rect(10 + k * 117, 46, 112, 200); c.strokeStyle = "rgba(233,227,214,0.2)"; c.lineWidth = 1; c.stroke(); }
+  ["NOISE", "THRESHOLD", "EDGE BAND", "RESULT"].forEach(function (s, n) { tag(c, s, 10 + n * 117, 36, "rgba(233,227,214,0.8)"); });
+  tag(c, "DISSOLVE " + th.toFixed(2) + " · ONE 256² NOISE SHARED BY EVERY DISSOLVE", 10, 258, "rgba(224,160,82,0.9)");
+}, 2.4);
+
+// WPO: a breathing wall with a sphere mask that bends the doorway wrong
+demo("mWpo", function (c, t) {
+  var cols = 24, rows = 14, x0 = 40, y0 = 22, W = 400, H = 226, br = Math.sin(t * TAU / 4.5), G = [], i, j;
+  c.fillStyle = "#0e0d0c"; c.fillRect(0, 0, 480, 270);
+  for (j = 0; j <= rows; j++) { var row = []; for (i = 0; i <= cols; i++) { var u = i / cols, v = j / rows, bx = x0 + u * W, by = y0 + v * H, z = br * Math.sin(Math.PI * u) * Math.sin(Math.PI * v), px = 240 + (bx - 240) * (1 + z * 0.045), py = 135 + (by - 135) * (1 + z * 0.045), dx = bx - 262, dy = by - 96, mm = Math.exp(-(dx * dx + dy * dy) / 7200); px += mm * Math.sin(t * 1.7 + v * 3) * 9; py += mm * Math.cos(t * 1.3 + u * 4) * 5; row.push([px, py, z, mm]); } G.push(row); }
+  for (j = 0; j < rows; j++) for (i = 0; i < cols; i++) {
+    var a = G[j][i], b = G[j][i + 1], q = G[j + 1][i + 1], d = G[j + 1][i], door = i >= 10 && i <= 13 && j >= 4, sh = (a[2] + q[2]) * 0.5;
+    poly(c, [a[0], a[1], b[0], b[1], q[0], q[1], d[0], d[1]]);
+    c.fillStyle = door ? "#121010" : PAL(j >= 11 ? "#4b3526" : "#5e614f"); c.fill();
+    if (!door) { c.fillStyle = sh > 0 ? "rgba(233,227,214," + (sh * 0.13).toFixed(3) + ")" : "rgba(0,0,0," + (-sh * 0.28).toFixed(3) + ")"; c.fill(); }
+    c.strokeStyle = "rgba(233,227,214," + (0.1 + 0.28 * a[3]).toFixed(3) + ")"; c.lineWidth = 0.6; c.stroke();
+  }
+  c.beginPath(); c.moveTo(G[14][10][0], G[14][10][1]); for (j = 13; j >= 4; j--) c.lineTo(G[j][10][0], G[j][10][1]); for (i = 11; i <= 14; i++) c.lineTo(G[4][i][0], G[4][i][1]); for (j = 5; j <= 14; j++) c.lineTo(G[j][14][0], G[j][14][1]);
+  c.strokeStyle = "rgba(6,6,8,0.95)"; c.lineWidth = 2.6; c.lineJoin = "round"; c.stroke();
+  tag(c, "BREATH " + (br > 0 ? "IN" : "OUT") + " · SPHERE MASK AT THE DOOR · COLLISION STAYS PUT", 12, 258, "rgba(233,227,214,0.85)");
+}, 1.2);
+
+// Wet black sand: glints = facet normal against the half vector; the pointer moves the view
+var SP = null, SPV = { x: 0.5, y: 0.4, user: -99 };
+var dSpark = demo("mSpark", function (c, t) {
+  var i;
+  if (!SP) { var R = rng(41), g = mk(480, 270), x = g.getContext("2d"); x.fillStyle = "#080707"; x.fillRect(0, 0, 480, 270); for (i = 0; i < 9000; i++) { var q = R(), s = 0.8 + R() * 1.6; x.fillStyle = q < 0.25 ? "rgba(40,37,33,0.9)" : q < 0.3 ? "rgba(70,65,58,0.7)" : "rgba(14,13,12,0.95)"; x.fillRect(R() * 480, R() * 270, s, s); } SP = { g: g, gr: [] }; for (i = 0; i < 1600; i++) { var an = R() * TAU, tl = Math.pow(R(), 0.7) * 0.9; SP.gr.push([R() * 480, R() * 270, Math.cos(an) * tl, Math.sin(an) * tl, R()]); } }
+  var vx = SPV.x, vy = SPV.y; if (!RM && NOW - SPV.user > 4) { vx = 0.5 + Math.sin(t * 0.5) * 0.4; vy = 0.45 + Math.sin(t * 0.37) * 0.2; }
+  c.drawImage(SP.g, 0, 0, 480, 270);
+  var sx = 480 * (1 - vx), sy = 270 * (1 - vy) * 0.8, g2 = c.createRadialGradient(sx, sy, 10, sx, sy, 170); g2.addColorStop(0, "rgba(200,206,220,0.16)"); g2.addColorStop(1, "rgba(200,206,220,0)"); c.fillStyle = g2; c.fillRect(0, 0, 480, 270);
+  var hx = -0.4 + (vx - 0.5) * 1.4, hy = -0.5 + (vy - 0.5) * 1.4, hz = 1.77, hl = Math.sqrt(hx * hx + hy * hy + hz * hz); hx /= hl; hy /= hl; hz /= hl;
+  for (i = 0; i < SP.gr.length; i++) {
+    var p = SP.gr[i], nz = Math.sqrt(Math.max(0, 1 - p[2] * p[2] - p[3] * p[3])), dd = p[2] * hx + p[3] * hy + nz * hz; if (dd < 0.97) continue;
+    var I = Math.pow((dd - 0.97) / 0.03, 2), s2 = 1 + I * 1.6;
+    c.fillStyle = p[4] < 0.3 ? "rgba(240,236,226," + I.toFixed(3) + ")" : "rgba(224,160,82," + I.toFixed(3) + ")"; c.fillRect(p[0] - s2 / 2, p[1] - s2 / 2, s2, s2);
+    if (I > 0.6) { c.fillStyle = "rgba(224,160,82," + (I * 0.3).toFixed(3) + ")"; c.fillRect(p[0] - 3, p[1] - 0.4, 6, 0.8); c.fillRect(p[0] - 0.4, p[1] - 3, 0.8, 6); }
+  }
+  tag(c, "VIEW " + (vx * 2 - 1).toFixed(2) + " · GLINT = FACET NORMAL · HALF VECTOR", 12, 258, "rgba(233,227,214,0.85)");
+}, 1.7);
+(function () {
+  var cv = document.getElementById("mSpark"); if (!cv) return;
+  cv.addEventListener("pointermove", function (e) { var r = cv.getBoundingClientRect(); SPV.x = clamp((e.clientX - r.left) / r.width, 0, 1); SPV.y = clamp((e.clientY - r.top) / r.height, 0, 1); SPV.user = NOW; redraw(dSpark); });
+  cv.addEventListener("keydown", function (e) { var k = { ArrowLeft: [-0.06, 0], ArrowRight: [0.06, 0], ArrowUp: [0, -0.06], ArrowDown: [0, 0.06] }[e.key]; if (!k) return; e.preventDefault(); SPV.x = clamp(SPV.x + k[0], 0, 1); SPV.y = clamp(SPV.y + k[1], 0, 1); SPV.user = NOW; redraw(dSpark); });
+})();
+
+// Procedural swatches, computed once; toggled between the in-game grey and the real albedo
+var PR = { mode: "mono", img: null };
+function buildProc() {
+  var mono = mk(480, 270), col = mk(480, 270), mx = mono.getContext("2d"), cx = col.getContext("2d"), im = cx.createImageData(480, 270), om = mx.createImageData(480, 270), D = im.data, O = om.data;
+  for (var y = 40; y < 240; y++) for (var x = 16; x < 464; x++) {
+    var k = Math.floor((x - 16) / 154), lx = x - 16 - k * 154, ly = y - 40, r, g, b; if (lx >= 140) continue;
+    if (k === 0) { var pl = Math.floor(ly / 25), hp = h2(pl, 7), ring = fbm(lx * 0.012 + hp * 9, ly * 0.09 + pl * 3, 3) * 9 + lx * 0.015, f = ring - Math.floor(ring), band = sstep(0, 0.18, f) * (1 - sstep(0.55, 0.95, f)), wear = (0.9 + 0.2 * fbm(lx * 0.02, ly * 0.02, 2)) * (0.82 + 0.3 * hp) * ((ly % 25) < 1.2 ? 0.45 : 1); r = lerp(90, 128, band) * wear; g = lerp(58, 84, band) * wear; b = lerp(36, 52, band) * wear; }
+    else if (k === 1) { var mot = 0.86 + 0.2 * fbm(lx * 0.02 + 40, ly * 0.02, 4), crack = 1 - sstep(0.004, 0.02, Math.abs(fbm(lx * 0.011 + 7, ly * 0.011 + 3, 5) - 0.5)); r = 206 * mot * (1 - 0.55 * crack); g = 195 * mot * (1 - 0.55 * crack); b = 168 * mot * (1 - 0.5 * crack); }
+    else { var wv = (Math.sin(lx * 1.7) * Math.sin(ly * 1.7) > 0 ? 1 : 0.84) * (0.9 + 0.2 * vn(lx * 0.6, ly * 0.07)) * (Math.floor(ly / 22) % 3 === 0 ? 0.7 : 1), fd = fbm(lx * 0.015 + 90, ly * 0.015, 3); r = lerp(138, 182, fd) * wv; g = lerp(58, 132, fd) * wv; b = lerp(54, 118, fd) * wv; }
+    var o = (y * 480 + x) * 4, mm = PAL.mono([r, g, b]); D[o] = r; D[o + 1] = g; D[o + 2] = b; D[o + 3] = 255; O[o] = mm[0]; O[o + 1] = mm[1]; O[o + 2] = mm[2]; O[o + 3] = 255;
+  }
+  cx.putImageData(im, 0, 0); mx.putImageData(om, 0, 0);
+  [cx, mx].forEach(function (q) { for (var n = 0; n < 3; n++) { q.beginPath(); q.rect(16 + n * 154, 40, 140, 200); ink(q, 2); } });
+  PR.img = { mono: mono, color: col };
+}
+var dProc = demo("mProc", function (c, t, dt, d) {
+  if (!PR.img) buildProc();
+  if (d.shown === PR.mode) return; d.shown = PR.mode;
+  c.fillStyle = "#0e0d0c"; c.fillRect(0, 0, 480, 270);
+  c.drawImage(PR.img[PR.mode], 0, 0, 480, 270);
+  ["WOOD · RINGS + PLANK HASH", "PLASTER · MOTTLE + CRACKS", "FABRIC · WEAVE + FADE"].forEach(function (s, i) { tag(c, s, 16 + i * 154, 30, "rgba(233,227,214,0.85)"); });
+  tag(c, "NO UNIQUE TEXTURES · ONE 64 KB NOISE PACK", 16, 254, "rgba(224,160,82,0.9)");
+}, 0);
+seg("segProc", function (b) { PR.mode = b.getAttribute("data-m"); dProc.shown = null; run(dProc, NOW, 0); });
+
+// Stencil breakdown of the shared shot
+var STN = { m: 0 };
+var dSten = demo("mSten", function (c, t) {
+  scene(c, t, { pal: [PAL, PAL_COLOR, PAL_MASK][STN.m], vig: STN.m === 2 ? false : undefined });
+  tag(c, ["FINAL · M_PP_DREAMMONO", "SCENE COLOR · BEFORE THE PASS", "CUSTOM STENCIL · WHITE 1 USABLE · GREY 2 SAND"][STN.m], 12, 258, STN.m === 2 ? "rgba(224,160,82,0.95)" : "rgba(233,227,214,0.85)");
+}, 4.4);
+seg("segSten", function (b) { STN.m = +b.getAttribute("data-m"); redraw(dSten); });
+
+/* ---------- budget bars: hover and focus name each part ---------- */
+[["sizeBar", "sizeTip"], ["frameBar", "frameTip"]].forEach(function (p) {
+  var bar = document.getElementById(p[0]), tip = document.getElementById(p[1]); if (!bar || !tip) return;
+  var def = tip.textContent;
+  bar.querySelectorAll("span").forEach(function (s) {
+    function on() { tip.textContent = s.getAttribute("data-tip"); }
+    function off() { tip.textContent = def; }
+    s.addEventListener("mouseenter", on); s.addEventListener("focus", on); s.addEventListener("mouseleave", off); s.addEventListener("blur", off);
+  });
+});
+
+/* ---------- boot: every demo draws a complete frame first, then the one loop runs ---------- */
+function boot() {
+  DEMOS.forEach(function (d) { if (d.warm) for (var w = d.warm; w > 0.001; w -= 1 / 30) run(d, d.still - w, 1 / 30); run(d, d.still, 1 / 30); });
+  if (!RM) requestAnimationFrame(function (ms) { NOW = ms / 1000; requestAnimationFrame(tick); });
+}
+var fontsReady = (document.fonts && document.fonts.ready) ? document.fonts.ready : Promise.resolve();
+Promise.race([fontsReady, new Promise(function (r) { setTimeout(r, 1200); })]).then(boot);
+})();
+</script>
+</body>
+</html>

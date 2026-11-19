@@ -1,0 +1,2 @@
+Suit source: Man Black Business Suit by Style3D CG, CC BY 4.0. https://sketchfab.com/3d-models/man-black-business-suit-7a669a06fb954d459985ccaa98672177
+T_Suit_Reference_BaseColor.png: generated using built-in image_gen from the user-supplied suit design and the original UV atlas on 2026-11-06. White wool suit, pale lavender pinstriped shirt, black skull/diamond tie. Original UV layout retained as generation constraint; rendered fit validation required.

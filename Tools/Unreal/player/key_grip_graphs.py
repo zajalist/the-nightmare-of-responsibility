@@ -1,0 +1,57 @@
+"""Use the Teen pinch frame for the key; keep the screwdriver's calibrated ratchet branch intact."""
+import json,sys
+from pathlib import Path
+from held_tool_graphs import Batch,inspect,find,PLAYER,SRC_C,MH_C,K
+
+def target():
+    nodes,edges=inspect(PLAYER,'SetToolHandTarget')
+    if any(n['title']=='Set KeyGrip' for n in nodes):return print('Key target already wired')
+    cast=find(nodes,'Cast To ABP_FoAPlayer')
+    last=find(nodes,'Set HeldToolWeight')
+    holding=find(nodes,'Get bHoldingTool');weight=find(nodes,'Get ToolGripWeight')
+    b=Batch(PLAYER,'SetToolHandTarget')
+    b.fn('iskey',K+'Not_PreBool',3600,700);b.link(holding,'bHoldingTool','iskey','A')
+    b.set('key','KeyGrip',3900,0,SRC_C)
+    b.link(cast,'AsABP Fo APlayer','key','self');b.link('iskey','ReturnValue','key','KeyGrip')
+    b.set('grip','GripWeight',4200,0,SRC_C)
+    b.link(cast,'AsABP Fo APlayer','grip','self');b.link(weight,'ToolGripWeight','grip','GripWeight')
+    b.chain(last,'key','grip');b.comment('Pinch or hold',['iskey','key','grip']);b.run()
+
+def rotation():
+    nodes,edges=inspect(PLAYER,'SetToolHandRotation')
+    if sum(n['title']=='Set HeldToolRotation' for n in nodes)>1:return print('Key rotation already wired')
+    e=find(nodes,'SetToolHandRotation');old=find(nodes,'Set ToolHandRotation')
+    cast=next(x['from_node'] for x in edges if x['to_node']==old and x['to_pin']=='execute')
+    axis=find(nodes,'MakeRotFromXZ');world=find(nodes,'Get ToolGripWorld');weight=find(nodes,'Get ToolGripWeight')
+    forward=find(nodes,'GetActorForwardVector');right=find(nodes,'GetActorRightVector')
+    measured=Path('P:/FoA/Saved/AnimShots/teen_key_pinch_measured_calibration.json')
+    calibration=json.loads((measured if measured.exists() else Path('P:/FoA/Saved/AnimShots/teen_key_grip_calibration.json')).read_text())
+    offset=','.join(str(v) for v in calibration['location'])
+    b=Batch(PLAYER,'SetToolHandRotation')
+    b.cut(e,'DeltaWorld',old,'ToolHandRotation');b.pin(old,'ToolHandRotation','0,0,0')
+    b.fn('keyframe',K+'ComposeRotators',900,-1500)
+    b.link(axis,'ReturnValue','keyframe','A');b.link(e,'DeltaWorld','keyframe','B')
+    b.fn('keyworld',K+'MakeTransform',1200,-1500,Scale='1,1,1')
+    b.link(world,'ToolGripWorld','keyworld','Location');b.link('keyframe','ReturnValue','keyworld','Rotation')
+    b.fn('pinchrot',K+'MakeRotator',600,-1100,**calibration['rotation_degrees'])
+    b.fn('pinch',K+'MakeTransform',900,-1100,Location=offset,Scale=','.join(map(str,calibration.get('scale',[1,1,1]))));b.link('pinchrot','ReturnValue','pinch','Rotation')
+    b.fn('inverse',K+'InvertTransform',1200,-1100);b.link('pinch','ReturnValue','inverse','T')
+    b.fn('keyhand',K+'ComposeTransforms',1500,-1500)
+    b.link('inverse','ReturnValue','keyhand','A');b.link('keyworld','ReturnValue','keyhand','B')
+    b.fn('handframe',K+'BreakTransform',1800,-1500);b.link('keyhand','ReturnValue','handframe','InTransform')
+    b.fn('backkey',K+'Multiply_VectorFloat',1800,-1100,B=-30.0);b.link(forward,'ReturnValue','backkey','A')
+    b.fn('outkey',K+'Multiply_VectorFloat',1800,-900,B=18.0);b.link(right,'ReturnValue','outkey','A')
+    b.fn('keypole',K+'Add_VectorVector',2100,-1100);b.link('backkey','ReturnValue','keypole','A');b.link('outkey','ReturnValue','keypole','B')
+    b.fn('lowerkey',K+'Add_VectorVector',2400,-1100,B='0,0,-8');b.link('keypole','ReturnValue','lowerkey','A')
+    b.fn('elbowkey',K+'Add_VectorVector',2700,-1100);b.link('lowerkey','ReturnValue','elbowkey','A');b.link('handframe','Location','elbowkey','B')
+    b.set('keytarget','ToolHandTarget',2100,-1900,MH_C);b.link('handframe','Location','keytarget','ToolHandTarget')
+    b.set('keyelbow','ToolElbowTarget',2400,-1900,MH_C);b.link('elbowkey','ReturnValue','keyelbow','ToolElbowTarget')
+    b.set('keyrotation','HeldToolRotation',2700,-1900,MH_C);b.link('handframe','Rotation','keyrotation','HeldToolRotation')
+    b.set('keyweight','HeldToolWeight',3000,-1900,MH_C);b.link(weight,'ToolGripWeight','keyweight','HeldToolWeight')
+    for ref in ('keytarget','keyelbow','keyrotation','keyweight'):b.link(cast,'AsABP Fo APlayer MH',ref,'self')
+    b.chain(old,'keytarget','keyelbow','keyrotation','keyweight')
+    b.comment('Place the key pinch',['keyframe','keyworld','pinchrot','pinch','inverse','keyhand','handframe','backkey','outkey',
+                                   'keypole','lowerkey','elbowkey','keytarget','keyelbow','keyrotation','keyweight'])
+    b.run()
+
+if __name__=='__main__':{'target':target,'rotation':rotation}[sys.argv[1]]()

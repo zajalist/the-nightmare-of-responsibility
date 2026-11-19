@@ -1,0 +1,279 @@
+<title>Level 1 Mechanics</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one reading column for the story, wide tables for the build contract; monochrome like the game, split-toned like MPC_Dream. */
+:root {
+  --bg: #f3f2f0;          /* bone, the game's highlight tone */
+  --surface: #e8e6e3;
+  --ink: #161719;         /* soot */
+  --muted: #5a5e66;       /* ash, cool-biased like the tutorial's night tint */
+  --line: #cfccc7;
+  --accent: #3e5873;      /* night tint, the tutorial's shadow tone */
+  --flag: #8a3b2e;        /* stamp red, used only for decisions */
+  --font-display: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111214; --surface: #1a1c1f; --ink: #e9e7e3; --muted: #9ba1ab;
+    --line: #2c2f34; --accent: #9db4cc; --flag: #d98b7c; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #111214; --surface: #1a1c1f; --ink: #e9e7e3; --muted: #9ba1ab;
+  --line: #2c2f34; --accent: #9db4cc; --flag: #d98b7c; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--font-body);
+  font-size: 15px; line-height: 1.6;
+}
+.wrap {
+  max-width: 1080px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 56px 96px;
+}
+header { display: grid; gap: 12px; margin-bottom: 40px; }
+h1 {
+  font-family: var(--font-display); font-weight: 400; font-size: clamp(44px, 7vw, 76px);
+  line-height: 0.95; margin: 0; letter-spacing: -0.01em; text-wrap: balance;
+}
+h1 em { font-style: normal; color: var(--muted); }
+.lede { font-size: 17px; max-width: 64ch; color: var(--muted); margin: 0; }
+.meta { font-family: var(--font-mono); font-size: 12.5px; color: var(--muted); display: flex; flex-wrap: wrap; gap: 6px 20px; }
+nav.toc { display: flex; flex-wrap: wrap; gap: 6px 18px; margin: 8px 0 0; font-size: 14px; }
+nav.toc a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+nav.toc a:hover, nav.toc a:focus-visible { border-bottom-color: var(--accent); outline: none; }
+section { margin-top: 64px; display: grid; gap: 16px; }
+h2 {
+  font-family: var(--font-display); font-weight: 500; font-size: clamp(28px, 4vw, 38px);
+  line-height: 1.05; margin: 0; text-wrap: balance;
+}
+h3 { font-size: 15px; font-weight: 600; margin: 8px 0 0; }
+p { margin: 0; max-width: 68ch; }
+.note { color: var(--muted); font-size: 14px; }
+code, .mono { font-family: var(--font-mono); font-size: 0.86em; }
+.scroll { overflow-x: auto; border-top: 1px solid var(--line); }
+table { border-collapse: collapse; width: 100%; min-width: 720px; font-size: 14px; }
+th, td { text-align: left; vertical-align: top; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); }
+th { font-weight: 600; font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+td:first-child { white-space: nowrap; font-family: var(--font-mono); font-size: 13px; }
+td.beat { font-family: var(--font-display); font-size: 20px; white-space: nowrap; }
+.tier { display: inline-block; font-size: 12px; line-height: 1.4; padding: 4px 12px; border: 1px solid var(--line); border-radius: 999px; white-space: nowrap; }
+.tier.s { border-color: var(--accent); color: var(--accent); }
+.tier.o { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px 32px; }
+.grid2 > div { min-width: 0; display: grid; gap: 8px; align-content: start; }
+.panel { background: var(--surface); padding: 20px; border-radius: 6px; display: grid; gap: 10px; }
+.stat { font-family: var(--font-mono); font-size: 13px; display: grid; grid-template-columns: max-content 1fr; gap: 4px 16px; }
+.stat b { font-weight: 500; }
+ul { margin: 0; padding-left: 18px; max-width: 68ch; display: grid; gap: 4px; }
+.decide { border-left: 3px solid var(--flag); padding: 4px 0 4px 16px; display: grid; gap: 6px; }
+.decide h3 { color: var(--flag); margin: 0; }
+pre.mermaid { background: var(--surface); color: var(--ink); padding: 20px; border-radius: 6px; overflow-x: auto; margin: 0; }
+.count { font-family: var(--font-display); font-size: 56px; line-height: 1; }
+.counts { display: flex; flex-wrap: wrap; gap: 24px 48px; }
+.counts > div { display: grid; gap: 2px; }
+@media (prefers-reduced-motion: reduce) { * { scroll-behavior: auto; } }
+</style>
+
+<div class="wrap">
+<header>
+  <h1>Level 1 <em>Mechanics</em></h1>
+  <p class="lede">How the tutorial morning and Find a Job actually play: the one loop, the handful of systems under it, and exactly what each beat asks of the player. This is the contract the gameplay lanes build to, kept small enough to finish by the Nov 17 freeze.</p>
+  <div class="meta"><span>The Nightmare of Responsibility</span><span>Unreal 5.8, Blueprint only</span><span>Spec v1, Nov 5</span></div>
+  <nav class="toc" aria-label="Sections">
+    <a href="#loop">The loop</a><a href="#systems">Systems</a><a href="#interact">Interaction</a><a href="#tutorial">Tutorial beats</a><a href="#encounter">Getting dressed</a><a href="#rollover">Day rollover</a><a href="#director">Dream director</a><a href="#job">Find a Job</a><a href="#lean">Lean budget</a><a href="#decide">Decisions</a>
+  </nav>
+</header>
+
+<section id="loop">
+  <h2>One loop drives every beat</h2>
+  <p>The Nightmare wants something ordinary. The world offers a plausible obstacle. The player looks, takes, uses and combines until it gives way, and the dream cracks a little further. Fail, and the day rolls over: the house resets, but what the player learned stays.</p>
+  <pre class="mermaid">
+flowchart LR
+  W["Wake"] --> Want["Want something ordinary"]
+  Want --> Obs["Obstacle at the current tier"]
+  Obs --> Act["Look, Take, Use, Combine"]
+  Act -->|solved| Crack["The dream cracks: tier rises"]
+  Crack --> Want
+  Act -->|failed| Roll["Day rolls over"]
+  Roll -->|"house resets, knowledge stays"| W
+  </pre>
+  <p class="note">Tiers are Plausible, Suspicious and Open. Payoffs (T9, L7) are full-colour release valves between them.</p>
+</section>
+
+<section id="systems">
+  <h2>Sixteen assets run all of it</h2>
+  <p>Every beat in the tutorial and Find a Job is built from these. Puzzles are configured on actor instances and data rows, never as new Blueprint classes, so adding a beat costs data, not code.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Asset</th><th>Kind</th><th>Job</th><th>Reused by</th></tr></thead>
+    <tbody>
+      <tr><td>BPI_Interactable</td><td>Interface</td><td>GetPrompt, CanInteract(Verb, HeldItem), Interact(Verb, HeldItem), ResetForNewDay</td><td>Every interactable, every level</td></tr>
+      <tr><td>BPC_Interactor</td><td>Component on player</td><td>Finds the best target every 0.1 s by timer (no Tick): camera-forward sphere trace, angle and distance score. Drives the prompt and focus highlight.</td><td>Player only</td></tr>
+      <tr><td>BPC_Inventory</td><td>Component on player</td><td>Four slots of Item IDs. Add, Remove, Has, Select, Combine. Broadcasts OnChanged for the HUD.</td><td>Player, saved by GI_FoA</td></tr>
+      <tr><td>BP_Interactable</td><td>Base actor</td><td>Mesh plus the interface. Instance-editable LookText per state, required item per verb, and an OnUsed event the level wires to.</td><td>Parent of the four below</td></tr>
+      <tr><td>BP_Pickup</td><td>Child</td><td>Take puts its Item ID in the inventory and hides the mesh. One class for key, screwdriver, hanger, shirt, CV.</td><td>T3, T5, T8, L2</td></tr>
+      <tr><td>BP_Container</td><td>Child</td><td>Opens by slide or hinge (configured per instance), reveals or holds a BP_Pickup. Drawers, wardrobe doors, desk drawer, boot.</td><td>T2, T3, T5, T7</td></tr>
+      <tr><td>BP_Door</td><td>Child</td><td>Lock states: Locked, KeyJammed, PlateOff, LatchFree, HandleOff, Open. Key snap, unscrew and hook routes. Swings on its hinge pivot.</td><td>T2 to T7, T10, every door after</td></tr>
+      <tr><td>BP_Topple</td><td>Child</td><td>One-shot physics fall with a sand burst, then becomes a blocker. Wardrobe now, filing cabinet or bus stop sign later.</td><td>T6, L5</td></tr>
+      <tr><td>BP_BeatDirector</td><td>Level actor</td><td>Current beat (E_Beat), objective line, phone task ticks, knowledge flags to set on each beat, fail and payoff hand-offs. Data from DT_Beats.</td><td>Every level, one instance each</td></tr>
+      <tr><td>BP_DreamDirector</td><td>Level actor</td><td>Presentation only: tier, MPC_Dream drivers, echoes, tear glitch, moving the door, refilling the drawer, menu mode. Already started by the post-process lane.</td><td>Every level</td></tr>
+      <tr><td>BP_Encounter</td><td>Level actor</td><td>Turn-based duel: stats, turn order, move resolution from DT_Moves, timed inputs, win and lose hand-offs.</td><td>T8, L2 (Write a CV)</td></tr>
+      <tr><td>GI_FoA</td><td>Game Instance</td><td>Day count, knowledge flags, inventory carry rules, settings. Saves and loads SG_FoA.</td><td>Whole game</td></tr>
+      <tr><td>DT_Items, DT_Beats, DT_Moves</td><td>Data tables</td><td>Every item, beat and encounter move as a row. Designers tune numbers here.</td><td>Whole game</td></tr>
+      <tr><td>WBP_HUD, WBP_Phone, WBP_Encounter</td><td>Widgets</td><td>Prompt, pickup toast, objective, subtitles; the phone (tasks, crossed-out days, notebook); the encounter menu. Built by the UI lane in the house style.</td><td>Whole game</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="interact">
+  <h2>Look, Take, Use, Combine</h2>
+  <div class="grid2">
+    <div>
+      <h3>Verbs</h3>
+      <ul>
+        <li><b>Look</b> always works and prints one sincere line of narration in Cormorant italic. Lines change with state and with knowledge from earlier days.</li>
+        <li><b>Take</b> moves a pickup into one of four slots. A full inventory refuses politely.</li>
+        <li><b>Use</b> applies the selected item to the target, or the bare hand when nothing is selected. Wrong items get a specific line, never a generic "can't do that".</li>
+        <li><b>Combine</b> exists in the system now but is taught in Find a Job (the CV beat), so the tutorial stays three verbs.</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Input and feedback</h3>
+      <ul>
+        <li>One interact key (E, gamepad face bottom) uses the context verb shown in the prompt; a second key cycles Look and Use when both apply.</li>
+        <li>Prompt reads like <span class="mono">[E] Use the screwdriver on the lock plate</span>: a full sentence in IBM Plex Sans, no separators.</li>
+        <li>Focus highlight is a soft rim from the dream post-process on custom stencil 3. Stencil 1 already keeps colour and 2 is the character's tear glitch.</li>
+        <li>Interactions play a montage from the animation lane and are spatially anchored: the Nightmare kneels at the boot and at the lock.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="scroll"><table>
+    <thead><tr><th>Item ID</th><th>Name in game</th><th>Found</th><th>Used on</th><th>Mesh</th></tr></thead>
+    <tbody>
+      <tr><td>Key</td><td>Old brass key</td><td>Inside the left boot under the bed</td><td>Door lock: snaps, becomes KeyStub</td><td>Lux3D door key</td></tr>
+      <tr><td>KeyStub</td><td>Half a key</td><td>Left in your hand at T4</td><td>Nothing. Look at it for the joke.</td><td>Key, cut in two</td></tr>
+      <tr><td>Screwdriver</td><td>Flathead screwdriver</td><td>Desk drawer</td><td>Lock plate: route A</td><td>CC0 screwdriver</td></tr>
+      <tr><td>Hanger</td><td>Wire hanger</td><td>Hook by the wardrobe</td><td>Door gap: route B, hooks the latch</td><td>Lux3D wire hanger</td></tr>
+      <tr><td>Shirt</td><td>The shirt</td><td>Wardrobe, after T7</td><td>Starts the T8 encounter</td><td>Lux3D shirt</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="tutorial">
+  <h2>The tutorial morning, beat by beat</h2>
+  <p>Goal on the phone: get dressed and leave the house. Each row is what the build must do, which systems carry it and what moves the beat on.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Beat</th><th>Tier</th><th>The player</th><th>Built from</th><th>Moves on when</th></tr></thead>
+    <tbody>
+      <tr><td class="beat">T0</td><td><span class="tier">Plausible</span></td><td>Opens the phone: seventeen crossed-out days, four unticked tasks. A black-sand hand taps Wake up.</td><td>WBP_Phone, sand hand splat mesh, BP_BeatDirector</td><td>Wake up is pressed (after the main menu's Wake Up)</td></tr>
+      <tr><td class="beat">T1</td><td><span class="tier">Plausible</span></td><td>Gets out of bed. The sheets settle, black sand trails the first steps.</td><td>Wake-up montage, bedding cloth settle, sand trail</td><td>The player stands and moves</td></tr>
+      <tr><td class="beat">T2</td><td><span class="tier">Plausible</span></td><td>Tries the door: locked. Searches commode drawers, desk, wardrobe.</td><td>BP_Door (Locked), BP_Container x5</td><td>Any search, or Look at the bed</td></tr>
+      <tr><td class="beat">T3</td><td><span class="tier">Plausible</span></td><td>Finds the key in a boot under the bed, in the last place it looks.</td><td>BP_Container (boot), BP_Pickup (Key)</td><td>Key taken</td></tr>
+      <tr><td class="beat">T4</td><td><span class="tier">Plausible</span></td><td>Uses the key. It snaps in the lock. A stare at the stub.</td><td>BP_Door to KeyJammed, Key becomes KeyStub</td><td>Key used on the door</td></tr>
+      <tr><td class="beat">T5</td><td><span class="tier">Plausible</span></td><td>Improvises: unscrews the lock plate with the screwdriver, or hooks the latch through the gap with the hanger.</td><td>BP_Door routes A and B, kneel montage</td><td>Either route frees the latch</td></tr>
+      <tr><td class="beat">T6</td><td><span class="tier">Plausible</span></td><td>Pulls the handle. It comes off. The wardrobe tips over the doorway in a burst of sand.</td><td>BP_Door to HandleOff, BP_Topple (wardrobe)</td><td>The wardrobe lands</td></tr>
+      <tr><td class="beat">T7</td><td><span class="tier s">Suspicious</span></td><td>Top-down. Looking back, the door is on another wall and the emptied drawer is full again. Time-shift echoes trail the Nightmare.</td><td>BP_DreamDirector moves the door and refills the drawer, top-down camera</td><td>The player reaches the moved door and opens the wardrobe for the shirt</td></tr>
+      <tr><td class="beat">T8</td><td><span class="tier o">Open</span></td><td>Puts on the shirt. The shirt fights back, turn by turn.</td><td>BP_Encounter, DT_Moves, WBP_Encounter</td><td>Win: T9. Lose: day rollover.</td></tr>
+      <tr><td class="beat">T9</td><td>Payoff</td><td>The suit settles on, framed like an action hero. Three seconds of full colour, then grey.</td><td>Sequencer shot, ColorReveal, sand burst</td><td>The shot ends</td></tr>
+      <tr><td class="beat">T10</td><td><span class="tier">Plausible</span></td><td>The door opens onto hallway light. The phone ticks Wake up.</td><td>BP_Door to Open, WBP_Phone</td><td>Walks out: Level 1</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="encounter">
+  <h2>Getting dressed, in numbers</h2>
+  <p>Turn-based and mechanically simple. Every move is a mundane verb with a sincere name and real numbers, all tunable in DT_Moves. A typical win takes six to eight turns.</p>
+  <div class="grid2">
+    <div class="panel">
+      <h3>The Nightmare</h3>
+      <div class="stat"><b>Composure</b><span>100. Reach 0 and the day rolls over.</span><b>Resolve</b><span>40, spent on moves</span></div>
+      <ul>
+        <li><b>Find Armhole</b>, free. Clears Sleeve Labyrinth and widens the next Button Up window.</li>
+        <li><b>Button Up</b>, 10 Resolve. A three-key timed input; each hit fastens one button, a perfect run fastens two. Blocked while the armhole is hidden.</li>
+        <li><b>Deep Breath</b>, free. Restores 15 Resolve and 5 Composure.</li>
+        <li><b>Check Mirror</b>, 5 Resolve. Restores 20 Composure and reveals the Shirt's next move.</li>
+      </ul>
+    </div>
+    <div class="panel">
+      <h3>The Shirt (inside out), Lv 30</h3>
+      <div class="stat"><b>Buttons</b><span>6 to fasten. All six wins.</span><b>Each turn</b><span>Composure drains 6: the clock is ticking</span></div>
+      <ul>
+        <li><b>Sleeve Labyrinth</b> hides the armhole until Find Armhole.</li>
+        <li><b>Static Cling</b> drains 12 Resolve.</li>
+        <li><b>Wrong Button</b> undoes one fastened button and costs 8 Composure.</li>
+      </ul>
+      <p class="note">The move pattern is weighted by tier and by attempt: on a later day the Shirt opens with the move the player already knows, so knowledge shortens the fight.</p>
+    </div>
+  </div>
+  <p class="note">The same BP_Encounter runs Find a Job's L2, where the CV is the opponent and Combine turns the morning into experience: "Expert in lock removal."</p>
+</section>
+
+<section id="rollover">
+  <h2>The day rolls over, knowledge stays</h2>
+  <p>On a fail the black-sand mare gallops through the room, the phone adds a crossed-out day and every BPI_Interactable resets to its morning state. GI_FoA keeps the flags below, which change Look lines, phone notebook entries and shortcuts.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Flag</th><th>Set at</th><th>What changes next morning</th></tr></thead>
+    <tbody>
+      <tr><td>Knows.KeyInBoot</td><td>T3</td><td>Looking at the bed mentions the boot. The notebook lists it.</td></tr>
+      <tr><td>Knows.KeySnaps</td><td>T4</td><td>Using the key first asks "Again?". The player can skip straight to the screwdriver or hanger.</td></tr>
+      <tr><td>Knows.ScrewdriverInDesk</td><td>T5</td><td>The desk drawer opens already ajar.</td></tr>
+      <tr><td>Knows.WardrobeFalls</td><td>T6</td><td>The handle prompt warns, and the player can brace the wardrobe first to skip the fall (it still falls, but slower, and T7 starts sooner).</td></tr>
+      <tr><td>Knows.DoorMoves</td><td>T7</td><td>The top-down beat is shorter; the moved door is lit from under.</td></tr>
+      <tr><td>Knows.ShirtPattern</td><td>T8</td><td>Check Mirror's preview is free on the first turn.</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="director">
+  <h2>The dream director</h2>
+  <p>A hidden tier picks which variant of each obstacle plays, so escalation follows progress and attempt count without hand-scripting every combination. BP_BeatDirector decides; BP_DreamDirector shows it.</p>
+  <div class="grid2">
+    <div><h3><span class="tier">Plausible</span></h3><p>Grey world at rest. Light echoes on fast camera moves only. Obstacles are ordinary bad luck.</p></div>
+    <div><h3><span class="tier s">Suspicious</span></h3><p>Echoes on the Nightmare, rare tear glitch, furniture moves when unobserved, hue drifts one step.</p></div>
+    <div><h3><span class="tier o">Open</span></h3><p>The dream fights back: encounters, sand bursts, heavy echoes. Each pass raises the base tier of the next obstacle.</p></div>
+  </div>
+</section>
+
+<section id="job">
+  <h2>Find a Job: pick four of seven</h2>
+  <p>Goal on the phone: write a CV and reach the employment office. The board planned seven beats for after the tutorial. The four below reuse the systems above almost entirely, which is why they are the recommendation.</p>
+  <div class="scroll"><table>
+    <thead><tr><th>Beat</th><th>Tier</th><th>Mechanic</th><th>Reuses</th><th>New work</th></tr></thead>
+    <tbody>
+      <tr><td class="beat">L2</td><td><span class="tier s">Suspicious</span></td><td>Write a CV: an encounter against a blank page, with Combine to turn the morning's events into experience.</td><td>BP_Encounter, DT_Moves, Combine</td><td>Desk set dressing, CV move rows</td></tr>
+      <tr><td class="beat">L4</td><td><span class="tier s">Suspicious</span></td><td>Same corner: top-down crossroads where every lap returns to the same corner until the player breaks the pattern.</td><td>Top-down camera, BP_DreamDirector teleport</td><td>A small street block</td></tr>
+      <tr><td class="beat">L6</td><td><span class="tier o">Open</span></td><td>Take a number: ticket 999, the display counts slowly from 001. Find the trick that skips the queue.</td><td>BP_Interactable, BP_Pickup, top-down camera</td><td>Office room, ticket machine (Lux3D)</td></tr>
+      <tr><td class="beat">L7</td><td>Payoff</td><td>Application received: the stamp lands like a gunshot. Full colour, then grey.</td><td>The T9 payoff shot setup</td><td>Stamp and counter</td></tr>
+    </tbody>
+  </table></div>
+  <p class="note">Left out: L1 (the bus pulls away), L3 (the printer jam) and L5 (the bus chase on a sand wave) need a street set and vehicle work that the other four do not.</p>
+</section>
+
+<section id="lean">
+  <h2>Lean budget</h2>
+  <div class="counts">
+    <div><span class="count">16</span><span class="note">mechanics assets for both levels</span></div>
+    <div><span class="count">5</span><span class="note">interactable actor classes</span></div>
+    <div><span class="count">3</span><span class="note">data tables carry every item, beat and move</span></div>
+    <div><span class="count">0</span><span class="note">per-puzzle Blueprint classes</span></div>
+  </div>
+  <ul>
+    <li>Props in the room become interactables by swapping their actor to the right child class; meshes and materials are reused as they are.</li>
+    <li>Graphs follow the house style: titled comment boxes with zoom bubbles, left-to-right flow, no overlapping nodes, timers instead of Tick.</li>
+    <li>Anything superseded during the build is deleted once nothing references it.</li>
+  </ul>
+</section>
+
+<section id="decide">
+  <h2>Decisions for you</h2>
+  <div class="decide"><h3>A second way to fail in the tutorial?</h3><p>Right now only the shirt can roll the day over. Option: the fear-of-adulthood clock on the commode rings at 09:00 game time (about twelve real minutes) and rolls the day. It adds pressure and makes the loop visible earlier.</p></div>
+  <div class="decide"><h3>Which four Find a Job beats?</h3><p>The recommendation is L2, L4, L6 and L7 because they reuse the encounter, the top-down camera and the payoff. Swap any of them for L1, L3 or L5 if a beat matters more than the build cost.</p></div>
+  <div class="decide"><h3>Encounter difficulty</h3><p>The numbers above aim at a first-try win for most players. Tougher means a likely first loss, which shows off the rollover at the cost of a repeat.</p></div>
+</section>
+</div>
