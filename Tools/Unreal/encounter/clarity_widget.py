@@ -361,7 +361,7 @@ def bodies():
         move = item_at(g, moves, i)
         stuns = g.getv('bStuns', move, MOVE)
         s = g.math('SelectFloat', A=beat, B=1.0, bPickA=g.math('BooleanAND', A=warn, B=stuns))
-        card = g.f('/Script/UMG.PanelWidget:GetChildAt', self=g.getv('ActCards'), Index=i)
+        card = g.getv(f'TornSize_Act{i}')  # inside the card TornStep scales: the two scales multiply (patch_pulse_scale.py)
         g.do(W + 'SetRenderScale', self=card, Scale=g.math('MakeVector2D', X=s, Y=s))
     g.finish()
 

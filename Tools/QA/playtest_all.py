@@ -337,7 +337,7 @@ def burst(plan, out, cap):
         info['pie_start_s'] = round(time.time() - t0, 1)
         play_cap = min(cap, LEASE_S - 12 - (time.time() - t0))  # leaves time to end PIE inside the 60 s
         inj = subprocess.run([sys.executable, ROOT + '/Tools/Unreal/integration/run_read.py', ROOT + '/Tools/Unreal/gameplay/pie_play.py',
-                              f'FOA_PLAN={plan}', f'FOA_CAP={play_cap:.0f}', f'FOA_OUT={out}'], cwd=ROOT, capture_output=True,
+                              f'FOA_PLAN={plan}', f'FOA_CAP={play_cap:.0f}', f'FOA_OUT={out}', f'FOA_SHOT={os.environ.get("FOA_SHOT", "1.0")}'], cwd=ROOT, capture_output=True,
                              text=True, timeout=20)
         info['inject'] = (inj.stdout + inj.stderr).strip().splitlines()[-1:] if (inj.stdout + inj.stderr).strip() else []
         renewed, checked, audio, sampled, key_id = time.time(), time.time(), [], 0.0, None

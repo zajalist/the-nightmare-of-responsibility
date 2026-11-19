@@ -205,7 +205,9 @@ def shot(tag):
     unreal.SystemLibrary.execute_console_command(W(), f'Shot showui filename={f} -nosuffix')
     S['shot_f'] = f
     # stills mode (a run folder named *stills*, main 11-19): each named moment also gets a 2x scene-only HighResShot
-    if 'stills' in OUT.lower() and tag not in ('t', 'beat') and not tag.startswith(('MISS', 'viewchange', 'hud_')):
+    timed = tag == 't' and PLAN in ('L2H', 'L2I', 'L2W', 'DR4') and time.time() - S.get('still_t', 0) > 2.4  # action between named moments
+    if 'stills' in OUT.lower() and (timed or tag not in ('t', 'beat') and not tag.startswith(('MISS', 'viewchange', 'hud_'))):
+        S['still_t'] = time.time()
         os.makedirs(OUT + '/stills', exist_ok=True)
         unreal.SystemLibrary.execute_console_command(
             W(), f'HighResShot 2 filename={OUT}/stills/{PLAN}_{int((time.time() - S["t0"]) * 100):05d}_{tag}.png')
